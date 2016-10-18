@@ -14,7 +14,7 @@ class Service(models.Model):
 class Geo(models.Model):
     name = models.CharField(max_length=40, blank=False)
     pid = models.CharField(max_length=6, blank=False)
-    rgeo = models.ForeignKey('self', null=True) #可回代自身，如一个省有多个市
+    rgeo = models.ForeignKey('self', null=True) #可回代自身，如：一个省有多个市
     data_type = models.ForeignKey(DataType)
 
 
