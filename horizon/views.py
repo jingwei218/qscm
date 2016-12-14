@@ -1,7 +1,11 @@
 from django.shortcuts import render
-
-from django.http import HttpResponse
+from horizon.models import BoardSetting
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the index.")
+    bsetting = BoardSetting.objects.filter()
+    return render(request, 'horizon.html',
+                  {
+                      'lang': 'en',
+                      'title': 'test'
+                   })
