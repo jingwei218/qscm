@@ -1,11 +1,13 @@
 from django.shortcuts import render
-from horizon.models import BoardSetting
+from django.contrib.auth.models import User
+from horizon.models import Setting
 
 
 def index(request):
-    bsetting = BoardSetting.objects.filter()
+    setting = Setting.objects.all()
     return render(request, 'horizon.html',
                   {
                       'lang': 'en',
-                      'title': 'test'
+                      'title': 'test',
+                      'setting': setting,
                    })
