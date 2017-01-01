@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'bootstrap3',
     'qsite.apps.QsiteConfig',
     'horizon.apps.HorizonConfig',
     'django.contrib.admin',
@@ -40,13 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -126,21 +127,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-BOOTSTRAP3_JQUERY_URL = STATIC_URL + 'js/jquery-3.1.0.min.js'
-BOOTSTRAP3_CSS_URL = STATIC_URL + 'css/bootstrap.min.css'
+STATIC_ROOT = '/home/jingwei/workspace/qscm/static'
 
-BOOTSTRAP3 = {
-
-    # The URL to the jQuery JavaScript file
-    'jquery_url': BOOTSTRAP3_JQUERY_URL,
-
-    # The Bootstrap base URL
-    'base_url': STATIC_URL,
-
-    # The complete URL to the Bootstrap CSS file (None means derive it from base_url)
-    'css_url': BOOTSTRAP3_CSS_URL,
-
-    # Include jQuery with Bootstrap JavaScript (affects django-bootstrap3 template tags)
-    'include_jquery': True,
-}
 

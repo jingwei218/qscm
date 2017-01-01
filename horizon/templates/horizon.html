@@ -1,27 +1,41 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<div class="container-fluid">
-    <div class="row" id="bsetting">
+<!--设置栏-->
+<div class="container-fluid settings" style="border: 2px #1b6d85 solid;">
+    <div class="row">
         <div class="col-md-4 col-sm-6 col-xs-12">
-            {% for i in setting %}
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-12 caption">{{ i.name }}</div>
-                    <div class="col-md-6 col-sm-6 col-xs-12 content"></div>
-                </div>
+            {% for setting in settings %}
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12 caption">{{ setting.name }}</div>
+                <div class="col-md-6 col-sm-6 col-xs-12 content"></div>
+            </div>
             {% endfor %}
 
         </div>
     </div>
 </div>
+<!--数据表-->
+<div class="container datasheet">
+    <div class="row datasheet-header"><!--数据表标题栏-->
+
+    </div>
+    <div class="row datasheet-rows"><!--数据行-->
+        {% for data_element in data_elements %}
+        <div name={{ data_element.pid }}>{{ data_element.element.pid }}</div>
+        {% endfor %}
+    </div>
+</div>
+<button class="submit">Submit</button>
 <script>
-    $('#bsetting .content').html($('#bsetting .caption').outerWidth());
+    $('.settings .content').html($('.settings .caption').outerWidth());
 </script>
 {% endblock %}
 {% block footer %}
 <div class="container-fluid">
+    <div class="row">{{ result }}</div>
     <div class="row">
-        copyright Quantum Supply Chain Management Co., Ltd.
+        Copyright Quantum Supply Chain Management Co., Ltd.
     </div>
 </div>
 {% endblock %}
