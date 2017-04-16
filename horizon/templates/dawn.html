@@ -1,0 +1,234 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{{ username }}
+
+<div class="container-fluid settings">
+    <!--Scheme List-->
+    <div class="row" style="border: 1px #761c19 dashed;">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            {% for scheme in schemes %}
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 col-xs-6 caption">
+                    <a href="/horizon/dawn/scheme/{{ scheme.pid }}/">{{ scheme.name }}</a>
+                </div>
+                <div class="col-md-1 col-xs-1">
+                    <a href="/horizon/dawn/scheme/setting/{{ scheme.pid }}/">Setting</a>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="row">
+                <div class="col-md-12 col-xs-12 caption">
+                    <a href="/horizon/dawn/scheme/new/">Create a new scheme</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Scheme Setting-->
+    <div class="row" style="border: 1px #1b6d85 solid;">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <!--Scheme Name-->
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12">{{ scheme_name }}</div>
+            </div>
+            <!--Scheme Settings-->
+            {% for scheme_setting in scheme_settings %}
+            {% if scheme_setting.setting.type != "List" %}
+            <div class="row">
+                <div class="col-lg-6 col-sm-6 col-xs-6 scheme_setting_name">{{ scheme_setting.setting.name }}</div>
+                <div class="col-lg-6 col-sm-6 col-xs-6 scheme_setting_value" id="s{{ scheme_setting.pid }}">{{ scheme_setting.value }}</div>
+            </div>
+            {% else %}
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12 scheme_setting_name">{{ scheme_setting.setting.name }}</div><!--List title-->
+                <div class="col-xs-5"><!--List to select from-->
+                    <select multiple="multiple" class="select_from" style="height: 350px; width: 100%;">
+                        {% for field in all_fields %}
+                        <option>{{ field }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-xs-2"><!--List icons-->
+                    <a href="" class="deselect_field"><div class="col-xs-12 glyphicon glyphicon-arrow-left text-center"></div></a>
+                    <a href="" class="select_field"><div class="col-xs-12 glyphicon glyphicon-arrow-right text-center"></div></a>
+                </div>
+                <div class="col-xs-5"><!--List for selected-->
+                    <select multiple="multiple" class="selected_items" style="height: 350px; width: 100%;">
+                    </select>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <!--Data Sheet Setting-->
+    <div class="row">
+        {% for group in data_sheet_settings_group|dictsort:"name" %}
+        <div class="col-lg-4 col-md-6 col-xs-12" style="border: 1px #66afe9 solid;">
+            <div class="row">
+                <div class="col-xs-12" id="{{ group.id }}">{{ group.name }}</div>
+            </div>
+            {% for data_sheet_setting in group.data_sheet_settings %}
+            {% if data_sheet_setting.setting.type = "List" %}
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12 scheme_setting_name">{{ data_sheet_setting.setting.name }}</div><!--List title-->
+                <div class="col-xs-5"><!--List to select from-->
+                    <select multiple="multiple" class="select_from" style="height: 350px; width: 100%;">
+                        {% for unselected_field in group.unselected_fields %}
+                        <option id="{{ unselected_field.pid }}">{{ unselected_field.display_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-xs-2"><!--List icons-->
+                    <a href="" class="deselect_field"><div class="col-xs-12 glyphicon glyphicon-arrow-left text-center"></div></a>
+                    <a href="" class="select_field"><div class="col-xs-12 glyphicon glyphicon-arrow-right text-center"></div></a>
+                </div>
+                <div class="col-xs-5"><!--List for selected-->
+                    <select multiple="multiple" class="selected_items" style="height: 350px; width: 100%;">
+                        {% for selected_field in group.data_sheet_fields %}
+                        <option id="{{ selected_field.data_field.pid }}">{{ selected_field.data_field.display_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            {% else %}
+            <div class="row">
+                <div class="col-xs-6 scheme_setting_name">{{ data_sheet_setting.setting.name }}</div>
+                <div class="col-xs-6 scheme_setting_value"  id="d{{ data_sheet_setting.pid }}" >{{ data_sheet_setting.value }}</div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+    <!--Save and Messages-->
+    <div class="row" id="save_setting" style="display: none">
+        <div class="col-md-6 col-xs-6">
+            <a href="save">Save Setting</a>
+        </div>
+        <div class="col-md-6 col-xs-6">
+            <span id="save_message"></span>
+        </div>
+    </div>
+    <!--Logout-->
+    <div class="row">
+        <div class="col-md-1 col-xs-2">
+            <a href="/horizon/logout/">logout</a>
+        </div>
+    </div>
+    <!--Hidden edit box-->
+    <input type="text" name="edit_box" class="form-control" id="edit_box" style="position: absolute;
+    padding-top: 0; padding-bottom: 0; display: none;">
+</div>
+
+<script type="text/javascript" src="/static/js/jquery.ajax.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+
+    var d = {};
+    // scheme设置值
+    $('.scheme_setting_value')
+        .mouseenter(function () {
+            $(this).css({
+                "background-color": "#15a7ff"
+            })
+        .mouseleave(function () {
+            $(this).css({
+                "background-color": "transparent"
+            });
+        }).click(function (e) {  //点击设置值
+            e.preventDefault();
+            e.stopPropagation();
+            // 当被编辑字段值与编辑框的值不同，且编辑框已显示时；即点击了被编辑字段的其它同类字段
+            if ($('.being_edited').text() != $('#edit_box').val() && $('#edit_box').css('display') != 'none') {
+                $('.being_edited').html($('#edit_box').val());  //更新被编辑字段的值，此时被点击字段与被编辑字段不同
+                $('#save_setting').show();  //显示保存按钮
+                var pid = $('.being_edited').attr('id');
+                if (pid != undefined) {
+                    d[pid] = $('.being_edited').text();  //以被编辑字段的pid为键，将更新的字段值存入词典d
+                }
+            }
+            $('.being_edited').removeClass('being_edited');  //若有当前编辑字段，移除编辑字段
+            $(this).addClass('being_edited');  //将当前被点击字段设为被编辑字段
+            var w = $(this).innerWidth(),
+                h = $(this).innerHeight(),
+                x = $(this).offset().left,
+                y = $(this).offset().top;
+            $('#edit_box').show().offset({left: x, top: y})
+                .css({
+                    "width": w,
+                    "height": h
+                })
+                .val($(this).text()).focus();  //显示编辑框
+        });
+    });
+    $('#edit_box').click(function (e) {
+        e.stopPropagation();
+    }).focus(function (e) {
+        e.stopPropagation();
+        $(this).select();
+    }).keypress(function (e) {
+        e.stopPropagation();
+        var key_pressed = e.which || e.keyCode;
+        if (key_pressed == 13 || key_pressed == 9) {  //按下回车或制表符tab时
+            if ($('.being_edited').text() != $('#edit_box').val()) {
+                $('.being_edited').html($('#edit_box').val());  //被编辑的字段为文本编辑框内的值
+                $('#save_setting').show();
+                var pid = $('.being_edited').attr('id');
+                if (pid != undefined) {
+                    d[pid] = $('.being_edited').text();
+                }
+            }
+            $(this).offset({left: 0, top: 0}).hide();
+            if (key_pressed == 13) {
+                $('.being_edited').removeClass('being_edited');  //被编辑的字段不再为被编辑状态
+            } else {
+                e.preventDefault();
+                var $nextSettingValue = $('.being_edited').parent().next().find('.scheme_setting_value');
+                $nextSettingValue.click();
+            }
+        }
+    });
+
+    $('*').not('#edit_box, .scheme_setting_value').click(function () {
+        if ($('.being_edited').text() != $('#edit_box').val() && $('#edit_box').css('display') != 'none') {
+            $('.being_edited').html($('#edit_box').val());  //被编辑的字段为文本编辑框内的值
+            $('#save_setting').show();
+            var pid = $('.being_edited').attr('id');
+            if (pid != undefined) {
+                d[pid] = $('.being_edited').text();
+                console.log('*not...', d);
+            }
+        }
+        $('.being_edited').removeClass('being_edited'); //被编辑的字段不再为被编辑状态
+        $('#edit_box').offset({left: 0, top: 0}).hide();
+    });
+
+    $('#save_setting').click(function (e) {
+        e.preventDefault();
+        ajaxPost('save', d);
+    });
+
+    $('.select_field').click(function (e) {
+        e.preventDefault();
+        $('.selected_items').append($('.select_from option:selected'));
+        $('.select_from option:selected').remove();
+    });
+
+    $('.deselect_field').click(function (e) {
+        e.preventDefault();
+        $('.select_from').append($('.selected_items option:selected'));
+        $('.selected_items option:selected').remove();
+    });
+});
+</script>
+{% endblock %}
+
+{% block footer %}
+<div class="container-fluid">
+    <div class="row">
+        Copyright Quantum Supply Chain Management Co., Ltd.
+    </div>
+</div>
+{% endblock %}
