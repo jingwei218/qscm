@@ -1,30 +1,3 @@
-{% extends 'base.html' %}
-
-{% block body %}
-
-{{ username }}
-
-<div class="container-fluid settings">
-    <!--Scheme List-->
-    <div class="row" style="border: 1px #761c19 dashed;">
-        <div class="col-md-4 col-sm-6 col-xs-12">
-            {% for scheme in schemes %}
-            <div class="row">
-                <div class="col-lg-4 col-sm-6 col-xs-6 caption">
-                    <a href="/horizon/dawn/scheme/{{ scheme.pid }}/">{{ scheme.name }}</a>
-                </div>
-                <div class="col-md-1 col-xs-1">
-                    <a href="/horizon/dawn/scheme/setting/{{ scheme.pid }}/">Setting</a>
-                </div>
-            </div>
-            {% endfor %}
-            <div class="row">
-                <div class="col-md-12 col-xs-12 caption">
-                    <a href="/horizon/dawn/scheme/new/">Create a new scheme</a>
-                </div>
-            </div>
-        </div>
-    </div>
     <!--Scheme Setting-->
     <div class="row" style="border: 1px #1b6d85 solid;">
         <div class="col-md-4 col-sm-6 col-xs-12">
@@ -111,16 +84,6 @@
             <span id="save_message"></span>
         </div>
     </div>
-    <!--Logout-->
-    <div class="row">
-        <div class="col-md-1 col-xs-2">
-            <a href="/horizon/logout/">logout</a>
-        </div>
-    </div>
-    <!--Hidden edit box-->
-    <input type="text" name="edit_box" class="form-control" id="edit_box" style="position: absolute;
-    padding-top: 0; padding-bottom: 0; display: none;">
-</div>
 
 <script type="text/javascript" src="/static/js/jquery.ajax.min.js"></script>
 <script type="text/javascript">
@@ -223,12 +186,3 @@ $(document).ready(function () {
     });
 });
 </script>
-{% endblock %}
-
-{% block footer %}
-<div class="container-fluid">
-    <div class="row">
-        Copyright Quantum Supply Chain Management Co., Ltd.
-    </div>
-</div>
-{% endblock %}

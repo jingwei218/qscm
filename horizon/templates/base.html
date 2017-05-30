@@ -8,11 +8,15 @@
     <link rel="icon" type="image/x-icon" href="/static/img/quantum.ico">
     <script src="/static/js/jquery-3.1.0.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
+    {% block head %}{% endblock %}
 </head>
 <body>
     {% block body %}{% endblock %}
 </body>
 <footer>
     {% block footer %}{% endblock %}
+    <div class="container-fluid">
+        <div class="row" style="text-align: center;">Copyright Quantum Supply Chain Management Co., Ltd.</div>
+    </div>
 </footer>
 </html>

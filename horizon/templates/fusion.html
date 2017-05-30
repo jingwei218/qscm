@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container-fluid" style="background-color: #A5D1F3;">
+    <div class="row">User: {{ username }}</div>
+</div>
+<div class="container-fluid">
+    <!--Scheme List-->
+    {% for scheme in schemes %}
+    <div class="row">
+        <div class="col-lg-4 col-sm-6 col-xs-6 caption">
+            <a href="/{{ platform|lower }}/{{ service|lower }}/scheme/{{ scheme.pid }}/">{{ scheme.name }}</a>
+        </div>
+        <div class="col-md-1 col-xs-1">
+            <a href="/{{ platform|lower }}/{{ service|lower }}/setting/{{ scheme.pid }}/">Setting</a>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="row">
+        <div class="col-md-12 col-xs-12 caption">
+            <a href="/{{ platform|lower }}/{{ service|lower }}/scheme/new/">Create a new scheme</a>
+        </div>
+    </div>
+    <!--Hidden edit box-->
+    <input type="text" name="edit_box" class="form-control" id="edit_box" style="position: absolute;
+    padding-top: 0; padding-bottom: 0; display: none;">
+</div>
+
+<!--Logout-->
+<div class="container-fluid">
+    <div class="row">
+        <a href="/{{ platform|lower }}/logout/">Log Out</a>
+    </div>
+</div>
+
+{% endblock %}

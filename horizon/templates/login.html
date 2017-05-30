@@ -5,18 +5,15 @@
     <div class="row">
         {{ error_message }}
     </div>
-    <div class="row">
-        <div class="col-md-4">
-            <form action="/horizon/login/" method="post">
-                {% csrf_token %}
-                <label for="username">Username: </label>
-                <input id="username" type="text" name="username"><br>
-                <label for="password">Password: </label>
-                <input id="password" type="password" name="password"><br>
-                <input type="submit" value="Log In">
-            </form>
-        </div>
-
+    <div class="row" style="text-align:center;">
+        <form action="/{{ platform|lower }}/login/" method="post">
+            {% csrf_token %}
+            <label for="username">Username: </label>
+            <input id="username" type="text" name="username"><br>
+            <label for="password">Password: </label>
+            <input id="password" type="password" name="password"><br>
+            <input type="submit" value="Log In">
+        </form>
     </div>
 </div>
 {% endblock %}

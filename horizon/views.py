@@ -5,138 +5,162 @@ from django.http import HttpResponseRedirect
 from django_ajax.decorators import ajax
 from django.apps import apps
 from .models import *
-from . import templates
 
 
 appconfig = apps.get_app_config('horizon')
+platform = HorizonSetting.objects.get(name='platform').value
+platform_lower = platform.lower()
 
 
 # 进入首页，包含登录链接
 def index(request):
     return render(request, 'index.html',
                   {
-                      'title': 'Quantum Horizon',
+                      'title': platform,
+                      'platform': platform,
                   })
 
 
-def userRegister(request):
+# ========================= 用户相关 ========================= #
+# 用户注册
+def user_register(request):
     if 'username' in request.POST:
         hu = HorizonUser.objects.filter(username=request.POST['username'])
         if len(hu) == 1:  # 当用户名存在时，显示错误信息
             return render(request, 'register.html',
                           {
-                              'title': 'Quantum Horizon Login',
+                              'title': platform,
                               'error_message': 'The username already exists.',
                           })
         else:
             # codes: register user
-            return HttpResponseRedirect('/horizon/')
+            return HttpResponseRedirect('/' + platform_lower + '/')
     else:  # 进入注册页面时，无usernanme等登录信息传入POST
         return render(request, 'register.html',
                       {
-                          'title': 'Quantum Horizon Register',
+                          'title': platform,
                       })
 
 
-# 用户登录页面
-def userLogin(request):
+# 用户登录
+def user_login(request):
     # 提交登录信息时
     if 'username' in request.POST:
         hu = HorizonUser.objects.filter(username=request.POST['username'])
-        if list(hu) != []:
+        if hu:  # 找到用户名
             u = authenticate(username=request.POST['username'], password=request.POST['password'])
-        else:
-            u = None
-        if u is not None:
-            login(request, u)
-            return HttpResponseRedirect('/horizon/services/')
-        else:
-            # 当登录信息有误时，显示错误信息
+            if u:
+                login(request, u)
+                return HttpResponseRedirect('/' + platform_lower + '/services/')
+            else:
+                # 当登录信息有误时，显示错误信息
+                return render(request, 'login.html',
+                              {
+                                  'title': platform,
+                                  'platform': platform,
+                                  'error_message': 'Incorrect password',
+                              })
+        else:  # 用户名未找到
             return render(request, 'login.html',
                           {
-                              'title': 'Quantum Horizon Login',
-                              'error_message': 'Incorrect username or password',
+                              'title': platform,
+                              'platform': platform,
+                              'error_message': 'Incorrect username',
                           })
     else:  # 首次打开登录页面时，无usernanme等登录信息传入POST
         return render(request, 'login.html',
                       {
-                          'title': 'Quantum Horizon Login',
+                          'title': platform,
+                          'platform': platform,
                       })
 
 
 # 用户登出
-def userLogout(request):
+def user_logout(request):
     logout(request)
-    return HttpResponseRedirect('/horizon/')
+    return HttpResponseRedirect('/' + platform_lower + '/')
 
 
 # 进入可用服务页面
-def services(request):
+def view_services(request):
     request.session.set_expiry(value=0)
     if request.user.is_authenticated():
         username = request.user.username
         services = Service.objects.filter(owners__username=username)
         return render(request, 'services.html',
                       {
-                          'title': 'Quantum Horizon Services',
+                          'title': platform,
                           'username': username,
                           'services': services,
+                          'platform': platform,
                       })
     else:
-        return HttpResponseRedirect('/horizon/')
+        return HttpResponseRedirect('/' + platform_lower + '/')
 
 
-def dawn(request):
-
+# ========================= 服务 ========================= #
+# 采购成本分析
+def service_fusion(request):
     if request.user.is_authenticated():
         username = request.user.username
         schemes = Scheme.objects.filter(owners__username=username)
-        return render(request, 'dawn.html',
+        return render(request, 'fusion.html',
                       {
                           'lang': 'en',
-                          'title': 'test',
+                          'title': platform,
+                          'platform': platform,
                           'username': username,
+                          'service': 'fusion',
                           'schemes': schemes,
                       })
     else:
-        return HttpResponseRedirect('/horizon/')
+        return HttpResponseRedirect('/' + platform_lower + '/')
 
 
-def newScheme(request):
-    return HttpResponseRedirect('/horizon/')
-
-
-def viewScheme(request, scheme_pid):
-
+# 对账
+def service_fission(request):
     if request.user.is_authenticated():
+        return HttpResponseRedirect('/' + platform_lower + '/')
+    else:
+        return HttpResponseRedirect('/' + platform_lower + '/')
 
+
+# ========================= 服务 ========================= #
+# 新建项目
+def new_scheme(request):
+    return HttpResponseRedirect('/' + platform_lower + '/')
+
+
+# 成本分析项目
+def view_scheme(request, scheme_pid):
+    if request.user.is_authenticated():  # 用户已登录
         username = request.user.username
         scheme = Scheme.objects.get(pid=scheme_pid)
         data_sheets = DataSheet.objects.filter(scheme=scheme)
-        data_sheet_tables = list()
+        tables = list()
         for data_sheet in data_sheets:  # 遍历所有数据表
-            data_sheet_tables.append({'name': data_sheet.name,  # 数据表名
-                                      'id': data_sheet.pid,  # 数据表pid
-                                      'table_header': [],  # 数据表列标题
-                                      'table_content': []  # 数据表内容
-                                      })
+            tables.append({'name': data_sheet.name,  # 数据表名
+                           'id': data_sheet.pid,  # 数据表pid
+                           'table_header': [],  # 数据表列标题
+                           'table_content': []  # 数据表内容
+                           })
             data_sheet_fields = data_sheet.datasheetfield_set.all()  # 数据表列标题
             for data_sheet_field in data_sheet_fields:
-                data_sheet_tables[-1]['table_header'].append(data_sheet_field.data_field.display_name)
+                tables[-1]['table_header'].append(data_sheet_field.data_field.display_name)
 
             data_sheet_elements = data_sheet.data_sheet_elements.all()  # 数据表每一行内容
 
             row = 1  # 初始化行号
             for data_sheet_element in data_sheet_elements:  # 遍历所有行
-                data_sheet_tables[-1]['table_content'].append({'id': data_sheet_element.pid,
-                                                               'content': []
-                                                               })
+                tables[-1]['table_content'].append({'id': data_sheet_element.pid,
+                                                    'content': []
+                                                    })
                 element = data_sheet_element.element  # 获得数据表每一行数据对应的element
 
                 for data_sheet_field in data_sheet_fields:  # 遍历所有列
                     model_name = data_sheet_field.data_field.model_name
                     through = data_sheet_field.data_field.through
-                    current_row = data_sheet_tables[-1]['table_content'][-1]['content']
+                    current_row = tables[-1]['table_content'][-1]['content']
                     if model_name is None:  # 没有model_name则显示行号
                         current_row.append(row)
                     else:  #
@@ -168,14 +192,16 @@ def viewScheme(request, scheme_pid):
         return render(request, 'scheme.html',
                       {
                           'lang': 'en',
-                          'title': 'scheme',
+                          'title': scheme.name,
+                          'platform': platform,
                           'username': username,
+                          'service': 'fusion',
                           'scheme': scheme,
                           'data_sheets': data_sheets,
-                          'data_sheet_tables': data_sheet_tables,
+                          'tables': tables,
                       })
     else:
-        return HttpResponseRedirect('/horizon/')
+        return HttpResponseRedirect('/' + platform_lower + '/')
 
 
 # Scheme和DataSheet的设置
@@ -198,10 +224,10 @@ def viewSchemeSetting(request, scheme_pid):
                 'name': data_sheet.name,
                 'data_sheet_settings': DataSheetSetting.objects.filter(data_sheet=data_sheet),
                 'data_sheet_fields': data_sheet_fields,
-                'unselected_fields': DataField.objects.exclude(display_name__in=selected_fields)
+                'unselected_fields': DisplayField.objects.exclude(display_name__in=selected_fields)
             })
 
-        return render(request, 'dawn.html',
+        return render(request, 'fusion.html',
                       {
                           'lang': 'en',
                           'title': 'Scheme Setting',
@@ -229,5 +255,5 @@ def saveSchemeSetting(request, scheme_pid):
                     setting.value = request.POST[setting_id]
                     setting.save()
                 except:
-                    return HttpResponseRedirect('/horizon/')
-            return HttpResponseRedirect('/horizon/dawn/scheme/' + '/setting/' + str(scheme_pid))
+                    return HttpResponseRedirect('/' + platform_lower + '/')
+            return HttpResponseRedirect('/' + platform_lower + '/' + 'fusion/scheme/' + '/setting/' + str(scheme_pid))

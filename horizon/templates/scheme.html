@@ -2,27 +2,27 @@
 
 {% block body %}
 
-<div class="container-fluid header">
-    User: {{ username }}
+<!--User Commands-->
+<div class="container-fluid" style="background-color: #A5D1F3;">
+    <div class="row">User: {{ username }}</div>
+    <div class="row"><a href="/{{ platform|lower }}/{{ service|lower }}/">Back</a></div>
+    <div class="row"><a href="/{{ platform|lower }}/logout/">Log Out</a></div>
 </div>
 
-
-<!--设置栏-->
-<div class="container-fluid settings" style="border: 2px #1b6d85 solid;">
+<!--标题栏-->
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-12 col-xs-12">
-            {{ scheme.name }}
-        </div>
+        <div class="col-md-12 col-xs-12">{{ scheme.name }}</div>
     </div>
 </div>
 
 <!--数据表-->
-<div class="container-fluid datasheet">
-    <div><!--数据行-->
-        {% for table in data_sheet_tables %}
-        <div class="row data_sheet" id="{{ table.id }}">
-            <div class="row" style="font-size: x-large">
-                <div class="col-xs-12 data_sheet_title">Data Sheet {{ table.name }}</div>
+<div class="container-fluid" style="overflow: scroll; text-align: left;">
+    <div><!--数据表-->
+        {% for table in tables %}
+        <div class="container" id="{{ table.id }}">
+            <div class="row" style="font-size: small">
+                <div class="col-xs-12">Data Sheet {{ table.name }}</div>
             </div>
             <div class="row"><!-- 列标题 -->
                 {% for col_header in table.table_header %}
@@ -38,20 +38,6 @@
             {% endfor %}
         </div>
         {% endfor %}
-    </div>
-    <!--Logout-->
-    <div>
-        <div class="col-md-1 col-xs-2">
-            <a href="/horizon/logout/">logout</a>
-        </div>
-    </div>
-</div>
-{% endblock %}
-
-{% block footer %}
-<div class="container-fluid">
-    <div class="row">
-        Copyright Quantum Supply Chain Management Co., Ltd.
     </div>
 </div>
 {% endblock %}

@@ -1,32 +1,21 @@
 {% extends 'base.html' %}
 
 {% block body %}
-{{ username }}
-<div class="container-fluid settings" style="border: 2px #1b6d85 solid;">
-    <div class="row">
-        {% for service in services %}
-        <div class="row">
-            <div class="col-md-6 col-xs-6 caption">
-                <a href="/horizon/{{ service.code_name }}/">{{ service.name }}</a>
-            </div>
-        </div>
-        {% endfor %}
-        <div class="row">
-            <div class="col-md-1 col-xs-2 caption">
-                <a href="/horizon/logout/">logout</a>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-
-    </div>
+<div class="container-fluid" style="background-color: #A5D1F3;">
+    <div class="row">User: {{ username }}</div>
 </div>
-{% endblock %}
-
-{% block footer %}
+<div class="container-fluid" style="font-size: 1em">
+    {% for service in services %}
+    <div class="row">
+        <div class="col-md-4 col-xs-12 caption">
+            <a href="/{{ platform|lower }}/{{ service.code_name }}/">{{ service.name }}</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 <div class="container-fluid">
     <div class="row">
-        Copyright Quantum Supply Chain Management Co., Ltd.
+        <a href="/{{ platform|lower }}/logout/">Log Out</a>
     </div>
 </div>
 {% endblock %}
