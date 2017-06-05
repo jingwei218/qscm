@@ -1,10 +1,9 @@
 from django.shortcuts import render
-from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django_ajax.decorators import ajax
 from django.apps import apps
-from .models import *
+from .render import *
 
 
 appconfig = apps.get_app_config('horizon')
@@ -137,57 +136,7 @@ def view_scheme(request, scheme_pid):
         username = request.user.username
         scheme = Scheme.objects.get(pid=scheme_pid)
         data_sheets = DataSheet.objects.filter(scheme=scheme)
-        tables = list()
-        for data_sheet in data_sheets:  # 遍历所有数据表
-            tables.append({'name': data_sheet.name,  # 数据表名
-                           'id': data_sheet.pid,  # 数据表pid
-                           'table_header': [],  # 数据表列标题
-                           'table_content': []  # 数据表内容
-                           })
-            data_sheet_fields = data_sheet.datasheetfield_set.all()  # 数据表列标题
-            for data_sheet_field in data_sheet_fields:
-                tables[-1]['table_header'].append(data_sheet_field.data_field.display_name)
-
-            data_sheet_elements = data_sheet.data_sheet_elements.all()  # 数据表每一行内容
-
-            row = 1  # 初始化行号
-            for data_sheet_element in data_sheet_elements:  # 遍历所有行
-                tables[-1]['table_content'].append({'id': data_sheet_element.pid,
-                                                    'content': []
-                                                    })
-                element = data_sheet_element.element  # 获得数据表每一行数据对应的element
-
-                for data_sheet_field in data_sheet_fields:  # 遍历所有列
-                    model_name = data_sheet_field.data_field.model_name
-                    through = data_sheet_field.data_field.through
-                    current_row = tables[-1]['table_content'][-1]['content']
-                    if model_name is None:  # 没有model_name则显示行号
-                        current_row.append(row)
-                    else:  #
-                        model = appconfig.get_model(model_name)  # 按model名称获得对象
-                        attr_name = data_sheet_field.data_field.display_name_through_attribute  # 属性名称
-                        try:
-                            if through == 'Element':
-                                query = model.objects.get(element=element)
-                                current_row.append(getattr(query, attr_name))
-                            elif through == 'Location':
-                                query = model.objects.filter(element=element).filter(
-                                    type=data_sheet_field.data_field.display_name)
-                                location = []
-                                for loc in query:
-                                    location.append(getattr(loc.geo, attr_name))
-                                location = "|".join(location)
-                                if location != '':
-                                    current_row.append(location)
-                                else:
-                                    raise ObjectDoesNotExist
-                            elif through == 'Quantity':
-                                uom = UoM.objects.get(name=data_sheet_field.data_field.display_name)
-                                query = model.objects.filter(data_sheet_element=data_sheet_element).get(uom=uom)
-                                current_row.append(getattr(query, attr_name))
-                        except ObjectDoesNotExist:
-                            current_row.append('N/A')
-                row += 1
+        tables, quantity_tables = render_data(data_sheets)
 
         return render(request, 'scheme.html',
                       {
@@ -199,6 +148,7 @@ def view_scheme(request, scheme_pid):
                           'scheme': scheme,
                           'data_sheets': data_sheets,
                           'tables': tables,
+                          'quantity_tables': quantity_tables
                       })
     else:
         return HttpResponseRedirect('/' + platform_lower + '/')

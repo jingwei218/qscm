@@ -157,7 +157,7 @@ class Location(models.Model):
     pid = models.IntegerField(primary_key=True)
     geo = models.ForeignKey(Geo)
     element = models.ForeignKey(Element)
-    sequence = models.IntegerField(default=0)
+    sequence = models.IntegerField()
 
     def __str__(self):
         return self.geo.name
@@ -210,6 +210,7 @@ class Quantity(models.Model):
     converting_factor = models.FloatField(blank=True, null=True)  # 转换率，如：333公斤/立方米，仅对转换量适用
     comparison = models.CharField(max_length=3, choices=(('min', 'Minimum'), ('max', 'Maximum')), blank=True,
                                   null=True)  # 计算计费单位量的比较方式，仅对转换量适用
+    sequence = models.IntegerField(blank=True, null=True)
     data_sheet_element = models.ForeignKey(DataSheetElement)  # 每个元素有一个或多个数量
 
     def __str__(self):
@@ -221,12 +222,17 @@ class Quantity(models.Model):
 class PriceCondition(models.Model):
     pid = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, blank=False, null=False)
+    display_name = models.CharField(max_length=255, blank=True, null=True)
+    group = models.IntegerField(blank=True, null=True)  # 用于同意义但不同表述方式的价格条件，如：3MT可表达为3000KG
     low = models.FloatField(blank=True, null=True)
     high = models.FloatField(blank=True, null=True)
     uom = models.ForeignKey(UoM)  # 区间判定单位
 
     def __str__(self):
         return self.name + "@" + self.uom.name
+
+    class Meta:
+        ordering = ['pid']
 
 
 # 价格
@@ -235,8 +241,12 @@ class Price(models.Model):
     value = models.FloatField(blank=True, null=True)  # 价格值
     uom = models.ForeignKey(UoM)  # 计价单位
     currency = models.ForeignKey(Currency)
+    category = models.ForeignKey(Category)
     price_conditions = models.ManyToManyField(PriceCondition)  # 计价条件，例，一个价格可以对应重量和体积双重条件
     price_sheet_element = models.ForeignKey(PriceSheetElement)
+
+    class Meta:
+        ordering = ['pid']
 
 
 # ========================= Sheets ========================= #
@@ -244,6 +254,7 @@ class Price(models.Model):
 class DataSheet(models.Model):
     pid = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, blank=False, null=False)  # 数据表描述
+    number_of_price_fields = models.IntegerField(blank=True, null=True)
     scheme = models.ForeignKey(Scheme)
     data_sheet_elements = models.ManyToManyField(DataSheetElement)
 
@@ -258,8 +269,8 @@ class DataSheet(models.Model):
 class PriceSheet(models.Model):
     pid = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, blank=False, null=False)  # 价格表描述
-    scheme = models.ForeignKey(Scheme)
     price_sheet_elements = models.ManyToManyField(PriceSheetElement)
+    vendor = models.ForeignKey(Company)
 
     def __str__(self):
         return self.name
@@ -270,7 +281,8 @@ class PriceSheet(models.Model):
 class DataSheetField(models.Model):
     data_sheet = models.ForeignKey(DataSheet)
     display_name = models.CharField(max_length=255, blank=False, null=False)
-    sequence = models.IntegerField()
+    field_type = models.CharField(max_length=30, blank=True, null=True)
+    sequence = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.display_name
@@ -283,6 +295,7 @@ class DataSheetField(models.Model):
 class PriceSheetField(models.Model):
     price_sheet = models.ForeignKey(PriceSheet)
     display_name = models.CharField(max_length=255, blank=False, null=False)
+    field_type = models.CharField(max_length=30, blank=True, null=True)
     sequence = models.IntegerField()
     price_conditions = models.ManyToManyField(PriceCondition)  # 计价条件，例，一个价格可以对应重量和体积双重条件
 
@@ -292,9 +305,6 @@ class PriceSheetField(models.Model):
     class Meta:
         ordering = ['sequence']
 
-
-class Pointer(models.Model):
-    name = models.ForeignKey
 
 # ========================= DataSheet Level Settings ========================= #
 # 数据表设置
