@@ -32,8 +32,8 @@
             <tbody>
                 {% for row in table.table_content %}
                 <tr id="{{ row.id }}"><!-- 数据行 -->
-                    {% for item in row.row_content %}
-                    <td style="padding: 4px;">{{ item }}</td>
+                    {% for item in row.content %}
+                    <td id="{{ item.id }}" style="padding: 4px;">{{ item.value }}</td>
                     {% endfor %}
                 </tr>
                 {% endfor %}
@@ -42,5 +42,4 @@
     </div>
     {% endfor %}
 </div>
-{{ quantity_tables }}
 {% endblock %}

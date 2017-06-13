@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpRequest, HttpResponse
 from django_ajax.decorators import ajax
 from django.apps import apps
+from django.views.decorators.csrf import csrf_protect
 from .render import *
+import json
 
 
 appconfig = apps.get_app_config('horizon')
@@ -124,10 +126,67 @@ def service_fission(request):
         return HttpResponseRedirect('/' + platform_lower + '/')
 
 
-# ========================= 服务 ========================= #
+# ========================= 项目 ========================= #
 # 新建项目
 def new_scheme(request):
-    return HttpResponseRedirect('/' + platform_lower + '/')
+    if request.user.is_authenticated():  # 用户已登录
+        username = request.user.username
+        scheme_settings = Setting.objects.filter(level=0)  # 设置项
+        return render(request, 'newscheme.html',
+        {
+            'lang': 'en',
+            'title': platform,
+            'platform': platform,
+            'username': username,
+            'service': 'fusion',
+            'scheme_settings': scheme_settings,
+        })
+    else:
+        return HttpResponseRedirect('/' + platform_lower + '/')
+
+
+# 保存新建项目
+def save_n_create_scheme(request):
+    if request.user.is_authenticated():  # 用户已登录
+        response_data = dict()
+        scheme_meta = dict()
+        try:
+            scheme_id = Scheme.objects.all().last().pid + 1
+        except AttributeError:
+            scheme_id = 900000000  # 默认初始化Scheme的id
+        scheme_meta['pid'] = scheme_id
+        scheme_meta['sl'] = False
+        scheme_meta['scheme_settings'] = list()
+        for key in request.POST:
+            value = request.POST[key]
+            if key == 'scheme_name':
+                scheme_meta['name'] = value
+            elif key == 'scheme_setting':
+                for k in value:
+                    scheme_setting_dict = dict()
+                    v = value[k]  # k为setting pid，v为设置的值
+                    try:
+                        scheme_setting_pid = SchemeSetting.objects.all().last().pid + 1
+                    except AttributeError:
+                        scheme_setting_pid = 4001  # 默认
+                    scheme_setting_dict['pid'] = scheme_setting_pid
+                    scheme_setting_dict['value'] = v
+                    scheme_setting_dict['setting'] = Setting.objects.get(pid=k)
+                    scheme_meta['scheme_settings'].append(scheme_setting_dict)
+        scheme_new = Scheme(pid=scheme_meta['pid'], name=scheme_meta['name'], setting_locked=scheme_meta['sl'])
+        scheme_new.save()
+        for setting in scheme_meta['scheme_settings']:
+            scheme_setting = SchemeSetting(pid=setting['pid'], value=setting['value'],
+                                           setting=setting['setting'],
+                                           scheme=scheme_new)
+            scheme_setting.save()
+        response_data["scheme_id"] = scheme_id
+        return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json"
+        )
+    else:
+        return HttpResponseRedirect('/' + platform_lower + '/')
 
 
 # 成本分析项目
@@ -136,9 +195,9 @@ def view_scheme(request, scheme_pid):
         username = request.user.username
         scheme = Scheme.objects.get(pid=scheme_pid)
         data_sheets = DataSheet.objects.filter(scheme=scheme)
-        tables, quantity_tables = render_data(data_sheets)
+        tables = render_data(data_sheets)
 
-        return render(request, 'scheme.html',
+        return render(request, 'viewscheme.html',
                       {
                           'lang': 'en',
                           'title': scheme.name,
@@ -148,14 +207,13 @@ def view_scheme(request, scheme_pid):
                           'scheme': scheme,
                           'data_sheets': data_sheets,
                           'tables': tables,
-                          'quantity_tables': quantity_tables
                       })
     else:
         return HttpResponseRedirect('/' + platform_lower + '/')
 
 
 # Scheme和DataSheet的设置
-def viewSchemeSetting(request, scheme_pid):
+def view_scheme_settings(request, scheme_pid):
     if request.user.is_authenticated():
         username = request.user.username  # 用户名
         schemes = Scheme.objects.filter(owners__username=username)  # 筛选出用户名下的scheme集合
@@ -191,7 +249,7 @@ def viewSchemeSetting(request, scheme_pid):
 
 
 @ajax
-def saveSchemeSetting(request, scheme_pid):
+def save_scheme_settings(request, scheme_pid):
     scheme = Scheme.objects.get(pid=scheme_pid)
     setting_locked = scheme.setting_locked
     if request.user.is_authenticated() and not setting_locked:

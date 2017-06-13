@@ -1,13 +1,13 @@
 from .models import *
 
 
-def allocate_quantity(quantity_vector, criteria, quantity_matrix):
+def allocate_quantity(quantity_vector, criteria, quantity_matrix_i):
     """
     :param quantity_vector: 未分配数量的列表，每一项为(quantity, role, data_sheet_element category)
     :param criteria: 数量区间分配规则，每一项为[price category, price_conditions]
-    :param quantity_matrix: 当前数据表的已分配的所有数量及其位置
+    :param quantity_matrix_i: 当前数据表的已分配的所有数量及其位置
     :param row: 当前行序号
-    :return: quantity_matrix
+    :return: quantity_matrix_i
     """
 
     number_of_criteria = len(criteria)
@@ -31,13 +31,13 @@ def allocate_quantity(quantity_vector, criteria, quantity_matrix):
                     qty_uom = qty[0].uom.name
                     try:
                         if qty_range[qty_uom][0] <= qty[0].value <= qty_range[qty_uom][1]:  # 找到uom对应的最低/最高限额，判断是否在区间内
-                            quantity_matrix[row][i] = qty[0].value
+                            quantity_matrix_i[row][i] = {'id': 0, 'value': qty[0].value}
                     except KeyError:
                         pass
                 elif qty_role == 'sapc':
                     qty_uom = qty[0].uom
                     if qty_uom == price_conditions[0].uom:  # 直接对应uom
-                        quantity_matrix[row][i] = qty[0].value
+                        quantity_matrix_i[row][i] = {'id': 0, 'value': qty[0].value}
                 elif qty_role == 'md':
                     q_in_range = [False] * len(qty)  # 判断值列表，当判断值列表中所有的元素为True，则判定在区间内
                     i_q = 0  # 初始化q的序号
@@ -54,7 +54,11 @@ def allocate_quantity(quantity_vector, criteria, quantity_matrix):
                     try:
                         q_in_range.index(False)
                     except ValueError:
-                        quantity_matrix[row][i] = 1
+                        quantity_matrix_i[row][i] = {'id': 0, 'value': 1.0}
 
             row += 1
-    return quantity_matrix
+    return quantity_matrix_i
+
+
+def chargeable_unit(base, conv, factor, compare):
+    pass

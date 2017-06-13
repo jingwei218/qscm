@@ -4,9 +4,10 @@ from . import views
 
 scheme_urls = [
     url(r'^(?P<scheme_pid>[0-9]+)/$', views.view_scheme, name='viewscheme'),
-    url(r'^setting/(?P<scheme_pid>[0-9]+)/$', views.viewSchemeSetting, name='viewschemesetting'),
-    url(r'^setting/(?P<scheme_pid>[0-9]+)/save$', views.saveSchemeSetting, name='viewschemesetting'),
+    url(r'^setting/(?P<scheme_pid>[0-9]+)/$', views.view_scheme_settings, name='viewschemesetting'),
+    url(r'^setting/(?P<scheme_pid>[0-9]+)/save$', views.save_scheme_settings, name='saveschemesetting'),
     url(r'^new/$', views.new_scheme, name='newscheme'),
+    url(r'^save_n_create_scheme/$', views.save_n_create_scheme, name='save_n_create_scheme'),
 ]
 
 
