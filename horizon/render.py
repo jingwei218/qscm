@@ -2,6 +2,7 @@ from .calculation import *
 from django.core.exceptions import ObjectDoesNotExist
 
 
+# 显示数据表、价格、成本数据
 def render_data(data_sheets):
     tables = list()  # 初始化数据表列表
     for data_sheet in data_sheets:  # 遍历所有数据表
@@ -120,3 +121,34 @@ def render_data(data_sheets):
             tables[-1]['table_content'][r]['content'] = data_matrix[r] + price_matrix[r] + quantity_matrix[r]
 
     return tables
+
+
+# 根据前端传入Scheme级设置新建Scheme
+def create_new_scheme(rec_json):
+    response_data = dict()
+    scheme_name = rec_json['scheme_name']
+    scheme_settings = rec_json['scheme_settings']
+    try:
+        scheme_pid = Scheme.objects.all().last().pid + 1
+    except AttributeError:
+        scheme_pid = 900000000  # 默认初始化Scheme的id
+    scheme_new = Scheme(pid=scheme_pid,
+                        name=scheme_name,
+                        setting_locked=False)
+    scheme_new.save()
+    for scheme_setting in scheme_settings:
+        setting_pid = int(scheme_setting['setting_pid'])
+        scheme_setting_value = scheme_setting['scheme_setting_value']
+        setting = Setting.objects.get(pid=setting_pid)
+        try:
+            scheme_setting_pid = SchemeSetting.objects.all().last().pid + 1
+        except AttributeError:
+            scheme_setting_pid = 4000
+        scheme_setting_new = SchemeSetting(pid=scheme_setting_pid,
+                                           value=scheme_setting_value,
+                                           scheme=scheme_new,
+                                           setting=setting)
+        scheme_setting_new.save()
+        response_data['scheme_pid'] = scheme_pid
+
+    return response_data

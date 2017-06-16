@@ -3,32 +3,11 @@ from django.contrib.auth.models import User
 
 
 # ========================= Platform Level ========================= #
-# 用户
-class HorizonUser(User):
-    default_language = models.CharField(max_length=4, blank=True, null=True)
-    permissions = models.CharField(max_length=100, blank=True, null=True)
-
-    def __str__(self):
-        return self.username
-
-
 # 平台基础信息
 class HorizonSetting(models.Model):
     pid = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=50, blank=False, null=False)
     value = models.CharField(max_length=50, blank=True, null=True)
-
-
-# 可供选择的服务：招标、对账
-class Service(models.Model):
-    pid = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=50, blank=False, null=False)  # 服务项目名称
-    code_name = models.CharField(max_length=50, blank=False, null=False)  # 服务项目代号
-    note = models.CharField(max_length=255, blank=True, null=True)  # 服务内容描述
-    owners = models.ManyToManyField(HorizonUser)  # 可用服务的用户
-
-    def __str__(self):
-        return self.name
 
 
 # 货币单位
@@ -93,6 +72,28 @@ class Geo(models.Model):
         verbose_name = 'Geography'
 
 
+# 用户
+class HorizonUser(User):
+    default_language = models.CharField(max_length=4, blank=True, null=True)
+    permissions = models.CharField(max_length=100, blank=True, null=True)
+    company = models.ForeignKey(Company, default=6707)
+
+    def __str__(self):
+        return self.username
+        
+
+# 可供选择的服务：招标、对账
+class Service(models.Model):
+    pid = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=50, blank=False, null=False)  # 服务项目名称
+    code_name = models.CharField(max_length=50, blank=False, null=False)  # 服务项目代号
+    note = models.CharField(max_length=255, blank=True, null=True)  # 服务内容描述
+    owners = models.ManyToManyField(HorizonUser)  # 可用服务的用户
+
+    def __str__(self):
+        return self.name
+
+
 # ========================= Scheme ========================= #
 # 招标项目总表，包含设置、数据表、价格表等
 class Scheme(models.Model):
@@ -130,6 +131,9 @@ class Setting(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['pid']
 
 
 # 项目总表设置
