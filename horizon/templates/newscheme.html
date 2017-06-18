@@ -3,7 +3,7 @@
 {% block body %}
 <script type="text/javascript" src="/static/js/js.cookie.js"></script>
 <script type="text/javascript">
-var ajax_url = "/{{ platform|lower }}/{{ service|lower }}/scheme/save_n_create_scheme/"
+var ajax_url = "/{{ platform|lower }}/{{ service|lower }}/scheme/create/"
 </script>
 <script type="text/javascript" src="/static/js/scheme.js"></script>
 
@@ -38,7 +38,10 @@ var ajax_url = "/{{ platform|lower }}/{{ service|lower }}/scheme/save_n_create_s
             {% endfor %}
         </tbody>
     </table>
-    <div class="col-xs-12"><a id="save_n_create_scheme" href="">Save and Create</a></div>
+    <div class="col-xs-12">
+        <a id="save_n_create_scheme" href="">Save and Create</a>
+        <a id="edit_scheme_settings" href="" hidden="hidden">Edit</a>
+    </div>
     <input id="edit_box">
 </div>
 

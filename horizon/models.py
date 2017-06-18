@@ -142,6 +142,7 @@ class SchemeSetting(models.Model):
     setting = models.ForeignKey(Setting)  # 对应的某个设置项
     scheme = models.ForeignKey(Scheme)  # Scheme一一对应其自有的设置
     value = models.CharField(max_length=255, blank=False, null=False)
+    locked = models.BooleanField(default=False)
 
     def __str__(self):
         return self.setting.name
@@ -259,6 +260,7 @@ class DataSheet(models.Model):
     pid = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, blank=False, null=False)  # 数据表描述
     number_of_price_fields = models.IntegerField(blank=True, null=True)
+    setting_locked = models.BooleanField(default=False)
     scheme = models.ForeignKey(Scheme)
     data_sheet_elements = models.ManyToManyField(DataSheetElement)
 

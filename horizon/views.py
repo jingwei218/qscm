@@ -105,6 +105,7 @@ def service_fusion(request):
     if request.user.is_authenticated():
         username = request.user.username
         schemes = Scheme.objects.filter(owners__username=username)
+        settings = Setting.objects.filter(level=0)  # 设置项
         return render(request, 'fusion.html',
                       {
                           'lang': 'en',
@@ -113,6 +114,7 @@ def service_fusion(request):
                           'username': username,
                           'service': 'fusion',
                           'schemes': schemes,
+                          'settings': settings,
                       })
     else:
         return HttpResponseRedirect('/' + platform_lower + '/')
@@ -127,29 +129,11 @@ def service_fission(request):
 
 
 # ========================= 项目 ========================= #
-# 新建项目
-def new_scheme(request):
-    if request.user.is_authenticated():  # 用户已登录
-        username = request.user.username
-        settings = Setting.objects.filter(level=0)  # 设置项
-        return render(request, 'newscheme.html',
-        {
-            'lang': 'en',
-            'title': platform,
-            'platform': platform,
-            'username': username,
-            'service': 'fusion',
-            'settings': settings,
-        })
-    else:
-        return HttpResponseRedirect('/' + platform_lower + '/')
-
-
 # 保存新建项目
-def save_n_create_scheme(request):
+def create_scheme(request):
     if request.user.is_authenticated():  # 用户已登录
-        rec_json = json.loads(request.body.decode('utf-8'))
-        response_data = create_new_scheme(rec_json)
+        rec_json = json.loads(request.body.decode('utf-8'))  # 前端发送来的json
+        response_data = create_new_scheme(rec_json)  # 解析json，并创建新的项目，生成返回信息
         return HttpResponse(
             json.dumps(response_data),
             content_type="application/json"

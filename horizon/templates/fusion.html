@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 
 {% block body %}
+<script type="text/javascript" src="/static/js/js.cookie.js"></script>
+<script type="text/javascript">var ajax_url = "/{{ platform|lower }}/{{ service|lower }}/scheme/create/";</script>
+<script type="text/javascript" src="/static/js/scheme.js"></script>
 
 <div class="container-fluid" style="background-color: #A5D1F3;">
     <div class="row">User: {{ username }}</div>
+    <div class="row"><a href="/{{ platform|lower }}/services/">Back</a></div>
+    <div class="row"><a href="/{{ platform|lower }}/logout/">Log Out</a></div>
 </div>
 <div class="container-fluid">
     <!--Scheme List-->
@@ -19,19 +24,39 @@
     {% endfor %}
     <div class="row">
         <div class="col-md-12 col-xs-12 caption">
-            <a href="/{{ platform|lower }}/{{ service|lower }}/scheme/new/">Create a new scheme</a>
+            <a id="new_scheme" href="">Create a new scheme</a>
         </div>
     </div>
-    <!--Hidden edit box-->
-    <input type="text" name="edit_box" class="form-control" id="edit_box" style="position: absolute;
-    padding-top: 0; padding-bottom: 0; display: none;">
 </div>
 
-<!--Logout-->
-<div class="container-fluid">
-    <div class="row">
-        <a href="/{{ platform|lower }}/logout/">Log Out</a>
+<div class="container-fluid" id="new_scheme_settings" style="font-size: x-small;" hidden="hidden">
+    <table class="table table-bordered table-condensed" style="width: 500px">
+        <caption style="font-size: small; font-weight:bold; font-style: italic"><span id="scheme_caption"></span></caption>
+        <thead>
+            <tr><!-- 列标题 -->
+                <th style="width: 200px">Description</th>
+                <th style="width: 300px">Setting Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Scheme Name</td>
+                <td class="scheme_name editable" data-type="text" data-not-null="True"></td>
+            </tr>
+            {% for setting in settings %}
+            <tr class="scheme_setting">
+                <td id="{{ setting.pid }}" class="setting_name">{{ setting.name }}</td>
+                <td class="scheme_setting_value editable" data-type="{{ setting.type }}" data-not-null="True"></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="col-xs-12">
+        <a id="create_scheme" href="">Save and Create</a>
+        <a id="edit_scheme_settings" href="" hidden="hidden">Edit</a>
+        <a id="cancel_scheme_edit" href="" hidden="hidden">Cancel</a>
     </div>
+    <input id="edit_box">
 </div>
 
 {% endblock %}
