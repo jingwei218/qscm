@@ -10,6 +10,8 @@
     <div class="row"><a href="/{{ platform|lower }}/services/">Back</a></div>
     <div class="row"><a href="/{{ platform|lower }}/logout/">Log Out</a></div>
 </div>
+
+<!--项目列表区-->
 <div class="container-fluid">
     <!--Scheme List-->
     {% for scheme in schemes %}
@@ -29,6 +31,7 @@
     </div>
 </div>
 
+<!--项目设置区-->
 <div class="container-fluid" id="new_scheme_settings" style="font-size: x-small;" hidden="hidden">
     <table class="table table-bordered table-condensed" style="width: 500px">
         <caption style="font-size: small; font-weight:bold; font-style: italic"><span id="scheme_caption"></span></caption>
@@ -59,4 +62,5 @@
     <input id="edit_box">
 </div>
 
+<!--数据表设置区-->
 {% endblock %}
