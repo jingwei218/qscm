@@ -4,7 +4,9 @@ from django.core.exceptions import ObjectDoesNotExist
 
 # 显示数据表、价格、成本数据
 def render_data(data_sheets):
+
     tables = list()  # 初始化数据表列表
+
     for data_sheet in data_sheets:  # 遍历所有数据表
         data_sheet_elements = data_sheet.data_sheet_elements.all()  # 数据表中所有行
 
@@ -34,35 +36,55 @@ def render_data(data_sheets):
         row = 0  # 初始化行号
         for data_sheet_element in data_sheet_elements:  # 遍历所有行
 
-            tables[-1]['table_content'].append({'id': data_sheet_element.pid, 'content': None})
+            tables[-1]['table_content'].append({'id': data_sheet_element.hash_pid, 'content': None})
 
             element = data_sheet_element.element  # 获得数据行对应的element
             vendor = data_sheet_element.vendor  # 获得数据行对应的vendor
-            dse_category = data_sheet_element.category
+            dse_category = data_sheet_element.category  # 获得数据行对应的category
             price_sheet_element = PriceSheetElement.objects.filter(element=element).filter(vendor=vendor)  # 检索出与当前行相关的价格
 
             for data_sheet_field in data_sheet_fields:  # 遍历所有数据列
-                field_type = data_sheet_field.field_type
-                data_sheet_field_index = data_sheet_field.sequence  #
+                field_type = data_sheet_field.field_type  # 获得字段类型
+                data_sheet_field_index = data_sheet_field.sequence  # 获得字段在列表中的位置
                 try:
+                    # 初始化单元格
                     cell_value = None
                     cell_id = None
+                    # 序列号
                     if field_type == 'Increment':
                         cell_value = row + 1
                         cell_id = 0
+                    # 位置
                     elif field_type == 'Location':
                         l = Location.objects.filter(element=element).get(sequence=data_sheet_field_index)
                         cell_value = l.geo.name
-                        cell_id = l.pid
+                        cell_id = l.hash_pid
+                    # 日期
+                    elif field_type == 'Date':
+                        d = DataDate.objects.filter(data_sheet_element=data_sheet_element).get(sequence=data_sheet_field_index)
+                        cell_value = d.date
+                        cell_id = d.hash_pid
+                    # 供应商
+                    elif field_type == 'Vendor':
+                        v = data_sheet_element.vendor
+                        cell_value = v.name
+                        cell_id = v.hash_pid
+                    # 业务分类
+                    elif field_type == 'Category':
+                        c = data_sheet_element.category
+                        cell_value = c.name
+                        cell_id = c.hash_pid
+                    # 数量
                     elif field_type == 'Quantity':
                         quantities = Quantity.objects.filter(data_sheet_element=data_sheet_element)
                         q = quantities.get(sequence=data_sheet_field_index)
                         cell_value = q.value
-                        cell_id = q.id
+                        cell_id = q.hash_pid
 
                         chgu_q = quantities.filter(role='chgu')  # 已计算计费数量
                         sapc_q = quantities.filter(role='sapc')  # 与价格条件相同的计费单位的数量
-                        md_q = quantities.filter(role='md')  # 多维条件限定的计费数量
+                        md_q = quantities.filter(role='md')  # 多条件限定的计费数量
+
                         # 指定未分配量
                         if chgu_q:
                             u_qty = (chgu_q, 'chgu', dse_category)
@@ -70,18 +92,7 @@ def render_data(data_sheets):
                             u_qty = (sapc_q, 'sapc', dse_category)
                         elif md_q:
                             u_qty = (md_q, 'md', dse_category)
-                        quantity_vector[row] = u_qty
-                    elif field_type == 'Vendor':
-                        v = data_sheet_element.vendor
-                        cell_value = v.name
-                        cell_id = v.pid
-                    elif field_type == 'Date':
-                        d = data_sheet_element.start_date
-                        cell_value = d
-                    elif field_type == 'Category':
-                        c = data_sheet_element.category
-                        cell_value = c.name
-                        cell_id = c.pid
+                        quantity_vector[row] = u_qty  # 更新为分配的数量向量
                 except ObjectDoesNotExist:
                     cell_value = 0
                 data_matrix[row][data_sheet_field_index] = {'id': cell_id, 'value': cell_value}
@@ -94,7 +105,7 @@ def render_data(data_sheets):
                     price_uom = price.uom.name
                     price_currency = price.currency.name
                     price_unit = price_currency + '/' + price_uom  # 显示的计价单位
-                    price_id = price.pid
+                    price_id = price.hash_pid
 
                     # 查询价格限制条件的显示名称，并结合计价单位添加入价格条件列表
                     price_conditions = price.price_conditions.all()
@@ -124,44 +135,166 @@ def render_data(data_sheets):
 
 
 # 根据前端传入Scheme级设置新建Scheme
-def create_new_scheme(rec_json):
+def save_scheme_settings(rec_json):
     response_data = dict()
     scheme_name = rec_json['scheme_name']
     scheme_settings = rec_json['scheme_settings']
+    scheme_users = rec_json['scheme_users']
     mode = rec_json['mode']
+
     if mode == 'create':
+
+        nbr_of_owners = 0
+
         try:
             scheme_pid = Scheme.objects.all().last().pid + 1
         except AttributeError:
             scheme_pid = 900000000  # 默认初始化Scheme的id
+        scheme_hash_pid = hashed(scheme_pid)
         scheme_new = Scheme(pid=scheme_pid,
                             name=scheme_name,
-                            setting_locked=False)
+                            setting_locked=False,
+                            hash_pid=scheme_hash_pid)
         scheme_new.save()
+
+        for scheme_setting in scheme_settings:
+            scheme_setting_value = scheme_setting['scheme_setting_value']
+
+            # 若项目设置有空值，则返回错误信息，删除已创建项目
+            if scheme_setting_value == '':
+                response_data['error_message'] = 'Setting value cannot be null.'
+                SchemeSetting.objects.filter(scheme=scheme_new).delete()
+                scheme_new.delete()
+                return response_data
+
+            setting_hash_pid = scheme_setting['setting_hash_pid']
+            setting = Setting.objects.get(hash_pid=setting_hash_pid)
+
+            try:
+                scheme_setting_pid = SchemeSetting.objects.all().last().pid + 1
+            except AttributeError:
+                scheme_setting_pid = 4000
+
+            scheme_setting_new = SchemeSetting(pid=scheme_setting_pid,
+                                               value=scheme_setting_value,
+                                               scheme=scheme_new,
+                                               setting=setting,
+                                               hash_pid=hashed(scheme_setting_pid))
+            scheme_setting_new.save()
+
+        for scheme_user in scheme_users:
+            try:
+                if scheme_user['user_selected']:
+                    scheme_owner = HorizonUser.objects.get(hash_pid=scheme_user['user_hash_pid'])
+                    scheme_new.owners.add(scheme_owner)
+                    nbr_of_owners += 1
+            except KeyError:  # 若无用户的hash_pid，有被篡改可能，删除已添加用户并返回错误信息
+                owners = HorizonUser.objects.filter(scheme=scheme_new)
+                for o in owners:
+                    scheme_new.owners.remove(o)
+                response_data['error_message'] = 'Owner does not match database.'
+                scheme_new.delete()
+                return response_data
+
+        if nbr_of_owners == 0:  # 若无项目拥有者，则无法生成新项目
+            response_data['error_message'] = 'Scheme must have at least 1 owner.'
+            scheme_new.delete()
+            return response_data
+
     elif mode == 'update':
-        scheme_new = Scheme.objects.get(pid=scheme_pid)
+
+        scheme_hash_pid = rec_json['scheme_hash_pid']
+        scheme = Scheme.objects.get(hash_pid=scheme_hash_pid)
+        nbr_of_owners = len(scheme.owners.all())
+
+        for scheme_setting in scheme_settings:
+            scheme_setting_value = scheme_setting['scheme_setting_value']
+            # 若项目设置有空值，则返回错误信息
+            if scheme_setting_value == '':
+                response_data['error_message'] = 'Setting value cannot be null.'
+                response_data['scheme_hash_pid'] = scheme_hash_pid
+                return response_data
+
+            setting_hash_pid = scheme_setting['setting_hash_pid']
+            setting = Setting.objects.get(hash_pid=setting_hash_pid)
+
+            scheme_setting_new = SchemeSetting.objects.filter(scheme=scheme).get(setting=setting)
+            scheme_setting_new.value = scheme_setting_value
+            scheme_setting_new.save()
+
+        for scheme_user in scheme_users:
+            scheme_owner = HorizonUser.objects.get(hash_pid=scheme_user['user_hash_pid'])
+            if scheme_user['user_selected'] == 1 and scheme_user['user_status'] == 0:
+                scheme.owners.add(scheme_owner)
+            elif scheme_user['user_selected'] == 0 and scheme_user['user_status'] == 1:
+                if nbr_of_owners > 1:
+                    scheme.owners.remove(scheme_owner)
+                    nbr_of_owners -= 1
+                else:
+                    response_data['error_message'] = 'Scheme must have at least 1 owner.'
+                    return response_data
+
+        scheme.name = scheme_name
+        scheme.save()
+
+    response_data['scheme_hash_pid'] = scheme_hash_pid
+    response_data['status'] = 'success'
+
+    return response_data
+
+
+def get_scheme_settings(request, rec_json):
+
+    response_data = dict()
+    scheme_hash_pid = rec_json['scheme_hash_pid']
+
+    scheme = Scheme.objects.get(hash_pid=scheme_hash_pid)
+    scheme_setting_locked = scheme.setting_locked
+    scheme_settings = SchemeSetting.objects.filter(scheme=scheme)
+    scheme_owners = scheme.owners.all()
+
+    username = request.user.username
+    user_company = HorizonUser.objects.get(username=username).company
+    users = HorizonUser.objects.filter(company=user_company)
+
+    data_sheets = DataSheet.objects.filter(scheme=scheme)
+
+    response_data['scheme_name'] = scheme.name
+    response_data['setting_locked'] = scheme_setting_locked
+    response_data['scheme_settings'] = list()
+    response_data['scheme_users'] = list()
+    response_data['data_sheets'] = list()
+
+    owner_hashpid_list = list()
+    for scheme_owner in scheme_owners:
+        owner_hashpid_list.append(scheme_owner.hash_pid)
 
     for scheme_setting in scheme_settings:
-        setting_pid = int(scheme_setting['setting_pid'])
-        scheme_setting_value = scheme_setting['scheme_setting_value']
-        setting = Setting.objects.get(pid=setting_pid)
-        # 若项目设置有空值，则返回错误信息，删除已创建项目
-        if scheme_setting_value == '':
-            response_data['error_message'] = 'Setting <' + setting.name + '> value cannot be null.'
-            if mode == 'create':
-                scheme_new.delete()
-            return response_data
-        try:
-            scheme_setting_pid = SchemeSetting.objects.all().last().pid + 1
-        except AttributeError:
-            scheme_setting_pid = 4000
-        scheme_setting_new = SchemeSetting(pid=scheme_setting_pid,
-                                           value=scheme_setting_value,
-                                           scheme=scheme_new,
-                                           setting=setting)
-        scheme_setting_new.save()
-    
-    response_data['scheme_pid'] = scheme_pid
-    response_data['status'] = 'success'
+        response_data['scheme_settings'].append({
+            'setting_hash_pid': scheme_setting.setting.hash_pid,
+            'setting_name': scheme_setting.setting.name,
+            'scheme_setting_value': scheme_setting.value
+        })
+
+    for user in users:
+        hash_pid = user.hash_pid
+        if hash_pid in owner_hashpid_list:
+            selected_owner = 1
+        else:
+            selected_owner = 0
+
+        response_data['scheme_users'].append({
+            'user_hash_pid': hash_pid,
+            'user_username': user.username,
+            'selected_owner': selected_owner
+        })
+
+    for data_sheet in data_sheets:
+        response_data['data_sheets'].append({
+            'datasheet_hash_pid': data_sheet.hash_pid,
+            'datasheet_name': data_sheet.name,
+            'number_of_price_fields': data_sheet.number_of_price_fields,
+            'setting_locked': data_sheet.setting_locked
+        })
 
     return response_data

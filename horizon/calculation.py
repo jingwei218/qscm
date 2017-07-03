@@ -1,4 +1,9 @@
 from .models import *
+import hashlib
+
+
+def hashed(value):
+    return hashlib.sha256(str(value).encode()).hexdigest()
 
 
 def allocate_quantity(quantity_vector, criteria, quantity_matrix_i):
@@ -22,10 +27,10 @@ def allocate_quantity(quantity_vector, criteria, quantity_matrix_i):
             qty_range[price_condition.uom.name] = (price_condition.low, price_condition.high)
 
         row = 0
-        for quantity in quantity_vector:
-            qty = quantity[0]  # 数量对象
-            qty_role = quantity[1]  # 数量类型
-            qty_category = quantity[2]
+        for quantity_vector_element in quantity_vector:
+            qty = quantity_vector_element[0]  # 数量对象
+            qty_role = quantity_vector_element[1]  # 数量类型
+            qty_category = quantity_vector_element[2]  # 业务类型
             if price_category == qty_category:
                 if qty_role == 'chgu':  # 直接判断所处位置
                     qty_uom = qty[0].uom.name
@@ -61,4 +66,7 @@ def allocate_quantity(quantity_vector, criteria, quantity_matrix_i):
 
 
 def chargeable_unit(base, conv, factor, compare):
-    pass
+
+    converted = conv * factor
+    chargeable = converted
+    return chargeable

@@ -1,26 +1,29 @@
-{% extends 'base.html' %}
-
-{% block body %}
+{% extends 'base.html' %} {% block body %}
 <script type="text/javascript" src="/static/js/js.cookie.js"></script>
-<script type="text/javascript">var ajax_url = "/{{ platform|lower }}/{{ service|lower }}/scheme/create/";</script>
+<script type="text/javascript">
+    var ajax_save_url = "/{{ platform|lower }}/{{ service|lower }}/scheme/save/",
+        ajax_get_url = "/{{ platform|lower }}/{{ service|lower }}/scheme/settings/",
+        ajax_get_owners = "/{{ platform|lower }}/{{ service|lower }}/scheme/owners/";
+
+</script>
 <script type="text/javascript" src="/static/js/scheme.js"></script>
 
 <div class="container-fluid" style="background-color: #A5D1F3;">
-    <div class="row">User: {{ username }}</div>
+    <div class="row">User: <a href="">{{ username }}</a></div>
+    <div class="row">Company: <a href="">{{ company }}</a></div>
     <div class="row"><a href="/{{ platform|lower }}/services/">Back</a></div>
     <div class="row"><a href="/{{ platform|lower }}/logout/">Log Out</a></div>
 </div>
-
 <!--项目列表区-->
 <div class="container-fluid">
     <!--Scheme List-->
     {% for scheme in schemes %}
     <div class="row">
         <div class="col-lg-4 col-sm-6 col-xs-6 caption">
-            <a href="/{{ platform|lower }}/{{ service|lower }}/scheme/{{ scheme.pid }}/">{{ scheme.name }}</a>
+            <a href="/{{ platform|lower }}/{{ service|lower }}/scheme/get/{{ scheme.hash_pid }}/">{{ scheme.name }}</a>
         </div>
         <div class="col-md-1 col-xs-1">
-            <a href="/{{ platform|lower }}/{{ service|lower }}/setting/{{ scheme.pid }}/">Setting</a>
+            <a href="/{{ platform|lower }}/{{ service|lower }}/scheme/{{ scheme.hash_pid }}/setting/" class="setting" id="{{ scheme.hash_pid }}">Setting</a>
         </div>
     </div>
     {% endfor %}
@@ -32,35 +35,53 @@
 </div>
 
 <!--项目设置区-->
-<div class="container-fluid" id="new_scheme_settings" style="font-size: x-small;" hidden="hidden">
+<div class="container-fluid" id="scheme_settings_container" style="font-size: x-small;" hidden="hidden">
     <table class="table table-bordered table-condensed" style="width: 500px">
-        <caption style="font-size: small; font-weight:bold; font-style: italic"><span id="scheme_caption"></span></caption>
+        <caption style="font-size: small; font-weight:bold; font-style: italic;"><span id="scheme_caption"></span></caption>
         <thead>
-            <tr><!-- 列标题 -->
+            <tr>
+                <!-- 列标题 -->
                 <th style="width: 200px">Description</th>
                 <th style="width: 300px">Setting Value</th>
             </tr>
         </thead>
         <tbody>
             <tr>
+                <!-- 项目名称 -->
                 <td>Scheme Name</td>
                 <td class="scheme_name editable" data-type="text" data-not-null="True"></td>
             </tr>
-            {% for setting in settings %}
+            <tr>
+                <!-- 项目拥有者 -->
+                <td>Scheme Owners</td>
+                <td class="scheme_owners" data-not-null="True">
+                    <select id="scheme_user_list" multiple="multiple" disabled="disabled">
+                        {% for user in users %}
+                        <option value="{{ user.hash_pid }}">{{ user.username }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            {% for setting in scheme_settings %}
             <tr class="scheme_setting">
-                <td id="{{ setting.pid }}" class="setting_name">{{ setting.name }}</td>
+                <td id="{{ setting.hash_pid }}" class="setting_name">{{ setting.name }}</td>
                 <td class="scheme_setting_value editable" data-type="{{ setting.type }}" data-not-null="True"></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <div class="col-xs-12">
-        <a id="create_scheme" href="">Save and Create</a>
-        <a id="edit_scheme_settings" href="" hidden="hidden">Edit</a>
-        <a id="cancel_scheme_edit" href="" hidden="hidden">Cancel</a>
+        <a id="scheme_settings_operation" href="" hidden="hidden"></a>
+        <a id="cancel_scheme_operation" href="" hidden="hidden">Cancel</a>
     </div>
-    <input id="edit_box">
 </div>
 
 <!--数据表设置区-->
+<div class="container-fluid" id="datasheet_settings_container" style="font-size: x-small;" hidden="hidden">
+    <ul class="nav nav-tabs" id="datasheet_namelist">
+        
+    </ul>
+</div>
+
+<input id="edit_box" style="font-size: x-small;" hidden="hidden">
 {% endblock %}

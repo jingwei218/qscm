@@ -1,9 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpRequest, HttpResponse
-from django_ajax.decorators import ajax
 from django.apps import apps
-from django.views.decorators.csrf import csrf_protect
 from .render import *
 import json
 
@@ -104,8 +102,11 @@ def view_services(request):
 def service_fusion(request):
     if request.user.is_authenticated():
         username = request.user.username
+        user_company = HorizonUser.objects.get(username=username).company
+        users = HorizonUser.objects.filter(company=user_company)
         schemes = Scheme.objects.filter(owners__username=username)
-        settings = Setting.objects.filter(level=0)  # 设置项
+        scheme_settings = Setting.objects.filter(level=0)  # 项目设置项
+        datasheet_settings = Setting.objects.filter(level=1)  # 数据表设置项
         return render(request, 'fusion.html',
                       {
                           'lang': 'en',
@@ -114,7 +115,10 @@ def service_fusion(request):
                           'username': username,
                           'service': 'fusion',
                           'schemes': schemes,
-                          'settings': settings,
+                          'scheme_settings': scheme_settings,
+                          'datasheet_settings': datasheet_settings,
+                          'users': users,
+                          'company': user_company.name,
                       })
     else:
         return HttpResponseRedirect('/' + platform_lower + '/')
@@ -130,10 +134,23 @@ def service_fission(request):
 
 # ========================= 项目 ========================= #
 # 保存新建项目
-def create_scheme(request):
+def save_scheme(request):
     if request.user.is_authenticated():  # 用户已登录
         rec_json = json.loads(request.body.decode('utf-8'))  # 前端发送来的json
-        response_data = create_new_scheme(rec_json)  # 解析json，并创建新的项目，生成返回信息
+        response_data = save_scheme_settings(rec_json)  # 解析json，并创建新的项目，生成返回信息
+        return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json"
+        )
+    else:
+        return HttpResponseRedirect('/' + platform_lower + '/')
+
+
+def view_scheme_settings(request):
+    if request.user.is_authenticated():  # 用户已登录
+
+        rec_json = json.loads(request.body.decode('utf-8'))  # 前端发送来的json
+        response_data = get_scheme_settings(request, rec_json)  # 解析json，并创建新的项目，生成返回信息
         return HttpResponse(
             json.dumps(response_data),
             content_type="application/json"
@@ -143,10 +160,10 @@ def create_scheme(request):
 
 
 # 成本分析项目
-def view_scheme(request, scheme_pid):
+def view_scheme(request, scheme_hash_pid):
     if request.user.is_authenticated():  # 用户已登录
         username = request.user.username
-        scheme = Scheme.objects.get(pid=scheme_pid)
+        scheme = Scheme.objects.get(hash_pid=scheme_hash_pid)
         data_sheets = DataSheet.objects.filter(scheme=scheme)
         tables = render_data(data_sheets)
 
@@ -164,57 +181,3 @@ def view_scheme(request, scheme_pid):
     else:
         return HttpResponseRedirect('/' + platform_lower + '/')
 
-
-# Scheme和DataSheet的设置
-def view_scheme_settings(request, scheme_pid):
-    if request.user.is_authenticated():
-        username = request.user.username  # 用户名
-        schemes = Scheme.objects.filter(owners__username=username)  # 筛选出用户名下的scheme集合
-        scheme = Scheme.objects.get(pid=scheme_pid)  # 筛选出指定scheme
-        scheme_name = scheme.name  # scheme的名称
-        scheme_settings = SchemeSetting.objects.filter(scheme=scheme)  # scheme的所有设置项
-        data_sheets = DataSheet.objects.filter(scheme=scheme)  # scheme对应的数据表集合
-        data_sheet_settings_group = list()
-        for data_sheet in data_sheets:
-            selected_fields = list()
-            data_sheet_fields = DataSheetField.objects.filter(data_sheet=data_sheet)
-            for data_sheet_field in data_sheet_fields:
-                selected_fields.append(data_sheet_field.data_field.display_name)
-            data_sheet_settings_group.append({
-                'id': data_sheet.pid,
-                'name': data_sheet.name,
-                'data_sheet_settings': DataSheetSetting.objects.filter(data_sheet=data_sheet),
-                'data_sheet_fields': data_sheet_fields,
-                'unselected_fields': DisplayField.objects.exclude(display_name__in=selected_fields)
-            })
-
-        return render(request, 'fusion.html',
-                      {
-                          'lang': 'en',
-                          'title': 'Scheme Setting',
-                          'username': username,
-                          'schemes': schemes,
-                          'scheme_settings': scheme_settings,
-                          'scheme_name': scheme_name,
-                          'data_sheets': data_sheets,
-                          'data_sheet_settings_group': data_sheet_settings_group,
-                      })
-
-
-@ajax
-def save_scheme_settings(request, scheme_pid):
-    scheme = Scheme.objects.get(pid=scheme_pid)
-    setting_locked = scheme.setting_locked
-    if request.user.is_authenticated() and not setting_locked:
-        if request.POST:
-            for setting_id in request.POST:
-                try:
-                    if setting_id[0] == 's':
-                        setting = SchemeSetting.objects.get(pid=int(setting_id[1:]))
-                    elif setting_id[0] == 'd':
-                        setting = DataSheetSetting.objects.get(pid=int(setting_id[1:]))
-                    setting.value = request.POST[setting_id]
-                    setting.save()
-                except:
-                    return HttpResponseRedirect('/' + platform_lower + '/')
-            return HttpResponseRedirect('/' + platform_lower + '/' + 'fusion/scheme/' + '/setting/' + str(scheme_pid))

@@ -3,10 +3,9 @@ from . import views
 
 
 scheme_urls = [
-    url(r'^(?P<scheme_pid>[0-9]+)/$', views.view_scheme, name='viewscheme'),
-    url(r'^setting/(?P<scheme_pid>[0-9]+)/$', views.view_scheme_settings, name='viewschemesetting'),
-    url(r'^setting/(?P<scheme_pid>[0-9]+)/save$', views.save_scheme_settings, name='saveschemesetting'),
-    url(r'^create/$', views.create_scheme, name='create_scheme'),
+    url(r'^get/(?P<scheme_hash_pid>\w+)/$', views.view_scheme, name='view_scheme'),
+    url(r'^save/$', views.save_scheme, name='save_scheme'),
+    url(r'^settings/$', views.view_scheme_settings, name='view_scheme_settings'),
 ]
 
 
