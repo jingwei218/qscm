@@ -88,7 +88,7 @@ function displayDataSheetTemplate(datasheet_field_list, number_of_options, mix_o
         
         for (var j=0; j<datasheet_field_list.length; j++) {
             $('#datasheet_template tbody tr select:last').append('<option></option>');
-            $('#datasheet_template tbody tr select:last').find('option:last').text(datasheet_field_list[j]);
+            $('#datasheet_template tbody tr select:last').find('option:last').text(datasheet_field_list[j]).attr('value', j);
         }
     }
 }
