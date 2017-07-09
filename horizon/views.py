@@ -1,12 +1,10 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpRequest, HttpResponse
-from django.apps import apps
 from .render import *
 import json
 
 
-appconfig = apps.get_app_config('horizon')
 platform = HorizonSetting.objects.get(name='platform').value
 platform_lower = platform.lower()
 
@@ -134,10 +132,11 @@ def service_fission(request):
 
 # ========================= 项目 ========================= #
 # 保存新建项目
-def save_scheme(request):
+def save_scheme_settings(request):
+
     if request.user.is_authenticated():  # 用户已登录
         rec_json = json.loads(request.body.decode('utf-8'))  # 前端发送来的json
-        response_data = save_scheme_settings(rec_json)  # 解析json，并创建新的项目，生成返回信息
+        response_data = save_scheme_settings_to_json(rec_json)  # 解析json，并创建新的项目，生成返回信息
         return HttpResponse(
             json.dumps(response_data),
             content_type="application/json"
@@ -146,11 +145,61 @@ def save_scheme(request):
         return HttpResponseRedirect('/' + platform_lower + '/')
 
 
-def view_scheme_settings(request):
-    if request.user.is_authenticated():  # 用户已登录
+def get_scheme_settings(request):
 
+    if request.user.is_authenticated():  # 用户已登录
         rec_json = json.loads(request.body.decode('utf-8'))  # 前端发送来的json
-        response_data = get_scheme_settings(request, rec_json)  # 解析json，并创建新的项目，生成返回信息
+        response_data = get_scheme_settings_to_json(request, rec_json)  # 解析json，并创建新的项目，生成返回信息
+        return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json"
+        )
+    else:
+        return HttpResponseRedirect('/' + platform_lower + '/')
+
+
+def lock_scheme_settings(request):
+
+    if request.user.is_authenticated():
+        rec_json = json.loads(request.body.decode('utf-8'))  # 前端发送来的json
+        response_data = lock_scheme_settings_to_json(rec_json)  # 解析json，并创建新的项目，生成返回信息
+        return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json"
+        )
+    else:
+        return HttpResponseRedirect('/' + platform_lower + '/')
+
+
+def save_datasheet_settings(request):
+
+    if request.user.is_authenticated():  # 用户已登录
+        rec_json = json.loads(request.body.decode('utf-8'))  # 前端发送来的json
+        response_data = save_datasheet_settings_to_json(rec_json)  # 解析json，并创建新的项目，生成返回信息
+        return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json"
+        )
+    else:
+        return HttpResponseRedirect('/' + platform_lower + '/')
+
+
+def get_datasheet_settings(request):
+
+    if request.user.is_authenticated():
+        rec_json = json.loads(request.body.decode('utf-8'))
+        response_data = get_datasheet_settings_to_json(rec_json)
+        return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json"
+        )
+
+
+def lock_datasheet_settings(request):
+
+    if request.user.is_authenticated():
+        rec_json = json.loads(request.body.decode('utf-8'))  # 前端发送来的json
+        response_data = lock_datasheet_settings_to_json(rec_json)  # 解析json，并创建新的项目，生成返回信息
         return HttpResponse(
             json.dumps(response_data),
             content_type="application/json"
@@ -160,12 +209,13 @@ def view_scheme_settings(request):
 
 
 # 成本分析项目
-def view_scheme(request, scheme_hash_pid):
+def get_scheme_content(request, scheme_hash_pid):
+
     if request.user.is_authenticated():  # 用户已登录
         username = request.user.username
         scheme = Scheme.objects.get(hash_pid=scheme_hash_pid)
-        data_sheets = DataSheet.objects.filter(scheme=scheme)
-        tables = render_data(data_sheets)
+        datasheets = DataSheet.objects.filter(scheme=scheme)
+        tables = render_data(datasheets)
 
         return render(request, 'viewscheme.html',
                       {
@@ -175,9 +225,8 @@ def view_scheme(request, scheme_hash_pid):
                           'username': username,
                           'service': 'fusion',
                           'scheme': scheme,
-                          'data_sheets': data_sheets,
+                          'datasheets': datasheets,
                           'tables': tables,
                       })
     else:
         return HttpResponseRedirect('/' + platform_lower + '/')
-

@@ -217,7 +217,7 @@ class DataDate(models.Model):
     hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
     date = models.DateField(auto_now_add=True)
     sequence = models.IntegerField(blank=False, null=False)
-    data_sheet_element = models.ForeignKey(DataSheetElement)  # 每个元素有一个或多个日期
+    datasheet_element = models.ForeignKey(DataSheetElement)  # 每个元素有一个或多个日期
 
 
 # 计量单位，用于标注数量的单位
@@ -245,7 +245,7 @@ class Quantity(models.Model):
     comparison = models.CharField(max_length=3, choices=(('min', 'Minimum'), ('max', 'Maximum')), blank=True,
                                   null=True)  # 计算计费单位量的比较方式，仅对转换量适用
     sequence = models.IntegerField(blank=True, null=True)
-    data_sheet_element = models.ForeignKey(DataSheetElement)  # 每个元素有一个或多个数量
+    datasheet_element = models.ForeignKey(DataSheetElement)  # 每个元素有一个或多个数量
 
     def __str__(self):
         return str(self.value) + ' x ' + self.uom.name
@@ -295,10 +295,10 @@ class DataSheet(models.Model):
     pid = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, blank=False, null=False)  # 数据表描述
     hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
-    number_of_price_fields = models.IntegerField(blank=True, null=True)
+    number_of_price_fields = models.IntegerField(blank=True, null=True, default=0)
     setting_locked = models.BooleanField(default=False)
     scheme = models.ForeignKey(Scheme)
-    data_sheet_elements = models.ManyToManyField(DataSheetElement)
+    datasheet_elements = models.ManyToManyField(DataSheetElement)
 
     def __str__(self):
         return self.name
@@ -322,7 +322,7 @@ class PriceSheet(models.Model):
 # ========================= Fields ========================= #
 # 数据表显示字段
 class DataSheetField(models.Model):
-    data_sheet = models.ForeignKey(DataSheet)
+    datasheet = models.ForeignKey(DataSheet)
     display_name = models.CharField(max_length=255, blank=False, null=False)
     field_type = models.CharField(max_length=30, blank=True, null=True)
     sequence = models.IntegerField(blank=True, null=True)
@@ -355,7 +355,7 @@ class DataSheetSetting(models.Model):
     pid = models.IntegerField(primary_key=True)
     hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
     setting = models.ForeignKey(Setting)
-    data_sheet = models.ForeignKey(DataSheet)
+    datasheet = models.ForeignKey(DataSheet)
     value = models.CharField(max_length=255, blank=False, null=False)
 
     def __str__(self):
@@ -372,7 +372,7 @@ class Cost(models.Model):
     hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
     value = models.FloatField()
     total = models.BooleanField()
-    data_sheet_element = models.ForeignKey(DataSheetElement)  # 一个数据表元素可有多个成本
+    datasheet_element = models.ForeignKey(DataSheetElement)  # 一个数据表元素可有多个成本
 
 
 

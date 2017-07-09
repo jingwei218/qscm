@@ -1,9 +1,12 @@
 {% extends 'base.html' %} {% block body %}
 <script type="text/javascript" src="/static/js/js.cookie.js"></script>
 <script type="text/javascript">
-    var ajax_save_url = "/{{ platform|lower }}/{{ service|lower }}/scheme/save/",
-        ajax_get_url = "/{{ platform|lower }}/{{ service|lower }}/scheme/settings/",
-        ajax_get_owners = "/{{ platform|lower }}/{{ service|lower }}/scheme/owners/";
+    var ajax_get_scheme_settings_url = "/{{ platform|lower }}/{{ service|lower }}/scheme/settings/",
+        ajax_save_scheme_settings_url = "/{{ platform|lower }}/{{ service|lower }}/scheme/settings/save/",
+        ajax_lock_scheme_settings_url = "/{{ platform|lower }}/{{ service|lower }}/scheme/settings/lock/",
+        ajax_get_datasheet_settings_url = "/{{ platform|lower }}/{{ service|lower }}/datasheet/settings/",
+        ajax_save_datasheet_settings_url = "/{{ platform|lower }}/{{ service|lower }}/datasheet/settings/save/",
+        ajax_lock_datasheet_settings_url = "/{{ platform|lower }}/{{ service|lower }}/datasheet/settings/lock/";
 
 </script>
 <script type="text/javascript" src="/static/js/scheme.js"></script>
@@ -35,7 +38,8 @@
 </div>
 
 <!--项目设置区-->
-<div class="container-fluid" id="scheme_settings_container" style="font-size: x-small;" hidden="hidden">
+<div class="container-fluid table-responsive" id="scheme_settings_container" style="font-size: x-small;" hidden="hidden">
+    <div style="font-size: small; font-weight:bold; font-style: italic;">Scheme Settings</div>
     <table class="table table-bordered table-condensed" style="width: 500px">
         <caption style="font-size: small; font-weight:bold; font-style: italic;"><span id="scheme_caption"></span></caption>
         <thead>
@@ -71,17 +75,63 @@
         </tbody>
     </table>
     <div class="col-xs-12">
-        <a id="scheme_settings_operation" href="" hidden="hidden"></a>
-        <a id="cancel_scheme_operation" href="" hidden="hidden">Cancel</a>
+        <ul class="nav nav-pills">
+            <li role="presentation"><a id="scheme_settings_operation" href="" hidden="hidden"></a></li>
+            <li role="presentation"><a id="scheme_settings_lock" href="" hidden="hidden">Create DataSheet</a></li>
+        </ul>
     </div>
 </div>
 
 <!--数据表设置区-->
 <div class="container-fluid" id="datasheet_settings_container" style="font-size: x-small;" hidden="hidden">
-    <ul class="nav nav-tabs" id="datasheet_namelist">
-        
-    </ul>
+    <ul class="nav nav-tabs" id="datasheet_namelist"></ul>
+    <div class="col-md-4 col-xs-12 table-responsive">
+        <div style="font-size: small; font-weight:bold; font-style: italic;">DataSheet Settings</div>
+        <table class="table table-bordered table-condensed" id="datasheet_settings_table">
+            <caption style="font-size: small; font-weight:bold; font-style: italic;"><span id="datasheet_caption"></span></caption>
+            <thead>
+                <tr>
+                    <!-- 列标题 -->
+                    <th style="width: 200px">Description</th>
+                    <th style="width: 300px">Setting Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <!-- 数据表名称 -->
+                    <td>DataSheet Name</td>
+                    <td class="datasheet_name editable" data-type="text" data-not-null="True"></td>
+                </tr>
+                {% for setting in datasheet_settings %}
+                <tr class="datasheet_setting">
+                    <td id="{{ setting.hash_pid }}" class="setting_name">{{ setting.name }}</td>
+                    <td class="datasheet_setting_value editable" data-type="{{ setting.type }}" data-not-null="True"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-8 col-xs-12 table-responsive" id="datasheet_template">
+        <div style="font-size: small; font-weight:bold; font-style: italic;">DataSheet Template</div>
+        <table class="table table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <td>列标题</td>
+                </tr>
+            </thead>
+                <tr>
+                    <td>列数据类型</td>
+                </tr>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xs-12">
+        <ul class="nav nav-pills">
+            <li role="presentation"><a id="datasheet_settings_operation" href="" hidden="hidden"></a></li>
+            <li role="presentation"><a id="datasheet_settings_lock" href="" hidden="hidden">Generate Template</a></li>
+        </ul>
+    </div>
 </div>
 
-<input id="edit_box" style="font-size: x-small;" hidden="hidden">
-{% endblock %}
+<input id="edit_box" style="font-size: x-small;" hidden="hidden"> {% endblock %}
