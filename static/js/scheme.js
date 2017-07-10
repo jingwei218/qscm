@@ -76,21 +76,41 @@ function displayDataSheetNameList(datasheets, number_of_datasheets) {
     editOn('#datasheet_settings_container'); //
 }
 
-function displayDataSheetTemplate(datasheet_field_list, number_of_options, mix_options, min_in_options, number_of_rows, number_of_columns) {
+function displayDataSheetTemplate(datasheet_field_list, datasheet_fields, number_of_columns) {
+
+    $('#datasheet_template_caption').text($('.datasheet_name').text());
 
     $('#datasheet_template thead tr>td').not('td:first').remove();
     $('#datasheet_template tbody tr>td').not('td:first').remove();
 
     for (var i=0; i<number_of_columns; i++) {
-        $('#datasheet_template thead tr').append('<td></td>');
+        $('#datasheet_template thead tr').append('<td class="editable" data-type="text"></td>');
         $('#datasheet_template thead tr td:last').data('sequence', i);
         $('#datasheet_template tbody tr').append('<td><select></select></td>');
         
         for (var j=0; j<datasheet_field_list.length; j++) {
             $('#datasheet_template tbody tr select:last').append('<option></option>');
-            $('#datasheet_template tbody tr select:last').find('option:last').text(datasheet_field_list[j]).attr('value', j);
+            $('#datasheet_template tbody tr select:last').find('option:last')
+                .text(datasheet_field_list[j])
+                .attr('value', datasheet_field_list[j])
+                .attr('id', j);
         }
+
+        if (datasheet_fields.length>0) { //当找到可用字段信息时
+            $('#datasheet_template thead tr td:last')
+                .attr('id', datasheet_fields[i]['sequence'])
+                .text(datasheet_fields[i]['display_name']);
+            var find_target = 'option[value="' + datasheet_fields[i]['field_type'] +'"]';
+            $('#datasheet_template tbody tr select:last')
+                .find(find_target).attr('selected', 'selected');
+        }
+        
     }
+
+    $('#datasheet_template').show(); //显示数据表模板
+    $('#datasheet_settings_operation').hide(); //不显示编辑按钮
+    $('#datasheet_settings_lock').hide(); //不显示创建数据表模板按钮
+    editOn('#datasheet_template'); //使模板可编辑
 }
 
 function saveSchemeSettings(mode) {
@@ -371,6 +391,7 @@ function getDataSheetSettings(datasheet_hash_pid) {
             //锁住设置时，自动显示所有数据表设置
             $('#datasheet_settings_operation').hide(); //不显示编辑按钮
             $('#datasheet_settings_lock').hide(); //不显示创建数据表按钮
+            lockDataSheetSettings(datasheet_hash_pid);
         } else {
             //未锁住设置时，可以选择编辑设置项
             $('#datasheet_settings_operation').text('Edit').show();
@@ -398,8 +419,10 @@ function lockDataSheetSettings(datasheet_hash_pid) {
         method: "POST",
         data: datasheet_meta_json,
     }).done(function (rec_json) {
-        datasheet_field_list = rec_json['datasheet_field_list'];
-        displayDataSheetTemplate(datasheet_field_list, number_of_options, mix_options, min_in_options, number_of_rows, number_of_columns);
+        var datasheet_field_list = rec_json['datasheet_field_list'],
+            datasheet_fields = rec_json['datasheet_fields'];
+        
+        displayDataSheetTemplate(datasheet_field_list, datasheet_fields, number_of_columns);
     });
 }
 
@@ -491,6 +514,7 @@ $(document).ready(function () {
         } else if ($(this).text() == "Edit") {
             $(this).text("Update"); //点击编辑后变为更新按钮
             $('#datasheet_settings_lock').hide(); //隐藏锁定设置按钮，编辑状态下不可锁定
+            $('#datasheet_template').hide(); //隐藏数据表模板
             editOn('#datasheet_settings_container'); //挂载单击事件，使字段可编辑
         }
     });

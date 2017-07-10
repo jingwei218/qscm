@@ -110,28 +110,36 @@
                 {% endfor %}
             </tbody>
         </table>
+        <div class="col-xs-12">
+            <ul class="nav nav-pills">
+                <li role="presentation"><a id="datasheet_settings_operation" href="" hidden="hidden"></a></li>
+                <li role="presentation"><a id="datasheet_settings_lock" href="" hidden="hidden">Generate Template</a></li>
+            </ul>
+        </div>
     </div>
-    <div class="col-md-8 col-xs-12 table-responsive" id="datasheet_template">
+    <div class="col-md-8 col-xs-12 table-responsive" id="datasheet_template" hidden="hidden">
         <div style="font-size: small; font-weight:bold; font-style: italic;">DataSheet Template</div>
         <table class="table table-bordered table-condensed">
+            <caption style="font-size: small; font-weight:bold; font-style: italic;"><span id="datasheet_template_caption"></span></caption>
             <thead>
                 <tr>
-                    <td>列标题</td>
+                    <td>Column Name</td>
                 </tr>
             </thead>
-                <tr>
-                    <td>列数据类型</td>
-                </tr>
+            <tr>
+                <td>Column Type</td>
+            </tr>
             <tbody>
             </tbody>
         </table>
+        <div class="col-xs-12">
+            <ul class="nav nav-pills">
+                <li role="presentation"><a id="datasheet_template_operation" href="" hidden="hidden">Save</a></li>
+                <li role="presentation"><a id="datasheet_template_lock" href="" hidden="hidden">Generate PriceSheet</a></li>
+            </ul>
+        </div>
     </div>
-    <div class="col-xs-12">
-        <ul class="nav nav-pills">
-            <li role="presentation"><a id="datasheet_settings_operation" href="" hidden="hidden"></a></li>
-            <li role="presentation"><a id="datasheet_settings_lock" href="" hidden="hidden">Generate Template</a></li>
-        </ul>
-    </div>
+
 </div>
 
 <input id="edit_box" style="font-size: x-small;" hidden="hidden"> {% endblock %}

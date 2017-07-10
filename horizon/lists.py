@@ -4,7 +4,7 @@ from django.apps import apps
 app = apps.get_app_config('horizon')
 
 
-datasheet_fields = [
+datasheet_fields_set = [
     ('Serial', None),
     ('Category', app.get_model('Category')),
     ('Location', app.get_model('Geo')),

@@ -433,8 +433,25 @@ def lock_datasheet_settings_to_json(rec_json):
 
     response_data = dict()
     response_data['datasheet_field_list'] = list()
+    response_data['datasheet_field_names'] = list()
+    response_data['datasheet_fields'] = list()
 
-    for field in datasheet_fields:
+    datasheet_hash_pid = rec_json['datasheet_hash_pid']
+    datasheet_setting_locked = rec_json['datasheet_setting_locked']
+
+    datasheet = DataSheet.objects.get(hash_pid=datasheet_hash_pid)
+    datasheet.setting_locked = datasheet_setting_locked
+    datasheet.save()
+
+    datasheet_fields = DataSheetField.objects.filter(datasheet=datasheet)
+    for datasheet_field in datasheet_fields:
+        response_data['datasheet_fields'].append({
+            'display_name': datasheet_field.display_name,
+            'field_type': datasheet_field.field_type,
+            'sequence': datasheet_field.sequence
+        })
+
+    for field in datasheet_fields_set:
         response_data['datasheet_field_list'].append(field[0])
 
     return response_data
