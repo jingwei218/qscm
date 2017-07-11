@@ -433,7 +433,6 @@ def lock_datasheet_settings_to_json(rec_json):
 
     response_data = dict()
     response_data['datasheet_field_list'] = list()
-    response_data['datasheet_field_names'] = list()
     response_data['datasheet_fields'] = list()
 
     datasheet_hash_pid = rec_json['datasheet_hash_pid']
@@ -442,6 +441,11 @@ def lock_datasheet_settings_to_json(rec_json):
     datasheet = DataSheet.objects.get(hash_pid=datasheet_hash_pid)
     datasheet.setting_locked = datasheet_setting_locked
     datasheet.save()
+
+    if datasheet.datasheet_elements.count() > 0:
+        response_data['datasheet_element_exists'] = True
+    else:
+        response_data['datasheet_element_exists'] = False
 
     datasheet_fields = DataSheetField.objects.filter(datasheet=datasheet)
     for datasheet_field in datasheet_fields:

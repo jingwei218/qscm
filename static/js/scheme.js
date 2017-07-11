@@ -73,38 +73,47 @@ function displayDataSheetNameList(datasheets, number_of_datasheets) {
     $('#datasheet_settings_container .editable').text(''); //清空表单
     $('#datasheet_settings_operation').text('Create').show(); //显示新建按钮
     $('#datasheet_settings_lock').hide(); //不显示创建模板按钮
+    $('#datasheet_template').hide(); //不显示数据表模板
     editOn('#datasheet_settings_container'); //
 }
 
-function displayDataSheetTemplate(datasheet_field_list, datasheet_fields, number_of_columns) {
+function displayDataSheetTemplate(datasheet_field_list, datasheet_fields, datasheet_element_exists, number_of_columns) {
 
-    $('#datasheet_template_caption').text($('.datasheet_name').text());
+    $('#datasheet_template_caption').text($('.datasheet_name').text()); //提示数据表名称
 
-    $('#datasheet_template thead tr>td').not('td:first').remove();
-    $('#datasheet_template tbody tr>td').not('td:first').remove();
+    //每行除第一列外全部删除
+    $('#datasheet_template tr').each(function(i, element) {
+        $(element).find('td').not(':first').remove();
+    });
 
-    for (var i=0; i<number_of_columns; i++) {
-        $('#datasheet_template thead tr').append('<td class="editable" data-type="text"></td>');
-        $('#datasheet_template thead tr td:last').data('sequence', i);
-        $('#datasheet_template tbody tr').append('<td><select></select></td>');
-        
-        for (var j=0; j<datasheet_field_list.length; j++) {
-            $('#datasheet_template tbody tr select:last').append('<option></option>');
-            $('#datasheet_template tbody tr select:last').find('option:last')
+    for (var i = 0; i < number_of_columns; i++) {
+
+        $('#datasheet_template #column_name').append('<td class="editable" data-type="text"></td>');
+        $('#datasheet_template #column_name td:last').data('sequence', i); //列名称添加次序
+        $('#datasheet_template #column_type').append('<td><select></select></td>'); //列类型为下拉列表
+
+        for (var j = 0; j < datasheet_field_list.length; j++) {
+            $('#datasheet_template #column_type select:last').append('<option></option>');
+            $('#datasheet_template #column_type select:last').find('option:last')
                 .text(datasheet_field_list[j])
                 .attr('value', datasheet_field_list[j])
                 .attr('id', j);
         }
 
-        if (datasheet_fields.length>0) { //当找到可用字段信息时
-            $('#datasheet_template thead tr td:last')
+        if (datasheet_fields.length > 0) { //当找到可用字段信息时
+            $('#datasheet_template #column_name td:last')
                 .attr('id', datasheet_fields[i]['sequence'])
                 .text(datasheet_fields[i]['display_name']);
-            var find_target = 'option[value="' + datasheet_fields[i]['field_type'] +'"]';
-            $('#datasheet_template tbody tr select:last')
+
+            var field_type = datasheet_fields[i]['field_type'],
+                find_target = 'option[value="' + field_type + '"]';
+            $('#datasheet_template #column_type select:last')
                 .find(find_target).attr('selected', 'selected');
+            if (datasheet_element_exists) {
+                $('#datasheet_template #column_type select:last').attr('disabled', 'disabled');
+                $('#datasheet_template_lock').hide();
+            }
         }
-        
     }
 
     $('#datasheet_template').show(); //显示数据表模板
@@ -396,6 +405,7 @@ function getDataSheetSettings(datasheet_hash_pid) {
             //未锁住设置时，可以选择编辑设置项
             $('#datasheet_settings_operation').text('Edit').show();
             $('#datasheet_settings_lock').show();
+            $('#datasheet_template').hide();
         }
         //(3)数据表设置部分
     });
@@ -420,9 +430,10 @@ function lockDataSheetSettings(datasheet_hash_pid) {
         data: datasheet_meta_json,
     }).done(function (rec_json) {
         var datasheet_field_list = rec_json['datasheet_field_list'],
-            datasheet_fields = rec_json['datasheet_fields'];
-        
-        displayDataSheetTemplate(datasheet_field_list, datasheet_fields, number_of_columns);
+            datasheet_fields = rec_json['datasheet_fields'],
+            datasheet_element_exists = rec_json['datasheet_element_exists'];
+
+        displayDataSheetTemplate(datasheet_field_list, datasheet_fields, datasheet_element_exists, number_of_columns);
     });
 }
 
@@ -445,6 +456,7 @@ $(document).ready(function () {
             txt_val = $('#edit_box').val();
         }
         $('.edited').text(txt_val);
+        $('.edited').removeClass('edited');
         $(this).val('').hide();
     });
 
@@ -523,4 +535,9 @@ $(document).ready(function () {
         e.preventDefault();
         lockDataSheetSettings(datasheet_hash_pid_glb);
     });
+
+    $('#datasheet_template').scroll(function (e) {
+        $('#edit_box').blur();
+    });
+
 });
