@@ -6,8 +6,10 @@
         ajax_lock_scheme_settings_url = "/{{ platform|lower }}/{{ service|lower }}/scheme/settings/lock/",
         ajax_get_datasheet_settings_url = "/{{ platform|lower }}/{{ service|lower }}/datasheet/settings/",
         ajax_save_datasheet_settings_url = "/{{ platform|lower }}/{{ service|lower }}/datasheet/settings/save/",
-        ajax_lock_datasheet_settings_url = "/{{ platform|lower }}/{{ service|lower }}/datasheet/settings/lock/";
-
+        ajax_lock_datasheet_settings_url = "/{{ platform|lower }}/{{ service|lower }}/datasheet/settings/lock/",
+        ajax_save_datasheet_fields_url = "/{{ platform|lower }}/{{ service|lower }}/datasheet/fields/save/",
+        ajax_lock_datasheet_fields_url = "/{{ platform|lower }}/{{ service|lower }}/datasheet/fields/lock/",
+        download_datasheet_template_url = "/{{ platform|lower }}/{{ service|lower }}/datasheet/template/download/";
 </script>
 <script type="text/javascript" src="/static/js/scheme.js"></script>
 
@@ -76,8 +78,10 @@
     </table>
     <div class="col-xs-12">
         <ul class="nav nav-pills">
-            <li role="presentation"><a id="scheme_settings_operation" href="" hidden="hidden"></a></li>
-            <li role="presentation"><a id="scheme_settings_lock" href="" hidden="hidden">Create DataSheet</a></li>
+            <li role="presentation">
+                <a id="scheme_settings_operation" href="" hidden="hidden"></a>
+            </li>
+            <li role="presentation"><a id="scheme_settings_lock" href="">Create DataSheet</a></li>
         </ul>
     </div>
 </div>
@@ -112,8 +116,10 @@
         </table>
         <div class="col-xs-12">
             <ul class="nav nav-pills">
-                <li role="presentation"><a id="datasheet_settings_operation" href="" hidden="hidden"></a></li>
-                <li role="presentation"><a id="datasheet_settings_lock" href="" hidden="hidden">Generate Template</a></li>
+                <li role="presentation">
+                    <a id="datasheet_settings_operation" href=""></a>
+                </li>
+                <li role="presentation"><a id="datasheet_settings_lock" href="">Generate Template</a></li>
             </ul>
         </div>
     </div>
@@ -130,12 +136,22 @@
                 <tr id="column_type">
                     <td>Column Type</td>
                 </tr>
+                <tr id="quantity_uom">
+                    <td>Quantity UoM</td>
+                </tr>
+                <tr id="quantity_type">
+                    <td>Quantity Type</td>
+                </tr>
             </tbody>
         </table>
         <div class="col-xs-12">
             <ul class="nav nav-pills">
-                <li role="presentation"><a id="datasheet_template_operation" href="" hidden="hidden">Save</a></li>
-                <li role="presentation"><a id="datasheet_template_lock" href="" hidden="hidden">Generate DataSheet</a></li>
+                <li role="presentation">
+                    <a id="datasheet_template_operation" href="">Save</a>
+                </li>
+                <li role="presentation">
+                    <a id="datasheet_template_download" href=""></a>
+                </li>
             </ul>
         </div>
     </div>

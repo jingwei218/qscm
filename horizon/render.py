@@ -1,6 +1,7 @@
 from .calculation import *
 from .lists import *
 from django.core.exceptions import ObjectDoesNotExist
+from openpyxl import *
 
 
 # 显示数据表、价格、成本数据
@@ -18,8 +19,8 @@ def render_data(datasheets):
                        })
 
         datasheet_fields = DataSheetField.objects.filter(datasheet=datasheet)
-        number_of_data_fields = len(datasheet_fields)  # 数据字段个数
-        number_of_data_rows = len(datasheet_elements)  # 数据行数
+        number_of_data_fields = datasheet_fields.count()  # 数据字段个数
+        number_of_data_rows = datasheet_elements.count()  # 数据行数
         number_of_price_fields = datasheet.number_of_price_fields  # 价格表字段个数
         data_header_list = list()  # 初始化数据标题列表
         data_matrix = [[0] * number_of_data_fields for x in range(0, number_of_data_rows)]
@@ -58,7 +59,7 @@ def render_data(datasheets):
                     # 位置
                     elif field_type == 'Location':
                         l = Location.objects.filter(element=element).get(sequence=datasheet_field_index)
-                        cell_value = l.geo.name
+                        cell_value = l.name
                         cell_id = l.hash_pid
                     # 日期
                     elif field_type == 'Date':
@@ -84,15 +85,15 @@ def render_data(datasheets):
 
                         chgu_q = quantities.filter(role='chgu')  # 已计算计费数量
                         sapc_q = quantities.filter(role='sapc')  # 与价格条件相同的计费单位的数量
-                        md_q = quantities.filter(role='md')  # 多条件限定的计费数量
+                        mres_q = quantities.filter(role='mres')  # 多条件限定的计费数量
 
                         # 指定未分配量
                         if chgu_q:
                             u_qty = (chgu_q, 'chgu', dse_category)
                         elif sapc_q:
                             u_qty = (sapc_q, 'sapc', dse_category)
-                        elif md_q:
-                            u_qty = (md_q, 'md', dse_category)
+                        elif mres_q:
+                            u_qty = (mres_q, 'mres', dse_category)
                         quantity_vector[row] = u_qty  # 更新为分配的数量向量
                 except ObjectDoesNotExist:
                     cell_value = 0
@@ -434,6 +435,8 @@ def lock_datasheet_settings_to_json(rec_json):
     response_data = dict()
     response_data['datasheet_field_list'] = list()
     response_data['datasheet_fields'] = list()
+    response_data['uoms'] = list()
+    response_data['quantity_types'] = quantity_types
 
     datasheet_hash_pid = rec_json['datasheet_hash_pid']
     datasheet_setting_locked = rec_json['datasheet_setting_locked']
@@ -441,6 +444,13 @@ def lock_datasheet_settings_to_json(rec_json):
     datasheet = DataSheet.objects.get(hash_pid=datasheet_hash_pid)
     datasheet.setting_locked = datasheet_setting_locked
     datasheet.save()
+
+    uoms = UoM.objects.all()
+    for uom in uoms:
+        response_data['uoms'].append({
+            'name': uom.name,
+            'uom_hash_pid': uom.hash_pid
+        })
 
     if datasheet.datasheet_elements.count() > 0:
         response_data['datasheet_element_exists'] = True
@@ -452,10 +462,112 @@ def lock_datasheet_settings_to_json(rec_json):
         response_data['datasheet_fields'].append({
             'display_name': datasheet_field.display_name,
             'field_type': datasheet_field.field_type,
-            'sequence': datasheet_field.sequence
+            'sequence': datasheet_field.sequence,
+            'quantity_type': datasheet_field.quantity_type,
         })
+        if datasheet_field.field_type == 'Quantity':
+            try:
+                response_data['datasheet_fields'][-1]['quantity_uom'] = datasheet_field.quantity_uom.name
+            except AttributeError:
+                response_data['datasheet_fields'][-1]['quantity_uom'] = datasheet_field.quantity_uom
 
     for field in datasheet_fields_set:
         response_data['datasheet_field_list'].append(field[0])
 
+    response_data['xltemplate_file_name'] = datasheet.xltemplate_file_name
+
     return response_data
+
+
+def save_datasheet_fields_to_json(rec_json):
+
+    response_data = dict()
+    datasheet_hash_pid = rec_json['datasheet_hash_pid']
+    datasheet_template_fields = rec_json['datasheet_template_fields']
+
+    datasheet = DataSheet.objects.get(hash_pid=datasheet_hash_pid)
+    datasheet_fields = DataSheetField.objects.filter(datasheet=datasheet)
+    datasheet_fields_count = datasheet_fields.count()
+
+    wb_datasheet_template = Workbook()
+    ws = wb_datasheet_template.active
+    ws.title = datasheet.name
+
+    for datasheet_template_field in datasheet_template_fields:
+
+        display_name = datasheet_template_field['display_name']
+        sequence = datasheet_template_field['sequence']
+        field_type = datasheet_template_field['field_type']
+
+        if display_name == '':
+            response_data['error_message'] = 'Field cannot be null.'
+            if datasheet_fields_count == 0:
+                DataSheetField.objects.filter(datasheet=datasheet).delete()
+            return response_data
+
+        if field_type == 'Quantity':
+
+            quantity_type = datasheet_template_field['quantity_type']
+            quantity_uom = datasheet_template_field['quantity_uom']
+
+            if quantity_uom == '':
+                response_data['error_message'] = 'Quantity UoM cannot be null.'
+                if datasheet_fields_count == 0:
+                    DataSheetField.objects.filter(datasheet=datasheet).delete()
+                return response_data
+
+            # 查询是否有现成的UoM
+            try:
+                uom = UoM.objects.get(name=quantity_uom)
+            except ObjectDoesNotExist:
+                uom_pid = UoM.objects.all().last().pid + 1
+                uom = UoM(pid=uom_pid, hash_pid=hashed(uom_pid), name=quantity_uom)
+                uom.save()
+
+            if datasheet_fields_count > 0:  # 更新字段名称
+                datasheet_field = datasheet_fields.get(sequence=sequence)
+                datasheet_field.display_name = display_name
+                datasheet_field.quantity_uom = uom
+                if datasheet.datasheet_elements.count() == 0:  # 当数据表中未有记录时可以调整字段类型和数量类型
+                    datasheet_field.field_type = field_type
+                    datasheet_field.quantity_type = quantity_type
+            else:  # 新建
+                datasheet_field = DataSheetField(sequence=sequence,
+                                                 display_name=display_name,
+                                                 field_type=field_type,
+                                                 quantity_type=quantity_type,
+                                                 quantity_uom=uom,
+                                                 datasheet=datasheet)
+        else:  # 非数量类型字段
+            if datasheet_fields_count > 0:  # 更新字段名称
+                datasheet_field = datasheet_fields.get(sequence=sequence)
+                datasheet_field.display_name = display_name
+                if datasheet.datasheet_elements.count() == 0:  # 当数据表中未有记录时可以调整字段类型和数量类型
+                    datasheet_field.field_type = field_type
+            else:  # 新建
+                datasheet_field = DataSheetField(sequence=sequence,
+                                                 display_name=display_name,
+                                                 field_type=field_type,
+                                                 datasheet=datasheet)
+
+        datasheet_field.save()
+
+        ws.cell(row=1, column=sequence + 1, value=display_name)
+        if field_type == 'Quantity':
+            ws.cell(row=1, column=sequence + 1, value=quantity_uom)
+
+    file_name = str(datasheet.pid) + '_' + datasheet.name
+    file_name = file_name.replace(' ', '_')
+    file_path = template_save_folders['datasheet_template']
+    file_fullname = file_name + '.xlsx'
+    file_fullpath = file_path + file_fullname
+    wb_datasheet_template.save(file_fullpath)
+
+    response_data['xltemplate_file_name'] = file_name
+    datasheet.xltemplate_file_name = file_name
+    datasheet.xltemplate_file_fullname = file_fullname
+    datasheet.xltemplate_file_fullpath = file_fullpath
+    datasheet.save()
+
+    return response_data
+

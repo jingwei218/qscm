@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect, HttpRequest, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
 from .render import *
 import json
 
@@ -204,6 +204,36 @@ def lock_datasheet_settings(request):
             json.dumps(response_data),
             content_type="application/json"
         )
+    else:
+        return HttpResponseRedirect('/' + platform_lower + '/')
+
+
+def save_datasheet_fields(request):
+
+    if request.user.is_authenticated():
+        rec_json = json.loads(request.body.decode('utf-8'))  # 前端发送来的json
+        response_data = save_datasheet_fields_to_json(rec_json)  # 解析json，并创建新的项目，生成返回信息
+        return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json"
+        )
+    else:
+        return HttpResponseRedirect('/' + platform_lower + '/')
+
+
+def get_datasheet_template(request, datasheet_hash_pid):
+
+    if request.user.is_authenticated():
+
+        datasheet = DataSheet.objects.get(hash_pid=datasheet_hash_pid)
+        file_fullpath = datasheet.xltemplate_file_fullpath
+        file_fullname = datasheet.xltemplate_file_fullname
+
+        with open(file_fullpath, 'rb') as f:
+            response = HttpResponse(f.read(), content_type="application/vnd.ms-excel")  # application/force-download
+            response['Content-Disposition'] = 'inline; filename={0}'.format(file_fullname)
+            return response
+
     else:
         return HttpResponseRedirect('/' + platform_lower + '/')
 

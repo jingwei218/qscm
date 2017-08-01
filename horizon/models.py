@@ -95,7 +95,7 @@ class HorizonUser(User):
 # 可供选择的服务：招标、对账
 class Service(models.Model):
     pid = models.IntegerField(primary_key=True)
-    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
+    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
     name = models.CharField(max_length=50, blank=False, null=False)  # 服务项目名称
     code_name = models.CharField(max_length=50, blank=False, null=False)  # 服务项目代号
     note = models.CharField(max_length=255, blank=True, null=True)  # 服务内容描述
@@ -122,16 +122,6 @@ class Scheme(models.Model):
 
 
 # ========================= Settings ========================= #
-# 设置选项中可选的值。有些设置为文字或数字，则没有可选值。
-class SettingOption(models.Model):
-    pid = models.IntegerField(primary_key=True)
-    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
-    name = models.CharField(max_length=50, blank=False, null=False)
-
-    def __str__(self):
-        return self.name
-
-
 # 设置选项
 class Setting(models.Model):
     pid = models.IntegerField(primary_key=True)
@@ -139,9 +129,7 @@ class Setting(models.Model):
     name = models.CharField(max_length=50, blank=False, null=False)  # 设置描述
     type = models.CharField(max_length=20, blank=False, null=True)  # 数据类型
     note = models.CharField(max_length=255, blank=True, null=True)  # 备注
-    model = models.CharField(max_length=255, blank=True, null=True)  # 指向须展开的model，如：数据表列标题
     level = models.IntegerField()  # 标注设置所适用层：0代表scheme层，1代表datasheet层
-    setting_options = models.ManyToManyField(SettingOption)  # 任一设置项目可以有多个设置选项值，同样的选项值可以被不同设置项目使用
 
     def __str__(self):
         return self.name
@@ -153,7 +141,7 @@ class Setting(models.Model):
 # 项目总表设置
 class SchemeSetting(models.Model):
     pid = models.IntegerField(primary_key=True)
-    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
+    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
     setting = models.ForeignKey(Setting)  # 对应的某个设置项
     scheme = models.ForeignKey(Scheme)  # Scheme一一对应其自有的设置
     value = models.CharField(max_length=255, blank=False, null=False)
@@ -169,14 +157,15 @@ class SchemeSetting(models.Model):
 # 计算表中的每一行即价格表/数据表中的每个元素
 class Element(models.Model):
     pid = models.IntegerField(primary_key=True)
-    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
+    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
 
 
 # 用于数据的地理位置信息
 class Location(models.Model):
     pid = models.IntegerField(primary_key=True)
-    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
-    geo = models.ForeignKey(Geo)
+    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
+    # geo = models.ForeignKey(Geo)
+    name = models.CharField(max_length=255, blank=False, null=False, default='')
     element = models.ForeignKey(Element)
     sequence = models.IntegerField()
 
@@ -190,7 +179,7 @@ class Location(models.Model):
 # 数据表元素，基于元素，但数据表元素可以是重复信息
 class DataSheetElement(models.Model):
     pid = models.IntegerField(primary_key=True)
-    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
+    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
     element = models.ForeignKey(Element)
     vendor = models.ForeignKey(Company)
     category = models.ForeignKey(Category)  # 每个数据表元素对应一个产品类别
@@ -297,6 +286,9 @@ class DataSheet(models.Model):
     hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
     number_of_price_fields = models.IntegerField(blank=True, null=True, default=0)
     setting_locked = models.BooleanField(default=False)
+    xltemplate_file_name = models.CharField(max_length=255, blank=True, null=True)
+    xltemplate_file_fullname = models.CharField(max_length=255, blank=True, null=True)
+    xltemplate_file_fullpath = models.CharField(max_length=255, blank=True, null=True)
     scheme = models.ForeignKey(Scheme)
     datasheet_elements = models.ManyToManyField(DataSheetElement)
 
@@ -326,6 +318,8 @@ class DataSheetField(models.Model):
     display_name = models.CharField(max_length=255, blank=False, null=False)
     field_type = models.CharField(max_length=30, blank=True, null=True)
     sequence = models.IntegerField(blank=True, null=True)
+    quantity_type = models.CharField(max_length=4, blank=True, null=True)
+    quantity_uom = models.ForeignKey(UoM, blank=True, null=True)
 
     def __str__(self):
         return self.display_name
@@ -373,11 +367,5 @@ class Cost(models.Model):
     value = models.FloatField()
     total = models.BooleanField()
     datasheet_element = models.ForeignKey(DataSheetElement)  # 一个数据表元素可有多个成本
-
-
-
-
-
-
 
 
