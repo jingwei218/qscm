@@ -55,12 +55,12 @@
             <tr>
                 <!-- 项目名称 -->
                 <td>Scheme Name</td>
-                <td class="scheme_name editable" data-type="text" data-not-null="True"></td>
+                <td class="scheme_name editable" data-type="text"></td>
             </tr>
             <tr>
                 <!-- 项目拥有者 -->
                 <td>Scheme Owners</td>
-                <td class="scheme_owners" data-not-null="True">
+                <td class="scheme_owners">
                     <select id="scheme_user_list" multiple="multiple" disabled="disabled">
                         {% for user in users %}
                         <option value="{{ user.hash_pid }}">{{ user.username }}</option>
@@ -71,7 +71,7 @@
             {% for setting in scheme_settings %}
             <tr class="scheme_setting">
                 <td id="{{ setting.hash_pid }}" class="setting_name">{{ setting.name }}</td>
-                <td class="scheme_setting_value editable" data-type="{{ setting.type }}" data-not-null="True"></td>
+                <td class="scheme_setting_value editable" data-type="{{ setting.type }}"></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -104,12 +104,17 @@
                 <tr>
                     <!-- 数据表名称 -->
                     <td>DataSheet Name</td>
-                    <td class="datasheet_name editable" data-type="text" data-not-null="True"></td>
+                    <td class="datasheet_name editable" data-type="text"></td>
+                </tr>
+                <tr>
+                    <!-- 类型 -->
+                    <td>Category</td>
+                    <td class="datasheet_category editable" data-type="list"></td>
                 </tr>
                 {% for setting in datasheet_settings %}
                 <tr class="datasheet_setting">
                     <td id="{{ setting.hash_pid }}" class="setting_name">{{ setting.name }}</td>
-                    <td class="datasheet_setting_value editable" data-type="{{ setting.type }}" data-not-null="True"></td>
+                    <td class="datasheet_setting_value editable" data-type="{{ setting.type }}"></td>
                 </tr>
                 {% endfor %}
             </tbody>

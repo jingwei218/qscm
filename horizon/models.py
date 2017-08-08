@@ -182,10 +182,6 @@ class DataSheetElement(models.Model):
     hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
     element = models.ForeignKey(Element)
     vendor = models.ForeignKey(Company)
-    category = models.ForeignKey(Category)  # 每个数据表元素对应一个产品类别
-
-    def __str__(self):
-        return str(self.pid) + "|" + self.category.name
 
     class Meta:
         ordering = ['pid']
@@ -290,6 +286,7 @@ class DataSheet(models.Model):
     xltemplate_file_fullname = models.CharField(max_length=255, blank=True, null=True)
     xltemplate_file_fullpath = models.CharField(max_length=255, blank=True, null=True)
     scheme = models.ForeignKey(Scheme)
+    category = models.ForeignKey(Category, default=67004)  # 每个数据表对应一个产品类别
     datasheet_elements = models.ManyToManyField(DataSheetElement)
 
     def __str__(self):

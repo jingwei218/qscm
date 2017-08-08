@@ -7,7 +7,6 @@ app = apps.get_app_config('horizon')
 
 datasheet_fields_set = [
     ('Serial', None),
-    ('Category', app.get_model('Category')),
     ('Location', app.get_model('Location')),
     ('Date', app.get_model('DataDate')),
     ('Quantity', app.get_model('Quantity')),
@@ -16,7 +15,10 @@ datasheet_fields_set = [
 
 
 option_list = {
-    'binary': ('Yes', 'No'),
+    'yesno': ('Yes', 'No'),
+    'yesnona': ('Yes', 'No', 'N/A'),
+    'truefalse': ('True', 'False'),
+    'truefalsena': ('True', 'False', 'N/A')
 }
 
 

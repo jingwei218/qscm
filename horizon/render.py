@@ -329,6 +329,7 @@ def save_datasheet_settings_to_json(rec_json):
     response_data = dict()
     scheme_hash_pid = rec_json['scheme_hash_pid']
     datasheet_name = rec_json['datasheet_name']
+
     datasheet_settings = rec_json['datasheet_settings']
     mode = rec_json['mode']
     scheme = Scheme.objects.get(hash_pid=scheme_hash_pid)
@@ -406,10 +407,12 @@ def get_datasheet_settings_to_json(rec_json):
     datasheet_hash_pid = rec_json['datasheet_hash_pid']
 
     datasheet = DataSheet.objects.get(hash_pid=datasheet_hash_pid)
+    datasheet_category = datasheet.category.name
     datasheet_setting_locked = datasheet.setting_locked
     datasheet_settings = DataSheetSetting.objects.filter(datasheet=datasheet)
     datasheet_fields = DataSheetField.objects.filter(datasheet=datasheet)
 
+    response_data['datasheet_category'] = datasheet_category
     response_data['setting_locked'] = datasheet_setting_locked
     response_data['datasheet_settings'] = list()
     response_data['datasheet_fields'] = list()
