@@ -1,4 +1,5 @@
 var scheme_hash_pid_glb, datasheet_hash_pid_glb;
+var option_list;
 var number_of_datasheets, number_of_vendors;
 var number_of_options, mix_options, min_in_options, number_of_rows, number_of_columns, quantity_allocated;
 var csrftoken = Cookies.get('csrftoken');
@@ -15,42 +16,6 @@ $.ajaxSetup({
         }
     }
 });
-
-function editOn(target) {
-    //可编辑字段点击事件
-    $(target).find('.editable').click(function(e) {
-        e.preventDefault();
-        var box_width = $(this).outerWidth(),
-            box_height = $(this).outerHeight(),
-            box_left = $(this).offset().left,
-            box_top = $(this).offset().top,
-            edited_value = $(this).text();
-
-        edit_type = $(this).data("type");
-        $('.edited').removeClass("edited");
-        $(this).addClass("edited");
-
-
-        if (edit_type == "checkbox") {
-            $('#edit_box').css({
-                width: box_height,
-                height: box_height,
-            });
-            $('.edited').css({ 'visibility': 'hidden' });
-        } else {
-            $('#edit_box').show()
-                .attr("type", edit_type)
-                .offset({
-                    left: box_left,
-                    top: box_top
-                }).css({
-                    width: box_width,
-                    height: box_height,
-                });
-        }
-        $('#edit_box').focus().val(edited_value).select();
-    });
-}
 
 function displayDataSheetNameList(datasheets, number_of_datasheets) {
     $('#datasheet_namelist>li').remove(); //移除所有数据表名称
@@ -73,7 +38,28 @@ function displayDataSheetNameList(datasheets, number_of_datasheets) {
     $('#datasheet_settings_operation').text('Create').show(); //显示新建按钮
     $('#datasheet_settings_lock').hide(); //不显示创建模板按钮
     $('#datasheet_template').hide(); //不显示数据表模板
-    editOn('#datasheet_settings_container'); //
+    editOn('#datasheet_settings_container'); //挂载编辑事件
+}
+
+function displaySettingLists(lists) {
+    //遍历带type-list类的td，从td的data-optionkey获取键，再得到键对应的列表，放入选项列表中
+    $('#datasheet_settings_container .type-list').each(function(i, element) {
+        var optionkey = $(element).data('optionkey'),
+            options = option_list[optionkey],
+            box_width = $(element).outerWidth(),
+            box_height = $(element).outerHeight();
+        $(element).append('<select></select>');
+        $(options).each(function(i, option) {
+            $(element).find('select').append('<option value="' + option + '">' + option + '</option>');
+        });
+    });
+    if (lists) {
+        $(lists).each(function(i, element) {
+            var find_target = 'option[value="' + element + '"]';
+            $('#datasheet_settings_container .type-list select').eq(i)
+                .find(find_target).attr('selected', 'selected');
+        });
+    }
 }
 
 function displayDataSheetTemplate(datasheet_field_list, datasheet_fields, datasheet_element_exists, uoms, quantity_types, number_of_columns) {
@@ -171,6 +157,7 @@ function displayDataSheetTemplate(datasheet_field_list, datasheet_fields, datash
         $('#column_type select, #quantity_uom input, #quantity_type select').attr('disabled', 'disabled');
         $('#datasheet_template_create').hide();
         $('#datasheet_template_download').hide();
+        $('#datasheet_file').hide();
     } else {
         $('#datasheet_template_create').show();
     }
@@ -240,6 +227,7 @@ function saveSchemeSettings(mode) {
         data: scheme_meta_json,
     }).done(function(rec_json) { //ajax发送成功后获得后台发送的反馈信息
         var err = rec_json['error_message'],
+            scheme_name = rec_json['scheme_name'],
             msg_create = "Scheme &lt;" + scheme_name + "&gt; was created.",
             msg_update = "Scheme &lt;" + scheme_name + "&gt; was updated.";
         //scheme_meta['scheme_hash_pid'] = scheme_hash_pid_glb;
@@ -252,6 +240,7 @@ function saveSchemeSettings(mode) {
                 $('#scheme_caption').html(msg_update);
             }
             scheme_hash_pid_glb = rec_json['scheme_hash_pid']; //用于在更新设置时向后台传输项目的pid
+            $('.scheme_name').text(scheme_name); //更新项目名称
             $('#scheme_settings_operation').text('Edit'); //保存后显示编辑按钮
             $('#scheme_settings_lock').show(); //保存后显示锁定按钮
             $('#scheme_settings_container .editable').off('click'); //保存后不可修改
@@ -286,6 +275,8 @@ function getSchemeSettings(scheme_hash_pid) {
             scheme_users = rec_json['scheme_users'],
             datasheets = rec_json['datasheets'],
             scheme_setting_locked = rec_json['setting_locked'];
+
+        option_list = rec_json['option_list'];
 
         //(1)项目设置部分
         $('.scheme_name').text(scheme_name); //在项目名称栏中显示名称
@@ -322,7 +313,12 @@ function getSchemeSettings(scheme_hash_pid) {
         if (scheme_setting_locked) {
             //锁住设置时，自动显示所有数据表设置
             displayDataSheetNameList(datasheets, number_of_datasheets);
-            getDataSheetSettings(datasheets[0]['datasheet_hash_pid']); //获得第一个数据表的设置信息
+            if (datasheets.length > 0) {
+                getDataSheetSettings(datasheets[0]['datasheet_hash_pid']); //获得第一个数据表的设置信息
+            } else {
+                displaySettingLists();
+            }
+
         } else {
             //未锁住设置时，可以选择编辑设置项
             $('#scheme_settings_operation').text('Edit').show();
@@ -351,8 +347,10 @@ function lockSchemeSettings(scheme_hash_pid) {
         method: "POST",
         data: scheme_meta_json,
     }).done(function(rec_json) {
-        datasheets = rec_json['datasheets'];
+        option_list = rec_json['option_list'];
+        var datasheets = rec_json['datasheets'];
         displayDataSheetNameList(datasheets, number_of_datasheets);
+        displaySettingLists();
     });
 }
 
@@ -360,11 +358,14 @@ function saveDataSheetSettings(mode) {
 
     var datasheet_settings = new Array(),
         datasheet_name = $('.datasheet_name').text(),
-        datasheet_category = $('.datasheet_category').text();
+        datasheet_category = $('.datasheet_category option:selected').val();
     $('.datasheet_setting').each(function(i, element) {
-        var setting_hash_pid = $(element).find('.setting_name').attr('id'), //设置项的pid号
+        var setting_hash_pid = $(element).find('.setting_name').attr('id'); //设置项的hash_pid号
+        if ($(element).find('.datasheet_setting_value').data('type') == 'list') {
+            datasheet_setting_value = $(element).find('option:selected').val();
+        } else {
             datasheet_setting_value = $(element).find('.datasheet_setting_value').text(); //设置项的值
-
+        }
         datasheet_settings[datasheet_settings.length] = { //在设置列表的最后添加设置项
             "setting_hash_pid": setting_hash_pid,
             "datasheet_setting_value": datasheet_setting_value
@@ -393,6 +394,7 @@ function saveDataSheetSettings(mode) {
 
         datasheet_hash_pid_glb = rec_json['datasheet_hash_pid']; //用于在更新设置时向后台传输项目的pid
         var err = rec_json['error_message'],
+            datasheet_name = rec_json['datasheet_name'],
             msg_create = "Datasheet &lt;" + datasheet_name + "&gt; was created.",
             msg_update = "Datasheet &lt;" + datasheet_name + "&gt; was updated.";
 
@@ -404,9 +406,13 @@ function saveDataSheetSettings(mode) {
             } else if (mode == 'update') {
                 $('#datasheet_caption').html(msg_update);
             }
+            $('.datasheet_name').text(datasheet_name);
             $('#datasheet_settings_operation').text('Edit'); //保存后显示编辑按钮
             $('#datasheet_settings_lock').show(); //保存后显示锁定按钮
             $('#datasheet_settings_container .editable').off('click'); //保存后不可修改
+            $('#datasheet_settings_container .type-list').each(function(i, element) {
+                $(element).text($(element).find('select').val());
+            });
             $('#datasheet_namelist>li.active').find('a')
                 .text(datasheet_name).attr('id', datasheet_hash_pid_glb)
                 .removeClass('glyphicon glyphicon-plus').removeAttr('aria-hidden');
@@ -418,7 +424,7 @@ function saveDataSheetSettings(mode) {
     min_in_options = datasheet_settings[2]['datasheet_setting_value'] == 'true';
     number_of_rows = parseInt(datasheet_settings[3]['datasheet_setting_value']);
     number_of_columns = parseInt(datasheet_settings[4]['datasheet_setting_value']);
-    quantity_allocated = datasheet_settings[5]['datasheet_setting_value'] == 'true';
+    //quantity_allocated = datasheet_settings[5]['datasheet_setting_value'] == 'true';
 }
 
 function getDataSheetSettings(datasheet_hash_pid) {
@@ -506,6 +512,7 @@ function lockDataSheetSettings(datasheet_hash_pid) {
             displayTemplateDownload(xltemplate_file_name, datasheet_hash_pid);
         } else {
             $('#datasheet_template_download').hide();
+            $('#datasheet_file').hide();
         }
     });
 }
@@ -563,6 +570,35 @@ function displayTemplateDownload(filename, datasheet_hash_pid) {
         .html('<span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>' + ' ' + filename)
         .attr('href', download_datasheet_template_url + datasheet_hash_pid + '/')
         .show();
+    $('#datasheet_file').show();
+}
+
+function editOn(target) {
+    //可编辑字段点击事件
+    $(target).find('.editable').click(function(e) {
+        e.preventDefault();
+        var box_width = $(this).outerWidth(),
+            box_height = $(this).outerHeight(),
+            box_left = $(this).offset().left,
+            box_top = $(this).offset().top,
+            edited_value = $(this).text(),
+            edit_type = $(this).data("type");
+
+        $('.edited').removeClass("edited");
+        $(this).addClass("edited");
+
+        if (edit_type != "list") {
+            $('#edit_box').show()
+                .attr("type", edit_type)
+                .offset({
+                    left: box_left,
+                    top: box_top
+                }).css({
+                    width: box_width,
+                    height: box_height,
+                }).focus().val(edited_value).select();
+        }
+    });
 }
 
 $(document).ready(function() {
@@ -639,6 +675,7 @@ $(document).ready(function() {
                 $('#datasheet_settings_operation').text('Create').show(); //显示新建按钮
                 $('#datasheet_settings_lock').hide(); //不显示创建模板按钮
                 editOn('#datasheet_settings_container'); //使设置可编辑
+                displaySettingLists();
             }
             $('.active').removeClass('active');
             $(e.target).parent('li').addClass('active');
@@ -657,6 +694,13 @@ $(document).ready(function() {
             $('#datasheet_settings_lock').hide(); //隐藏锁定设置按钮，编辑状态下不可锁定
             $('#datasheet_template').hide(); //隐藏数据表模板
             editOn('#datasheet_settings_container'); //挂载单击事件，使字段可编辑
+            var lists = new Array();
+            $('#datasheet_settings_container .type-list').each(function(i, element) {
+                lists[i] = $(element).text();
+                $(element).text('');
+            });
+            displaySettingLists(lists);
+
         }
     });
 
@@ -672,6 +716,35 @@ $(document).ready(function() {
 
     $('#datasheet_template').scroll(function(e) {
         $('#edit_box').blur();
+    });
+
+    $('#datasheet_file_operation').click(function(e) {
+        e.preventDefault();
+        $('#datasheet_upload_form').submit();
+    });
+
+    $('#datasheet_upload_form').submit(function() {
+        var formData = new FormData(this);
+        formData.append('datasheet_hash_pid', datasheet_hash_pid_glb);
+
+        $.ajax({
+            url: upload_datasheet_file_url,
+            type: 'POST',
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false
+        }).done(function(rec_json) {
+            var err = rec_json['error_message'],
+                datasheet_file_name = rec_json['xldatasheet_file_name'];
+            $('#datasheet_file').val('');
+            if (err) {
+                $('#datasheet_file_upload_message').text(err);
+            } else {
+                $('#datasheet_file_upload_message').text(datasheet_file_name + ' was uploaded.');
+            }
+        });
+        return false;
     });
 
 });

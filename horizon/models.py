@@ -127,7 +127,8 @@ class Setting(models.Model):
     pid = models.IntegerField(primary_key=True)
     hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
     name = models.CharField(max_length=50, blank=False, null=False)  # 设置描述
-    type = models.CharField(max_length=20, blank=False, null=True)  # 数据类型
+    type = models.CharField(max_length=20, blank=False, null=True)  # 设定类型
+    list = models.CharField(max_length=50, blank=True, null=True)  # 若设定类型为list，则需要注明列表名称
     note = models.CharField(max_length=255, blank=True, null=True)  # 备注
     level = models.IntegerField()  # 标注设置所适用层：0代表scheme层，1代表datasheet层
 
@@ -285,6 +286,7 @@ class DataSheet(models.Model):
     xltemplate_file_name = models.CharField(max_length=255, blank=True, null=True)
     xltemplate_file_fullname = models.CharField(max_length=255, blank=True, null=True)
     xltemplate_file_fullpath = models.CharField(max_length=255, blank=True, null=True)
+    xldatasheet_file_name = models.CharField(max_length=255, blank=True, null=True)
     scheme = models.ForeignKey(Scheme)
     category = models.ForeignKey(Category, default=67004)  # 每个数据表对应一个产品类别
     datasheet_elements = models.ManyToManyField(DataSheetElement)

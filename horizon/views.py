@@ -5,6 +5,7 @@ from .render import *
 import json
 
 
+
 platform = HorizonSetting.objects.get(name='platform').value
 platform_lower = platform.lower()
 
@@ -238,16 +239,47 @@ def get_datasheet_template(request, datasheet_hash_pid):
         return HttpResponseRedirect('/' + platform_lower + '/')
 
 
+def upload_datasheet_file(request):
+
+    if request.user.is_authenticated():
+
+        response_data = dict()
+        try:
+            datasheet_hash_pid = request.POST['datasheet_hash_pid']
+            datasheet = DataSheet.objects.get(hash_pid=datasheet_hash_pid)
+            datasheet_pid = datasheet.pid
+            rec_file = request.FILES["datasheet_file"]  # 前端发送来的文件
+            file_path = save_folders['datasheet_file'] + str(datasheet_pid) + '/'  # 每个数据表创建单独的目录
+            file_name = save_datasheet_upload(rec_file, file_path)
+            datasheet.xldatasheet_file_name = file_name
+            datasheet.save()
+            response_data['xldatasheet_file_name'] = file_name
+
+        except KeyError:
+            response_data = {'error_message': 'No file was selected.'}
+
+        return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json"
+        )
+    else:
+        return HttpResponseRedirect('/' + platform_lower + '/')
+
+
 # 成本分析项目
-def get_scheme_content(request, scheme_hash_pid):
+def get_datasheets(request, scheme_hash_pid):
 
     if request.user.is_authenticated():  # 用户已登录
         username = request.user.username
         scheme = Scheme.objects.get(hash_pid=scheme_hash_pid)
         datasheets = DataSheet.objects.filter(scheme=scheme)
-        tables = render_data(datasheets)
+        datatables = list()
 
-        return render(request, 'viewscheme.html',
+        for datasheet in datasheets:
+            datatable = render_data(datasheet)
+            datatables.append(datatable)
+
+        return render(request, 'datasheets.html',
                       {
                           'lang': 'en',
                           'title': scheme.name,
@@ -255,8 +287,8 @@ def get_scheme_content(request, scheme_hash_pid):
                           'username': username,
                           'service': 'fusion',
                           'scheme': scheme,
-                          'datasheets': datasheets,
-                          'tables': tables,
+                          'datatables': datatables,
+
                       })
     else:
         return HttpResponseRedirect('/' + platform_lower + '/')

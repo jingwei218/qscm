@@ -18,19 +18,23 @@ option_list = {
     'yesno': ('Yes', 'No'),
     'yesnona': ('Yes', 'No', 'N/A'),
     'truefalse': ('True', 'False'),
-    'truefalsena': ('True', 'False', 'N/A')
+    'truefalsena': ('True', 'False', 'N/A'),
+    'minmax': ('Minimum', 'Maximum'),
+    'minmaxna': ('Minimum', 'Maximum', 'N/A'),
 }
 
 
-template_save_folders = {
-    'datasheet_template': BASE_DIR + '/horizon/xl_templates/'
+save_folders = {
+    'datasheet_template': BASE_DIR + '/horizon/xl_templates/',
+    'datasheet_file': BASE_DIR + '/horizon/xl_datasheets/',
 }
 
 
 quantity_types = [
     ('base', 'Base'),
     ('conv', 'Convertible'),
+    ('freq', 'Frequency'),
     ('sapc', 'Price Condition'),
     ('mres', 'Multiple Restrictions'),
-    ('freq', 'Frequency')
+    ('chgu', 'Chargeable')
 ]

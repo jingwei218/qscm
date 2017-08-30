@@ -1,5 +1,7 @@
 from .models import *
+from openpyxl import *
 import hashlib
+
 
 
 def hashed(value):
@@ -70,3 +72,4 @@ def chargeable_unit(base, conv, factor, compare):
     converted = conv * factor
     chargeable = converted
     return chargeable
+

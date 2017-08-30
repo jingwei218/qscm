@@ -1,0 +1,64 @@
+{% extends 'base.html' %} {% block body %}
+<script type="text/javascript" src="/static/js/js.cookie.js"></script>
+<script type="text/javascript">
+    var upload_datasheet_file_url = "/{{ platform|lower }}/{{ service|lower }}/datasheet/upload/";
+</script>
+<script type="text/javascript" src="/static/js/datasheet.js"></script>
+
+<!--User Commands-->
+<div class="container-fluid" style="background-color: #A5D1F3;">
+    <div class="row">User: {{ username }}</div>
+    <div class="row"><a href="/{{ platform|lower }}/{{ service|lower }}/">Back</a></div>
+    <div class="row"><a href="/{{ platform|lower }}/logout/">Log Out</a></div>
+</div>
+
+<!--标题栏-->
+<div class="container-fluid">
+    <div class="row" style="line-height: 3em;">
+        <div class="col-md-12 col-xs-12" style="font-weight:bold; font-style: italic;">{{ scheme.name }}</div>
+    </div>
+</div>
+
+<!--数据表区域-->
+<div class="container-fluid" style="overflow: scroll; text-align: left; font-size: x-small;">
+
+    {% for datatable in datatables %}
+    <div class="container-fluid table-responsive" id="{{ datatable.id }}">
+        <ul class="nav nav-pills">
+            <li role="presentation">
+                <a class="datasheet_file_operation" id="{{ datatable.id }}" href="">Upload</a>
+            </li>
+            <li role="presentation">
+                <form action="/" method="post" class="datasheet_upload_form" id="{{ datatable.id }}" enctype="multipart/form-data">
+                    <input class="datasheet_file" id="{{ datatable.id }}" type="file" name="datasheet_file">
+                    <span class="datasheet_file_upload_message" id="{{ datatable.id }}"></span>
+                </form>
+            </li>
+        </ul>
+        <!--数据表名称+数据表数据-->
+        <table class="table table-hover table-bordered">
+            <caption style="font-size: small; font-weight:bold; font-style: italic">Data Sheet {{ datatable.name }}</caption>
+            <!--数据表名称-->
+            <thead>
+                <tr>
+                    <!-- 列标题 -->
+                    {% for col_header in datatable.header %}
+                    <th style="padding: 4px;">{{ col_header }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in datatable.content %}
+                <tr id="{{ row.id }}">
+                    <!-- 数据行 -->
+                    {% for cell in row.values %}
+                    <td id="{{ cell.id }}" style="padding: 4px;">{{ cell.value }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

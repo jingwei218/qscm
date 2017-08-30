@@ -3,7 +3,7 @@ from . import views
 
 
 scheme_urls = [
-    url(r'^get/(?P<scheme_hash_pid>\w+)/$', views.get_scheme_content, name='get_scheme_content'),
+    url(r'^get/(?P<scheme_hash_pid>\w+)/$', views.get_datasheets, name='get_datasheets'),
     url(r'^settings/$', views.get_scheme_settings, name='view_scheme_settings'),
     url(r'^settings/save/$', views.save_scheme_settings, name='save_scheme_settings'),
     url(r'^settings/lock/$', views.lock_scheme_settings, name='lock_scheme_settings'),
@@ -15,6 +15,7 @@ datasheet_urls = [
     url(r'^settings/lock/$', views.lock_datasheet_settings, name='lock_datasheet_settings'),
     url(r'^fields/save/$', views.save_datasheet_fields, name='save_datasheet_fields'),
     url(r'^template/download/(?P<datasheet_hash_pid>\w+)/$', views.get_datasheet_template, name='get_datasheet_template'),
+    url(r'^upload/$', views.upload_datasheet_file, name='upload_datasheet_file'),
 ]
 
 urlpatterns = [
