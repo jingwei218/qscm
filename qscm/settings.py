@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'qsite.apps.QsiteConfig',
     'horizon.apps.HorizonConfig',
+    'demo7.apps.Demo7Config',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

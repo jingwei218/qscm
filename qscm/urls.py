@@ -20,4 +20,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^horizon/', include('horizon.urls')),
+    url(r'^demo7/', include('demo7.urls')),
 ]

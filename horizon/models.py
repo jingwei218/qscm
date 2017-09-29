@@ -45,7 +45,7 @@ class Company(models.Model):
     pid = models.IntegerField(primary_key=True)
     hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
     name = models.CharField(max_length=255, blank=False, null=False) #公司名称
-    register_number = models.CharField(max_length=30, blank=False, null=False)  # 公司注册号
+    register_number = models.CharField(max_length=30, blank=False, null=False, default='0')  # 公司注册号
     note = models.TextField(blank=True, null=True)  # 备注
     categories = models.ManyToManyField(Category)
 
@@ -59,7 +59,7 @@ class Geo(models.Model):
     hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
     name = models.CharField(max_length=200, blank=False, null=False)
     related_geo = models.ForeignKey('self', null=True)  # 可回代自身，如：一个省有多个市
-    level = models.IntegerField(blank=False, null=False)
+    level = models.IntegerField(blank=True, null=True)
 
     def ls(self):  # 生成地理信息各层级的列表
         templs = list()
@@ -159,22 +159,8 @@ class SchemeSetting(models.Model):
 class Element(models.Model):
     pid = models.IntegerField(primary_key=True)
     hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
-
-
-# 用于数据的地理位置信息
-class Location(models.Model):
-    pid = models.IntegerField(primary_key=True)
-    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
-    # geo = models.ForeignKey(Geo)
-    name = models.CharField(max_length=255, blank=False, null=False, default='')
-    element = models.ForeignKey(Element)
-    sequence = models.IntegerField()
-
-    def __str__(self):
-        return self.geo.name
-
-    class Meta:
-        ordering = ['sequence']
+    name = models.CharField(max_length=255, blank=False, null=False)
+    category = models.ForeignKey(Category)
 
 
 # 数据表元素，基于元素，但数据表元素可以是重复信息
@@ -191,10 +177,25 @@ class DataSheetElement(models.Model):
 # 价格表行
 class PriceSheetElement(models.Model):
     pid = models.IntegerField(primary_key=True)
-    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
+    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
     element = models.ForeignKey(Element)
     vendor = models.ForeignKey(Company)
 
+
+# 用于数据的地理位置信息
+class Location(models.Model):
+    pid = models.IntegerField(primary_key=True)
+    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
+    geo = models.ForeignKey(Geo, blank=True, null=True)
+    name = models.CharField(max_length=255, blank=False, null=False, default='')
+    datasheet_element = models.ForeignKey(DataSheetElement)
+    sequence = models.IntegerField()
+
+    def __str__(self):
+        return self.geo.name
+
+    class Meta:
+        ordering = ['pid']
 
 # ========================= DataSheetElement Addons ========================= #
 # 日期
@@ -283,13 +284,14 @@ class DataSheet(models.Model):
     hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
     number_of_price_fields = models.IntegerField(blank=True, null=True, default=0)
     setting_locked = models.BooleanField(default=False)
+    data_locked = models.BooleanField(default=False)
+    scheme = models.ForeignKey(Scheme)
+    category = models.ForeignKey(Category, default=67004)  # 每个数据表对应一个产品类别
+    datasheet_elements = models.ManyToManyField(DataSheetElement)
     xltemplate_file_name = models.CharField(max_length=255, blank=True, null=True)
     xltemplate_file_fullname = models.CharField(max_length=255, blank=True, null=True)
     xltemplate_file_fullpath = models.CharField(max_length=255, blank=True, null=True)
     xldatasheet_file_name = models.CharField(max_length=255, blank=True, null=True)
-    scheme = models.ForeignKey(Scheme)
-    category = models.ForeignKey(Category, default=67004)  # 每个数据表对应一个产品类别
-    datasheet_elements = models.ManyToManyField(DataSheetElement)
 
     def __str__(self):
         return self.name
@@ -317,7 +319,7 @@ class DataSheetField(models.Model):
     display_name = models.CharField(max_length=255, blank=False, null=False)
     field_type = models.CharField(max_length=30, blank=True, null=True)
     sequence = models.IntegerField(blank=True, null=True)
-    quantity_type = models.CharField(max_length=4, blank=True, null=True)
+    quantity_role = models.CharField(max_length=4, blank=True, null=True)
     quantity_uom = models.ForeignKey(UoM, blank=True, null=True)
 
     def __str__(self):

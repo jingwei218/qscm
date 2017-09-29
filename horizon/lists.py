@@ -30,7 +30,7 @@ save_folders = {
 }
 
 
-quantity_types = [
+quantity_roles = [
     ('base', 'Base'),
     ('conv', 'Convertible'),
     ('freq', 'Frequency'),

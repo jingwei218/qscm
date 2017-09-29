@@ -24,6 +24,7 @@
 
     {% for datatable in datatables %}
     <div class="container-fluid table-responsive" id="{{ datatable.id }}">
+        {% if datatable.locked == False %}
         <ul class="nav nav-pills">
             <li role="presentation">
                 <a class="datasheet_file_operation" id="{{ datatable.id }}" href="">Upload</a>
@@ -35,6 +36,7 @@
                 </form>
             </li>
         </ul>
+        {% endif %}
         <!--数据表名称+数据表数据-->
         <table class="table table-hover table-bordered">
             <caption style="font-size: small; font-weight:bold; font-style: italic">Data Sheet {{ datatable.name }}</caption>

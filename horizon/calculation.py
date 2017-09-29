@@ -1,6 +1,8 @@
+from django.core.exceptions import ObjectDoesNotExist
 from .models import *
 from openpyxl import *
 import hashlib
+import pandas as pd
 
 
 
@@ -73,3 +75,129 @@ def chargeable_unit(base, conv, factor, compare):
     chargeable = converted
     return chargeable
 
+
+def clean_datasheet(datasheet):
+
+    # 清除location/quantity/datadate/datasheet_element
+    datasheet_elements = DataSheetElement.objects.filter(datasheet=datasheet)
+    for datasheet_element in datasheet_elements:
+        datasheet_element.location_set.all().delete()
+        datasheet_element.quantity_set.all().delete()
+        datasheet_element.datadate_set.all().delete()
+        datasheet_element.delete()
+
+
+def load_xl_datasheet(file_fullpath, datasheet):
+
+    # 通用参数
+    category = datasheet.category
+    category_pid = category.pid
+
+    # 各类型字段
+    # 必选字段
+    datasheetfields = DataSheetField.objects.filter(datasheet=datasheet)
+    serial_field = datasheetfields.get(field_type='Serial')
+    vendor_field = datasheetfields.get(field_type='Vendor')
+    # 可选字段
+    quantity_fields = datasheetfields.filter(field_type='Quantity')
+    location_fields = datasheetfields.filter(field_type='Location')
+    date_fields = datasheetfields.filter(field_type='Date')
+
+    # 排列参数
+    location_cols = list()
+    location_seqs = list()
+    quantity_seqs = list()
+    date_seqs = list()
+    for field in location_fields:
+        location_cols.append(field.display_name)  # 位置字段名称
+        location_seqs.append(field.sequence)  # 位置字段序列
+    for field in quantity_fields:
+        quantity_seqs.append(field.sequence)  # 数量字段序列
+    for field in date_fields:
+        date_seqs.append(field.sequence)  # 日期字段序列
+    serial_seq = serial_field.sequence  # 序号字段序列
+    vendor_seq = vendor_field.sequence  # 供应商字段序列
+
+    geo_checklist = dict()
+    element_checklist = dict()
+    vendor_checklist = dict()
+
+    xl = pd.ExcelFile(file_fullpath)
+    df = pd.read_excel(xl)
+
+    last_location_pid = Location.objects.all().last().pid
+    last_quantity_pid = Quantity.objects.all().last().pid
+
+    for i, row in df.iterrows():  # 遍历每一行元素信息
+
+        # element
+        element_name = str(category_pid)  # 初始化元素名称
+        for loc in row[location_cols]:  # 遍历每行中每一个位置信息
+            if loc not in geo_checklist:  # 遍历记录
+                # 查找地点信息，若找不到则新建地点信息。随后将找到或新建的地点信息pid号添加至元素名称中
+                try:
+                    geo = Geo.objects.get(name=loc)
+                except ObjectDoesNotExist:
+                    geo_pid = Geo.objects.all().last().pid + 1
+                    geo = Geo(pid=geo_pid, hash_pid=hashed(geo_pid), name=loc)
+                    geo.save()
+                geo_checklist[loc] = geo
+            else:
+                geo = geo_checklist[loc]
+            element_name += '-' + str(geo.pid)
+        # 查找元素名称，若找不到则新建元素。
+        if element_name not in element_checklist:
+            try:
+                element = Element.objects.filter(category=category).get(name=element_name)  # 确认是否已存在相同元素
+            except ObjectDoesNotExist:
+                element_pid = Element.objects.all().last().pid + 1  # 不存在相同元素时新建
+                element = Element(pid=element_pid, hash_pid=hashed(element_pid), name=element_name, category=category)
+                element.save()
+            element_checklist[element_name] = element
+        else:
+            element = element_checklist[element_name]
+
+        # vendor
+        vendor_name = row[vendor_seq]
+        if vendor_name not in vendor_checklist:
+            try:
+                vendor = Company.objects.get(name=vendor_name)  # 确认是否已存在相同公司名称
+            except ObjectDoesNotExist:
+                vendor_pid = Company.objects.all().last().pid + 1
+                vendor = Company(pid=vendor_pid, hash_pid=hashed(vendor_pid), name=vendor_name)
+                vendor.save()
+            vendor_checklist[vendor_name] = vendor
+        else:
+            vendor = vendor_checklist[vendor_name]
+
+        # datasheet element
+        datasheet_element_pid = DataSheetElement.objects.all().last().pid + 1
+        datasheet_element = DataSheetElement(pid=datasheet_element_pid, hash_pid=hashed(datasheet_element_pid),
+                                             element=element, vendor=vendor)
+        datasheet_element.save()
+
+        # location
+        for location_seq in location_seqs:
+            location_name = row[location_seq]
+            geo = geo_checklist[location_name]
+            last_location_pid += 1
+            location = Location(pid=last_location_pid, hash_pid=hashed(last_location_pid), sequence=location_seq,
+                                datasheet_element=datasheet_element, name=location_name, geo=geo)
+            location.save()
+
+        # quantity
+        for quantity_seq in quantity_seqs:
+            quantity_value = row[quantity_seq]
+            quantity_field = quantity_fields.get(sequence=quantity_seq)
+            quantity_role = quantity_field.quantity_role
+            quantity_uom = quantity_field.quantity_uom
+            quantity_comparison = datasheet.datasheetsetting_set.get(setting=1033).value
+            quantity_conv_factor = float(datasheet.datasheetsetting_set.get(setting=1032).value)
+            last_quantity_pid += 1
+            quantity = Quantity(pid=last_quantity_pid, hash_pid=hashed(last_quantity_pid), sequence=quantity_seq,
+                                datasheet_element=datasheet_element, value=quantity_value, uom=quantity_uom,
+                                role=quantity_role, converting_factor=quantity_conv_factor, comparison=quantity_comparison)
+            quantity.save()
+
+        # datasheet
+        datasheet.datasheet_elements.add(datasheet_element)

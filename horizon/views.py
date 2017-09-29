@@ -12,7 +12,7 @@ platform_lower = platform.lower()
 
 # 进入首页，包含登录链接
 def index(request):
-    return render(request, 'index.html',
+    return render(request, 'frontpage.html',
                   {
                       'title': platform,
                       'platform': platform,
@@ -250,7 +250,7 @@ def upload_datasheet_file(request):
             datasheet_pid = datasheet.pid
             rec_file = request.FILES["datasheet_file"]  # 前端发送来的文件
             file_path = save_folders['datasheet_file'] + str(datasheet_pid) + '/'  # 每个数据表创建单独的目录
-            file_name = save_datasheet_upload(rec_file, file_path)
+            file_name = save_datasheet_upload(rec_file, file_path, datasheet)
             datasheet.xldatasheet_file_name = file_name
             datasheet.save()
             response_data['xldatasheet_file_name'] = file_name

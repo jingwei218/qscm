@@ -1,8 +1,8 @@
 from .calculation import *
 from .lists import *
-from django.core.exceptions import ObjectDoesNotExist
 import re
 import os
+
 
 # 显示数据表、价格、成本数据
 def render_data(datasheet):
@@ -12,6 +12,7 @@ def render_data(datasheet):
     datatable['id'] = datasheet.hash_pid  # 数据表hash_pid
     datatable['header'] = []  # 数据表列标题
     datatable['content'] = []  # 数据表内容
+    datatable['locked'] = datasheet.data_locked
     datasheet_elements = datasheet.datasheet_elements.all()  # 数据表中所有行
 
     datasheet_fields = DataSheetField.objects.filter(datasheet=datasheet)
@@ -33,8 +34,8 @@ def render_data(datasheet):
     row = 0  # 初始化行号
     for datasheet_element in datasheet_elements:  # 遍历所有行
 
-        element = datasheet_element.element  # 获得数据行对应的element
-        vendor = datasheet_element.vendor  # 获得数据行对应的vendor
+        #element = datasheet_element.element  # 获得数据行对应的element
+        #vendor = datasheet_element.vendor  # 获得数据行对应的vendor
         #price_sheet_element = PriceSheetElement.objects.filter(element=element).filter(vendor=vendor)  # 检索出与当前行相关的价格
 
         for datasheet_field in datasheet_fields:  # 遍历所有数据列
@@ -50,7 +51,7 @@ def render_data(datasheet):
                     cell_id = 0
                 # 位置
                 elif field_type == 'Location':
-                    l = Location.objects.filter(element=element).get(sequence=datasheet_field_sequence)
+                    l = Location.objects.filter(datasheet_element=datasheet_element).get(sequence=datasheet_field_sequence)
                     cell_value = l.name
                     cell_id = l.hash_pid
                 # 日期
@@ -81,7 +82,7 @@ def render_data(datasheet):
                         u_qty = (sapc_q, 'sapc')
                     elif mres_q:
                         u_qty = (mres_q, 'mres')
-                    quantity_vector[row] = u_qty  # 更新为分配的数量向量
+                    quantity_vector[row] = u_qty  # 更新未分配的数量向量
 
             except ObjectDoesNotExist:
                 cell_value = 0
@@ -450,7 +451,7 @@ def lock_datasheet_settings_to_json(rec_json):
     response_data['datasheet_field_list'] = list()
     response_data['datasheet_fields'] = list()
     response_data['uoms'] = list()
-    response_data['quantity_types'] = quantity_types
+    response_data['quantity_roles'] = quantity_roles
 
     datasheet_hash_pid = rec_json['datasheet_hash_pid']
     datasheet_setting_locked = rec_json['datasheet_setting_locked']
@@ -477,7 +478,7 @@ def lock_datasheet_settings_to_json(rec_json):
             'display_name': datasheet_field.display_name,
             'field_type': datasheet_field.field_type,
             'sequence': datasheet_field.sequence,
-            'quantity_type': datasheet_field.quantity_type,
+            'quantity_role': datasheet_field.quantity_role,
         })
         if datasheet_field.field_type == 'Quantity':
             try:
@@ -521,7 +522,7 @@ def save_datasheet_fields_to_json(rec_json):
 
         if field_type == 'Quantity':
 
-            quantity_type = datasheet_template_field['quantity_type']
+            quantity_role = datasheet_template_field['quantity_role']
             quantity_uom = datasheet_template_field['quantity_uom']
 
             if quantity_uom == '':
@@ -543,20 +544,20 @@ def save_datasheet_fields_to_json(rec_json):
                 if datasheet.datasheet_elements.count() == 0:  # 当数据表中未有记录时可以调整字段类型和数量类型
                     datasheet_field.field_type = field_type
                     datasheet_field.display_name = display_name
-                    datasheet_field.quantity_type = quantity_type
+                    datasheet_field.quantity_role = quantity_role
                     datasheet_field.quantity_uom = uom
             else:  # 新建
                 datasheet_field = DataSheetField(sequence=sequence,
                                                  display_name=display_name,
                                                  field_type=field_type,
-                                                 quantity_type=quantity_type,
+                                                 quantity_role=quantity_role,
                                                  quantity_uom=uom,
                                                  datasheet=datasheet)
         else:  # 非数量类型字段
             if datasheet_fields_count > 0:  # 更新字段名称
                 datasheet_field = datasheet_fields.get(sequence=sequence)
                 datasheet_field.display_name = display_name
-                datasheet_field.quantity_type = None
+                datasheet_field.quantity_role = None
                 datasheet_field.quantity_uom = None
                 if datasheet.datasheet_elements.count() == 0:  # 当数据表中未有记录时可以调整字段类型和数量类型
                     datasheet_field.field_type = field_type
@@ -569,7 +570,6 @@ def save_datasheet_fields_to_json(rec_json):
         datasheet_field.save()
 
         ws.cell(row=1, column=sequence + 1, value=display_name)
-
 
     file_name = str(datasheet.pid) + '_' + datasheet.name
     file_name = file_name.replace(' ', '_')
@@ -587,22 +587,21 @@ def save_datasheet_fields_to_json(rec_json):
     return response_data
 
 
-def save_datasheet_upload(rec_file, file_path):
+def save_datasheet_upload(rec_file, file_path, datasheet):
     rec_file_name = rec_file.name
     r = re.compile(r'[A-Za-z0-9_.()\[\]\-]+')
     file_name = ''.join(r.findall(rec_file_name))
     if not os.path.exists(file_path):  # 不存在在目录时创建新目录
         os.makedirs(file_path)
-    with open(file_path + file_name, 'wb+') as destination:
+    file_fullpath = file_path + file_name
+    with open(file_fullpath, 'wb+') as destination:
         for chunk in rec_file.chunks():
             destination.write(chunk)
-
-    # os.remove(file_path+file_name)
+    clean_datasheet(datasheet)
+    load_xl_datasheet(file_fullpath, datasheet)
 
     return file_name
 
 
-#def load_xl_datasheet(file_fullpath):
-#    xl = pd.ExcelFile(file_fullpath)
-
-
+def delete_datasheet(file_fullpath):
+    os.remove(file_fullpath)

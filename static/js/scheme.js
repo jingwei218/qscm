@@ -62,7 +62,7 @@ function displaySettingLists(lists) {
     }
 }
 
-function displayDataSheetTemplate(datasheet_field_list, datasheet_fields, datasheet_element_exists, uoms, quantity_types, number_of_columns) {
+function displayDataSheetTemplate(datasheet_field_list, datasheet_fields, datasheet_element_exists, uoms, quantity_roles, number_of_columns) {
 
     $('#datasheet_template_caption').text($('.datasheet_name').text()); //提示数据表名称
 
@@ -84,8 +84,8 @@ function displayDataSheetTemplate(datasheet_field_list, datasheet_fields, datash
 
         $('#column_name').append('<td class="editable" data-type="text"></td>');
         $('#column_type').append('<td><select></select></td>'); //列类型为下拉列表
-        $('#quantity_uom, #quantity_type').append('<td></td>'); //添加数量单位列表
-        $('#column_name td:last, #column_type td:last, #quantity_uom td:last, #quantity_type td:last').data('sequence', i); //列添加次序
+        $('#quantity_uom, #quantity_role').append('<td></td>'); //添加数量单位列表
+        $('#column_name td:last, #column_type td:last, #quantity_uom td:last, #quantity_role td:last').data('sequence', i); //列添加次序
 
         //添加列类型选项
         for (var j = 0; j < datasheet_field_list.length; j++) {
@@ -126,13 +126,13 @@ function displayDataSheetTemplate(datasheet_field_list, datasheet_fields, datash
                 $('#quantity_uom td:last').append('<input list="uom_list"/>')
                     .append(uom_datalist);
                 $('#quantity_uom input:last').val(datasheet_fields[i]['quantity_uom']);
-                $('#quantity_type td:last').append('<select></select>');
-                $(quantity_types).each(function(i, element) {
-                    $('#quantity_type select:last').append('<option value="' + element[0] + '">' + element[1] + '</option>');
+                $('#quantity_role td:last').append('<select></select>');
+                $(quantity_roles).each(function(i, element) {
+                    $('#quantity_role select:last').append('<option value="' + element[0] + '">' + element[1] + '</option>');
                 });
-                var quantity_type = datasheet_fields[i]['quantity_type'];
-                find_target = 'option[value="' + quantity_type + '"]';
-                $('#quantity_type select:last').find(find_target).attr('selected', 'selected');
+                var quantity_role = datasheet_fields[i]['quantity_role'];
+                find_target = 'option[value="' + quantity_role + '"]';
+                $('#quantity_role select:last').find(find_target).attr('selected', 'selected');
             }
         }
     }
@@ -143,18 +143,18 @@ function displayDataSheetTemplate(datasheet_field_list, datasheet_fields, datash
         //若为数量，显示列表；若非数量，移除列表
         if (column_type == 'Quantity') {
             $('#quantity_uom').find('td').not(':first').eq(seq).append('<input list="uom_list"/>').append(uom_datalist);
-            $('#quantity_type').find('td').not(':first').eq(seq).append('<select></select>');
-            $(quantity_types).each(function(i, element) {
-                $('#quantity_type').find('td').not(':first').eq(seq).find('select').append('<option value="' + element[0] + '">' + element[1] + '</option>');
+            $('#quantity_role').find('td').not(':first').eq(seq).append('<select></select>');
+            $(quantity_roles).each(function(i, element) {
+                $('#quantity_role').find('td').not(':first').eq(seq).find('select').append('<option value="' + element[0] + '">' + element[1] + '</option>');
             });
         } else {
             $('#quantity_uom').find('td').not(':first').eq(seq).find('input').remove();
-            $('#quantity_type').find('td').not(':first').eq(seq).find('select').remove();
+            $('#quantity_role').find('td').not(':first').eq(seq).find('select').remove();
         }
     });
 
     if (datasheet_element_exists) {
-        $('#column_type select, #quantity_uom input, #quantity_type select').attr('disabled', 'disabled');
+        $('#column_type select, #quantity_uom input, #quantity_role select').attr('disabled', 'disabled');
         $('#datasheet_template_create').hide();
         $('#datasheet_template_download').hide();
         $('#datasheet_file').hide();
@@ -504,10 +504,10 @@ function lockDataSheetSettings(datasheet_hash_pid) {
             datasheet_fields = rec_json['datasheet_fields'],
             datasheet_element_exists = rec_json['datasheet_element_exists'],
             uoms = rec_json['uoms'],
-            quantity_types = rec_json['quantity_types'],
+            quantity_roles = rec_json['quantity_roles'],
             xltemplate_file_name = rec_json['xltemplate_file_name'];
 
-        displayDataSheetTemplate(datasheet_field_list, datasheet_fields, datasheet_element_exists, uoms, quantity_types, number_of_columns);
+        displayDataSheetTemplate(datasheet_field_list, datasheet_fields, datasheet_element_exists, uoms, quantity_roles, number_of_columns);
         if (xltemplate_file_name) {
             displayTemplateDownload(xltemplate_file_name, datasheet_hash_pid);
         } else {
@@ -524,14 +524,14 @@ function saveDataSheetTemplate() {
         var sequence = $(element).data('sequence'), //获取字段的次序
             display_name = $(element).text(),
             field_type = $('#column_type select').eq(i).find('option:selected').val(),
-            quantity_type = $('#quantity_type td').not(':first').eq(i).find('select').find('option:selected').val(),
+            quantity_role = $('#quantity_role td').not(':first').eq(i).find('select').find('option:selected').val(),
             quantity_uom = $('#quantity_uom td').not(':first').eq(i).find('input').val();
 
         datasheet_template_fields[datasheet_template_fields.length] = { //在设置列表的最后添加设置项
             "sequence": sequence,
             "display_name": display_name,
             "field_type": field_type,
-            "quantity_type": quantity_type,
+            "quantity_role": quantity_role,
             "quantity_uom": quantity_uom
         }
     });

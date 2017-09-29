@@ -2,19 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="71d929fb-5ce8-426d-b208-9fb8b2a7c9e0" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/horizon/docs/.~lock.test data.ods#" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/horizon/docs/test data.ods" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/horizon/templates/viewscheme.html" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/demo7/templates/base.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/demo7/templates/frontpage.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/demo7/urls.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/horizon/xl_datasheets/48006/48006_new_asldfkj_(alsdnvla).xlsx" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/horizon/xl_datasheets/48006/48006_new_asldfkj_alsdnvla.xlsx" afterPath="$PROJECT_DIR$/horizon/xl_datasheets/48006/48006_new_asldfkj_alsdnvla.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/horizon/xl_templates/48006_new_asldfkj_alsdnvla.xlsx" afterPath="$PROJECT_DIR$/horizon/xl_templates/48006_new_asldfkj_alsdnvla.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/horizon/calculation.py" afterPath="$PROJECT_DIR$/horizon/calculation.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/horizon/lists.py" afterPath="$PROJECT_DIR$/horizon/lists.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/horizon/models.py" afterPath="$PROJECT_DIR$/horizon/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/horizon/render.py" afterPath="$PROJECT_DIR$/horizon/render.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/horizon/templates/datasheets.html" afterPath="$PROJECT_DIR$/horizon/templates/datasheets.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/horizon/templates/fusion.html" afterPath="$PROJECT_DIR$/horizon/templates/fusion.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/horizon/urls.py" afterPath="$PROJECT_DIR$/horizon/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/horizon/tests.py" afterPath="$PROJECT_DIR$/horizon/tests.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/horizon/views.py" afterPath="$PROJECT_DIR$/horizon/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qscm/settings.py" afterPath="$PROJECT_DIR$/qscm/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/qscm/urls.py" afterPath="$PROJECT_DIR$/qscm/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/scheme.js" afterPath="$PROJECT_DIR$/static/js/scheme.js" />
     </list>
     <ignored path="qscm.iws" />
@@ -44,65 +48,7 @@
     <favorites_list name="qscm" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/horizon/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-85">
-              <caret line="173" column="28" lean-forward="false" selection-start-line="173" selection-start-column="28" selection-end-line="173" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/qscm/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="114" column="26" lean-forward="false" selection-start-line="114" selection-start-column="26" selection-end-line="114" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/horizon/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="render.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/horizon/render.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="605" column="13" lean-forward="false" selection-start-line="605" selection-start-column="13" selection-end-line="605" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="calculation.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/horizon/calculation.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="6" column="10" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="10" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-                <element signature="e#216#2698#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -114,16 +60,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>scheme_pid</find>
-      <find>view_scheme</find>
-      <find>scheme =</find>
-      <find>scheme_owners</find>
-      <find>price_fiel</find>
-      <find>datasheet</find>
-      <find>user_status</find>
-      <find>save_scheme</find>
-      <find>data_sheets</find>
-      <find>setting_locked</find>
       <find>scheme</find>
       <find>data_sheet</find>
       <find>datasheet_element</find>
@@ -144,6 +80,16 @@
       <find>error</find>
       <find>datasheets</find>
       <find>hashed</find>
+      <find>datasheet</find>
+      <find>location</find>
+      <find>option_list</find>
+      <find>quantity_types</find>
+      <find>quantity_type</find>
+      <find>datasheetfield</find>
+      <find>quantity</find>
+      <find>category_pid</find>
+      <find>delete</find>
+      <find>save_datasheet_upload</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -161,7 +107,6 @@
         <option value="$PROJECT_DIR$/horizon/templates/base_for_grid.html" />
         <option value="$PROJECT_DIR$/horizon/templates/index2.html" />
         <option value="$PROJECT_DIR$/qscm/wsgi.py" />
-        <option value="$PROJECT_DIR$/qscm/urls.py" />
         <option value="$PROJECT_DIR$/horizon/templates/result.html" />
         <option value="$PROJECT_DIR$/horizon/templates/horizon.html" />
         <option value="$PROJECT_DIR$/horizon/templates/register.html" />
@@ -179,12 +124,17 @@
         <option value="$PROJECT_DIR$/horizon/xlhandler.py" />
         <option value="$PROJECT_DIR$/horizon/dicts.py" />
         <option value="$PROJECT_DIR$/horizon/urls.py" />
+        <option value="$PROJECT_DIR$/horizon/views.py" />
+        <option value="$PROJECT_DIR$/horizon/tests.py" />
         <option value="$PROJECT_DIR$/horizon/lists.py" />
         <option value="$PROJECT_DIR$/horizon/models.py" />
-        <option value="$PROJECT_DIR$/horizon/calculation.py" />
-        <option value="$PROJECT_DIR$/horizon/views.py" />
         <option value="$PROJECT_DIR$/horizon/render.py" />
+        <option value="$PROJECT_DIR$/horizon/calculation.py" />
         <option value="$PROJECT_DIR$/qscm/settings.py" />
+        <option value="$PROJECT_DIR$/qscm/urls.py" />
+        <option value="$PROJECT_DIR$/demo7/templates/index.html" />
+        <option value="$PROJECT_DIR$/demo7/urls.py" />
+        <option value="$PROJECT_DIR$/demo7/views.py" />
       </list>
     </option>
   </component>
@@ -194,11 +144,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="981" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="755" />
     <option name="y" value="24" />
-    <option name="width" value="1132" />
-    <option name="height" value="1007" />
+    <option name="width" value="840" />
+    <option name="height" value="813" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -237,8 +187,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -249,17 +197,14 @@
             <path>
               <item name="qscm" type="b2602c69:ProjectViewProjectNode" />
               <item name="qscm" type="462c0819:PsiDirectoryNode" />
-              <item name="horizon" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qscm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qscm" type="462c0819:PsiDirectoryNode" />
-              <item name="qscm" type="462c0819:PsiDirectoryNode" />
+              <item name="demo7" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -270,18 +215,18 @@
     <property name="js.eslint.eslintPackage" value="" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/horizon/templates" />
-      <recent name="$PROJECT_DIR$/horizon/static" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/django_ajax" />
-      <recent name="$PROJECT_DIR$/horizon" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/horizon" />
       <recent name="$PROJECT_DIR$/qsite" />
       <recent name="$PROJECT_DIR$/qscm" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/demo7/templates" />
+      <recent name="$PROJECT_DIR$/horizon/templates" />
+      <recent name="$PROJECT_DIR$/horizon/static" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/django_ajax" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -296,7 +241,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.views">
+  <component name="RunManager" selected="Python.tests">
     <configuration default="true" type="tests" factoryName="Doctests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -416,6 +361,42 @@
       <option name="USE_PATTERN" value="false" />
       <method />
     </configuration>
+    <configuration name="calculation" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/horizon" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="qscm" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/horizon/calculation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="tests" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/horizon" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="qscm" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/horizon/tests.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <configuration name="views" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -434,9 +415,16 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+    <list size="3">
+      <item index="0" class="java.lang.String" itemvalue="Python.views" />
+      <item index="1" class="java.lang.String" itemvalue="Python.calculation" />
+      <item index="2" class="java.lang.String" itemvalue="Python.tests" />
+    </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Python.views" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="Python.tests" />
+        <item index="1" class="java.lang.String" itemvalue="Python.calculation" />
+        <item index="2" class="java.lang.String" itemvalue="Python.views" />
       </list>
     </recent_temporary>
   </component>
@@ -466,16 +454,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="981" y="24" width="1132" height="1007" extended-state="4" />
+    <frame x="-1" y="-4" width="1602" height="856" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22324723" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16859716" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893288" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21703297" sideWeight="0.41827542" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3264463" sideWeight="0.4882583" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893288" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32781458" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3264463" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3278328" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22234891" sideWeight="0.5817246" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15830116" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21487603" sideWeight="0.5817246" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26584023" sideWeight="0.49612403" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -484,7 +473,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32647464" sideWeight="0.4882583" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947233" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -505,6 +493,12 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/demo7/urls.py</url>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -512,47 +506,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="23" />
+      <option name="time" value="26" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/js/npm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/horizon/migrations/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/horizon/migrations/0001_initial.py" />
-    <entry file="file://$PROJECT_DIR$/qsite/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.local/lib/python3.5/site-packages/django/db/models/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="576" column="8" lean-forward="false" selection-start-line="576" selection-start-column="8" selection-end-line="576" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/jquery-3.1.0.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -654,24 +612,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/horizon/templates.py" />
-    <entry file="file://$PROJECT_DIR$/horizon/tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/horizon/templates/services.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="17" column="35" lean-forward="false" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/horizon/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="11" column="14" lean-forward="true" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -707,24 +651,39 @@
     <entry file="file://$PROJECT_DIR$/horizon/templates/viewscheme.html" />
     <entry file="file://$PROJECT_DIR$/horizon/xlhandler.py" />
     <entry file="file://$PROJECT_DIR$/horizon/dicts.py" />
-    <entry file="file://$PROJECT_DIR$/horizon/urls.py">
+    <entry file="file://$PROJECT_DIR$/horizon/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="26" column="66" lean-forward="false" selection-start-line="26" selection-start-column="66" selection-end-line="26" selection-end-column="66" />
+        <state relative-caret-position="0">
+          <caret line="289" column="4" lean-forward="false" selection-start-line="289" selection-start-column="4" selection-end-line="289" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/horizon/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/horizon/lists.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="57" lean-forward="false" selection-start-line="28" selection-start-column="57" selection-end-line="28" selection-end-column="57" />
+        <state relative-caret-position="527">
+          <caret line="32" column="11" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/horizon/apps.py">
+    <entry file="file://$PROJECT_DIR$/horizon/calculation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+        <state relative-caret-position="493">
+          <caret line="85" column="45" lean-forward="false" selection-start-line="85" selection-start-column="45" selection-end-line="85" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+            <element signature="e#290#2772#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -735,64 +694,132 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/horizon/apps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/qscm/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="54" lean-forward="false" selection-start-line="13" selection-start-column="54" selection-end-line="13" selection-end-column="54" />
+        <state relative-caret-position="238">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo7/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo7/apps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/qscm/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state relative-caret-position="357">
+          <caret line="22" column="34" lean-forward="false" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/horizon/views.py">
+    <entry file="file://$PROJECT_DIR$/horizon/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="19" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/horizon/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="14" lean-forward="true" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/horizon/render.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="605" column="13" lean-forward="false" selection-start-line="605" selection-start-column="13" selection-end-line="605" selection-end-column="13" />
+        <state relative-caret-position="110">
+          <caret line="589" column="25" lean-forward="false" selection-start-line="589" selection-start-column="4" selection-end-line="589" selection-end-column="25" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#119#6049#0" expanded="false" />
+            <element signature="e#6127#10549#0" expanded="false" />
+            <element signature="e#10609#12654#0" expanded="false" />
+            <element signature="e#12706#13639#0" expanded="false" />
+            <element signature="e#13694#17189#0" expanded="false" />
+            <element signature="e#17243#18412#0" expanded="false" />
+            <element signature="e#18467#20213#0" expanded="false" />
+            <element signature="e#20266#24320#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/horizon/calculation.py">
+    <entry file="file://$PROJECT_DIR$/demo7/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="10" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#216#2698#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/horizon/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-85">
-          <caret line="173" column="28" lean-forward="false" selection-start-line="173" selection-start-column="28" selection-end-line="173" selection-end-column="28" />
+        <state relative-caret-position="153">
+          <caret line="9" column="45" lean-forward="false" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/qscm/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="114" column="26" lean-forward="false" selection-start-line="114" selection-start-column="26" selection-end-line="114" selection-end-column="26" />
+        <state relative-caret-position="-272">
+          <caret line="35" column="29" lean-forward="false" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo7/templates/frontpage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="14" lean-forward="false" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo7/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="30" lean-forward="false" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo7/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="37" lean-forward="false" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/horizon/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="19" lean-forward="true" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
