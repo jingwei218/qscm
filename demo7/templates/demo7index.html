@@ -1,7 +1,60 @@
-{% extends 'demo7_base.html' %}
+{% extends 'demo7base.html' %} {% block body %}
 
-{% block body %}
 <div class="container-fluid">
     <div class="row" style="text-align: center">7 Demos</div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">1. Multiple files upload</div>
+        <div class="col-xs-12">
+            <form action="/demo7/multiupload/" method="post" class="uploader" id="uploader" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="fileuploads" multiple="multiple" accept="image/*">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-xs-12">2. Table sort and print</div>
+        <div class="col-xs-12">
+            <table id="t-1" class="sortable printable">
+                <thead>
+                    <tr>
+                        <th class="sort-alpha">Title</th>
+                        <th class="sort-alpha">Author(s)</th>
+                        <th class="sort-date">Publish Date</th>
+                        <th class="sort-numeric">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="editable">Drupal 7</td>
+                        <td class="editable">David <span class="sort-key">Mercer</span></td>
+                        <td class="editable">September 2010</td>
+                        <td class="editable">$44.99</td>
+                    </tr>
+                    <tr>
+                        <td class="editable">Amazon SimpleDB: LITE</td>
+                        <td class="editable">Prabhakar <span class="sort-key">Chaganti</span>, Rich Helms</td>
+                        <td class="editable">May 2011</td>
+                        <td class="editable">$9.99</td>
+                    </tr>
+                    <tr>
+                        <td class="editable">Object-Oriented JavaScript</td>
+                        <td class="editable">Stoyan <span class="sort-key">Stefanov</span></td>
+                        <td class="editable">July 2008</td>
+                        <td class="editable">$39.99</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-12">
+            <input id="print_table" type="button" value="Print" />
+        </div>
+        <input id="edit_box" style="font-size: x-small;" hidden="hidden">
+    </div>
+    <br>
 </div>
 {% endblock %}

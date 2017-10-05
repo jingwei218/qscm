@@ -93,50 +93,67 @@
 0084_auto_20170704_1431.py	../horizon/migrations/0084_auto_20170704_1431.py	1;"	kind:file	line:1
 0085_auto_20170709_0640.py	../horizon/migrations/0085_auto_20170709_0640.py	1;"	kind:file	line:1
 0086_auto_20170709_1242.py	../horizon/migrations/0086_auto_20170709_1242.py	1;"	kind:file	line:1
-AJAXMiddleware	../django_ajax/middleware.py	/^class AJAXMiddleware(object):$/;"	kind:class	line:9
-AJAXMixin	../django_ajax/mixin.py	/^class AJAXMixin(object):$/;"	kind:class	line:9
+0087_datasheet_datasheet_template_created.py	../horizon/migrations/0087_datasheet_datasheet_template_created.py	1;"	kind:file	line:1
+0088_auto_20170717_1351.py	../horizon/migrations/0088_auto_20170717_1351.py	1;"	kind:file	line:1
+0089_auto_20170718_1238.py	../horizon/migrations/0089_auto_20170718_1238.py	1;"	kind:file	line:1
+0090_datasheet_xltemplate_file_location.py	../horizon/migrations/0090_datasheet_xltemplate_file_location.py	1;"	kind:file	line:1
+0091_auto_20170718_1338.py	../horizon/migrations/0091_auto_20170718_1338.py	1;"	kind:file	line:1
+0092_auto_20170719_1452.py	../horizon/migrations/0092_auto_20170719_1452.py	1;"	kind:file	line:1
+0093_datasheet_xltemplate_file_fullname.py	../horizon/migrations/0093_datasheet_xltemplate_file_fullname.py	1;"	kind:file	line:1
+0094_auto_20170724_1203.py	../horizon/migrations/0094_auto_20170724_1203.py	1;"	kind:file	line:1
+0095_auto_20170724_1235.py	../horizon/migrations/0095_auto_20170724_1235.py	1;"	kind:file	line:1
+0096_auto_20170806_0707.py	../horizon/migrations/0096_auto_20170806_0707.py	1;"	kind:file	line:1
+0097_setting_list.py	../horizon/migrations/0097_setting_list.py	1;"	kind:file	line:1
+0098_datasheet_xldatasheet_file_name.py	../horizon/migrations/0098_datasheet_xldatasheet_file_name.py	1;"	kind:file	line:1
+0099_location_geo.py	../horizon/migrations/0099_location_geo.py	1;"	kind:file	line:1
+0100_element_name.py	../horizon/migrations/0100_element_name.py	1;"	kind:file	line:1
+0101_auto_20170902_0949.py	../horizon/migrations/0101_auto_20170902_0949.py	1;"	kind:file	line:1
+0102_auto_20170902_1002.py	../horizon/migrations/0102_auto_20170902_1002.py	1;"	kind:file	line:1
+0103_auto_20170902_1252.py	../horizon/migrations/0103_auto_20170902_1252.py	1;"	kind:file	line:1
+0104_auto_20170902_1522.py	../horizon/migrations/0104_auto_20170902_1522.py	1;"	kind:file	line:1
+0105_datasheet_data_locked.py	../horizon/migrations/0105_datasheet_data_locked.py	1;"	kind:file	line:1
+0106_auto_20170908_0515.py	../horizon/migrations/0106_auto_20170908_0515.py	1;"	kind:file	line:1
+0107_auto_20170925_2130.py	../horizon/migrations/0107_auto_20170925_2130.py	1;"	kind:file	line:1
+0108_remove_datasheet_datasheet_elements.py	../horizon/migrations/0108_remove_datasheet_datasheet_elements.py	1;"	kind:file	line:1
+0109_datasheet_datasheet_elements.py	../horizon/migrations/0109_datasheet_datasheet_elements.py	1;"	kind:file	line:1
 ALLOWED_HOSTS	../qscm/settings.py	/^ALLOWED_HOSTS = []$/;"	kind:variable	line:28
 AUTH_PASSWORD_VALIDATORS	../qscm/settings.py	/^AUTH_PASSWORD_VALIDATORS = [$/;"	kind:variable	line:95
-AllocatedQuantity	../horizon/models.py	/^class AllocatedQuantity(models.Model):$/;"	kind:class	line:254
+AllocatedQuantity	../horizon/models.py	/^class AllocatedQuantity(models.Model):$/;"	kind:class	line:241
 BASE_DIR	../qscm/settings.py	/^BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))$/;"	kind:variable	line:16
 Category	../horizon/models.py	/^class Category(models.Model):$/;"	kind:class	line:23
 Company	../horizon/models.py	/^class Company(models.Model):$/;"	kind:class	line:44
-Cost	../horizon/models.py	/^class Cost(models.Model):$/;"	kind:class	line:370
+Cost	../horizon/models.py	/^class Cost(models.Model):$/;"	kind:class	line:365
 Currency	../horizon/models.py	/^class Currency(models.Model):$/;"	kind:class	line:15
 DATABASES	../qscm/settings.py	/^DATABASES = {$/;"	kind:variable	line:80
-DEBUG	../django_ajax/tests.py	/^DEBUG = True$/;"	kind:variable	line:10
 DEBUG	../qscm/settings.py	/^DEBUG = True$/;"	kind:variable	line:26
-DEFAULT_CHARSET	../django_ajax/tests.py	/^DEFAULT_CHARSET = 'utf-8'$/;"	kind:variable	line:11
-DataDate	../horizon/models.py	/^class DataDate(models.Model):$/;"	kind:class	line:215
-DataSheet	../horizon/models.py	/^class DataSheet(models.Model):$/;"	kind:class	line:294
-DataSheetElement	../horizon/models.py	/^class DataSheetElement(models.Model):$/;"	kind:class	line:191
-DataSheetField	../horizon/models.py	/^class DataSheetField(models.Model):$/;"	kind:class	line:324
-DataSheetSetting	../horizon/models.py	/^class DataSheetSetting(models.Model):$/;"	kind:class	line:354
-Element	../horizon/models.py	/^class Element(models.Model):$/;"	kind:class	line:170
+DataDate	../horizon/models.py	/^class DataDate(models.Model):$/;"	kind:class	line:202
+DataSheet	../horizon/models.py	/^class DataSheet(models.Model):$/;"	kind:class	line:281
+DataSheetElement	../horizon/models.py	/^class DataSheetElement(models.Model):$/;"	kind:class	line:167
+DataSheetField	../horizon/models.py	/^class DataSheetField(models.Model):$/;"	kind:class	line:317
+DataSheetSetting	../horizon/models.py	/^class DataSheetSetting(models.Model):$/;"	kind:class	line:349
+Demo7Config	../demo7/apps.py	/^class Demo7Config(AppConfig):$/;"	kind:class	line:4
+Element	../horizon/models.py	/^class Element(models.Model):$/;"	kind:class	line:159
 Geo	../horizon/models.py	/^class Geo(models.Model):$/;"	kind:class	line:57
 HorizonConfig	../horizon/apps.py	/^class HorizonConfig(AppConfig):$/;"	kind:class	line:4
 HorizonSetting	../horizon/models.py	/^class HorizonSetting(models.Model):$/;"	kind:class	line:7
 HorizonUser	../horizon/models.py	/^class HorizonUser(User):$/;"	kind:class	line:81
 INSTALLED_APPS	../qscm/settings.py	/^INSTALLED_APPS = [$/;"	kind:variable	line:33
-JSONResponse	../django_ajax/response.py	/^class JSONResponse(HttpResponse):$/;"	kind:class	line:12
 LANGUAGE_CODE	../qscm/settings.py	/^LANGUAGE_CODE = 'en-us'$/;"	kind:variable	line:114
 Language	../qsite/models.py	/^class Language(models.Model):$/;"	kind:class	line:4
-LazyJSONEncoder	../django_ajax/encoder.py	/^class LazyJSONEncoder(LazyJSONEncoderMixin, json.JSONEncoder):$/;"	kind:class	line:51
-LazyJSONEncoderMixin	../django_ajax/encoder.py	/^class LazyJSONEncoderMixin(object):$/;"	kind:class	line:15
-Location	../horizon/models.py	/^class Location(models.Model):$/;"	kind:class	line:176
+Location	../horizon/models.py	/^class Location(models.Model):$/;"	kind:class	line:186
 MIDDLEWARE_CLASSES	../qscm/settings.py	/^MIDDLEWARE_CLASSES = [$/;"	kind:variable	line:45
 Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:120
-Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:149
-Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:164
-Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:186
-Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:201
-Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:233
-Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:273
-Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:288
-Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:306
-Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:333
-Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:348
-Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:364
+Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:138
+Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:153
+Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:173
+Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:197
+Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:220
+Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:260
+Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:275
+Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:299
+Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:328
+Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:343
+Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:359
 Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:76
 Meta	../horizon/models.py	/^    class Meta:$/;"	kind:class	line:91
 Migration	../horizon/migrations/0001_initial.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:10
@@ -225,38 +242,56 @@ Migration	../horizon/migrations/0083_remove_schemesetting_locked.py	/^class Migr
 Migration	../horizon/migrations/0084_auto_20170704_1431.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
 Migration	../horizon/migrations/0085_auto_20170709_0640.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
 Migration	../horizon/migrations/0086_auto_20170709_1242.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../horizon/migrations/0087_datasheet_datasheet_template_created.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../horizon/migrations/0088_auto_20170717_1351.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../horizon/migrations/0089_auto_20170718_1238.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../horizon/migrations/0090_datasheet_xltemplate_file_location.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../horizon/migrations/0091_auto_20170718_1338.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../horizon/migrations/0092_auto_20170719_1452.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../horizon/migrations/0093_datasheet_xltemplate_file_fullname.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../horizon/migrations/0094_auto_20170724_1203.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../horizon/migrations/0095_auto_20170724_1235.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:9
+Migration	../horizon/migrations/0096_auto_20170806_0707.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:9
+Migration	../horizon/migrations/0097_setting_list.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../horizon/migrations/0098_datasheet_xldatasheet_file_name.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../horizon/migrations/0099_location_geo.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:9
+Migration	../horizon/migrations/0100_element_name.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../horizon/migrations/0101_auto_20170902_0949.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:9
+Migration	../horizon/migrations/0102_auto_20170902_1002.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:9
+Migration	../horizon/migrations/0103_auto_20170902_1252.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../horizon/migrations/0104_auto_20170902_1522.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../horizon/migrations/0105_datasheet_data_locked.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../horizon/migrations/0106_auto_20170908_0515.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:9
+Migration	../horizon/migrations/0107_auto_20170925_2130.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:9
+Migration	../horizon/migrations/0108_remove_datasheet_datasheet_elements.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../horizon/migrations/0109_datasheet_datasheet_elements.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
 Migration	../qsite/migrations/0001_initial.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:9
 Migration	../qsite/migrations/0002_auto_20160923_1149.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
 Migration	../qsite/migrations/0003_auto_20160923_1150.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
 NavigationBar	../qsite/models.py	/^class NavigationBar(models.Model):$/;"	kind:class	line:12
-Price	../horizon/models.py	/^class Price(models.Model):$/;"	kind:class	line:278
-PriceCondition	../horizon/models.py	/^class PriceCondition(models.Model):$/;"	kind:class	line:260
-PriceSheet	../horizon/models.py	/^class PriceSheet(models.Model):$/;"	kind:class	line:311
-PriceSheetElement	../horizon/models.py	/^class PriceSheetElement(models.Model):$/;"	kind:class	line:206
-PriceSheetField	../horizon/models.py	/^class PriceSheetField(models.Model):$/;"	kind:class	line:338
+Price	../horizon/models.py	/^class Price(models.Model):$/;"	kind:class	line:265
+PriceCondition	../horizon/models.py	/^class PriceCondition(models.Model):$/;"	kind:class	line:247
+PriceSheet	../horizon/models.py	/^class PriceSheet(models.Model):$/;"	kind:class	line:304
+PriceSheetElement	../horizon/models.py	/^class PriceSheetElement(models.Model):$/;"	kind:class	line:178
+PriceSheetField	../horizon/models.py	/^class PriceSheetField(models.Model):$/;"	kind:class	line:333
 QsiteConfig	../qsite/apps.py	/^class QsiteConfig(AppConfig):$/;"	kind:class	line:4
-Quantity	../horizon/models.py	/^class Quantity(models.Model):$/;"	kind:class	line:238
-REASON_PHRASES	../django_ajax/shortcuts.py	/^REASON_PHRASES = {$/;"	kind:variable	line:17
+Quantity	../horizon/models.py	/^class Quantity(models.Model):$/;"	kind:class	line:225
 ROOT_URLCONF	../qscm/settings.py	/^ROOT_URLCONF = 'qscm.urls'$/;"	kind:variable	line:56
-ResponseTestCase	../django_ajax/tests.py	/^class ResponseTestCase(TestCase):$/;"	kind:class	line:15
-SECRET_KEY	../django_ajax/tests.py	/^SECRET_KEY = 'j&^s-a4(uwj!fdqwr!_pa_0@#$kv8!4j(t3st44_6o^)g=ec%@'$/;"	kind:variable	line:12
 SECRET_KEY	../qscm/settings.py	/^SECRET_KEY = '#aq=mi6t)t02%)e+br*a^jd@ulmm03daa7bbp_^#z-qrs@@^ci'$/;"	kind:variable	line:23
 STATIC_URL	../qscm/settings.py	/^STATIC_URL = '\/static\/'$/;"	kind:variable	line:124
 Scheme	../horizon/models.py	/^class Scheme(models.Model):$/;"	kind:class	line:110
-SchemeSetting	../horizon/models.py	/^class SchemeSetting(models.Model):$/;"	kind:class	line:154
+SchemeSetting	../horizon/models.py	/^class SchemeSetting(models.Model):$/;"	kind:class	line:143
 Service	../horizon/models.py	/^class Service(models.Model):$/;"	kind:class	line:96
-Setting	../horizon/models.py	/^class Setting(models.Model):$/;"	kind:class	line:136
-SettingOption	../horizon/models.py	/^class SettingOption(models.Model):$/;"	kind:class	line:126
+Setting	../horizon/models.py	/^class Setting(models.Model):$/;"	kind:class	line:126
 TEMPLATES	../qscm/settings.py	/^TEMPLATES = [$/;"	kind:variable	line:58
-TIME_ZONE	../qscm/settings.py	/^TIME_ZONE = 'UTC'$/;"	kind:variable	line:116
+TIME_ZONE	../qscm/settings.py	/^TIME_ZONE = 'Asia\/Shanghai'$/;"	kind:variable	line:116
 USE_I18N	../qscm/settings.py	/^USE_I18N = True$/;"	kind:variable	line:118
 USE_L10N	../qscm/settings.py	/^USE_L10N = True$/;"	kind:variable	line:120
 USE_TZ	../qscm/settings.py	/^USE_TZ = True$/;"	kind:variable	line:122
-UoM	../horizon/models.py	/^class UoM(models.Model):$/;"	kind:class	line:224
-VERSION	../django_ajax/__init__.py	/^VERSION = (2, 3, 6, 'final', 0)$/;"	kind:variable	line:10
+UoM	../horizon/models.py	/^class UoM(models.Model):$/;"	kind:class	line:211
 WSGI_APPLICATION	../qscm/settings.py	/^WSGI_APPLICATION = 'qscm.wsgi.application'$/;"	kind:variable	line:74
-__init__	../django_ajax/response.py	/^    def __init__(self, data, *args, **kwargs):$/;"	kind:member	line:17
-__init__.py	../django_ajax/__init__.py	1;"	kind:file	line:1
+__init__.py	../demo7/__init__.py	1;"	kind:file	line:1
+__init__.py	../demo7/migrations/__init__.py	1;"	kind:file	line:1
 __init__.py	../horizon/__init__.py	1;"	kind:file	line:1
 __init__.py	../horizon/migrations/__init__.py	1;"	kind:file	line:1
 __init__.py	../qscm/__init__.py	1;"	kind:file	line:1
@@ -265,57 +300,58 @@ __init__.py	../qsite/migrations/__init__.py	1;"	kind:file	line:1
 __str__	../horizon/models.py	/^    def __str__(self):  # 生成地理信息各层级的组合字符串$/;"	kind:member	line:73
 __str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:104
 __str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:117
-__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:131
-__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:146
-__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:161
-__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:183
-__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:198
-__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:230
-__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:250
-__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:270
-__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:303
-__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:318
-__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:330
-__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:345
-__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:361
+__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:135
+__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:150
+__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:194
+__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:217
+__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:237
+__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:257
+__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:296
+__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:311
+__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:325
+__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:340
+__str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:356
 __str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:39
 __str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:52
 __str__	../horizon/models.py	/^    def __str__(self):$/;"	kind:member	line:88
 __str__	../qsite/models.py	/^    def __str__(self):$/;"	kind:member	line:17
 __str__	../qsite/models.py	/^    def __str__(self):$/;"	kind:member	line:8
+admin.py	../demo7/admin.py	1;"	kind:file	line:1
 admin.py	../horizon/admin.py	1;"	kind:file	line:1
 admin.py	../qsite/admin.py	1;"	kind:file	line:1
-ajax	../django_ajax/decorators.py	/^def ajax(function=None, mandatory=True, **ajax_kwargs):$/;"	kind:function	line:14
-ajax_mandatory	../django_ajax/mixin.py	/^    ajax_mandatory = True$/;"	kind:variable	line:14
-allocate_quantity	../horizon/calculation.py	/^def allocate_quantity(quantity_vector, criteria, quantity_matrix_i):$/;"	kind:function	line:9
-app	../horizon/lists.py	/^app = apps.get_app_config('horizon')$/;"	kind:variable	line:4
+allocate_quantity	../horizon/calculation.py	/^def allocate_quantity(quantity_vector, criteria, quantity_matrix_i):$/;"	kind:function	line:13
+app	../horizon/lists.py	/^app = apps.get_app_config('horizon')$/;"	kind:variable	line:5
 application	../qscm/wsgi.py	/^application = get_wsgi_application()$/;"	kind:variable	line:16
+apps.py	../demo7/apps.py	1;"	kind:file	line:1
 apps.py	../horizon/apps.py	1;"	kind:file	line:1
 apps.py	../qsite/apps.py	1;"	kind:file	line:1
 bases	../horizon/migrations/0004_auto_20161218_1207.py	/^            bases=('auth.user',),$/;"	kind:variable	line:29
 calculation.py	../horizon/calculation.py	1;"	kind:file	line:1
 categories	../horizon/models.py	/^    categories = models.ManyToManyField(Category)$/;"	kind:variable	line:50
-category	../horizon/models.py	/^    category = models.ForeignKey(Category)  # 每个数据表元素对应一个产品类别$/;"	kind:variable	line:196
-category	../horizon/models.py	/^    category = models.ForeignKey(Category)$/;"	kind:variable	line:284
-chargeable_unit	../horizon/calculation.py	/^def chargeable_unit(base, conv, factor, compare):$/;"	kind:function	line:68
+category	../horizon/models.py	/^    category = models.ForeignKey(Category)$/;"	kind:variable	line:163
+category	../horizon/models.py	/^    category = models.ForeignKey(Category)$/;"	kind:variable	line:271
+category	../horizon/models.py	/^    category = models.ForeignKey(Category, default=67004)  # 每个数据表对应一个产品类别$/;"	kind:variable	line:289
+chargeable_unit	../horizon/calculation.py	/^def chargeable_unit(base, conv, factor, compare):$/;"	kind:function	line:72
+clean_datasheet	../horizon/calculation.py	/^def clean_datasheet(datasheet):$/;"	kind:function	line:79
 code_name	../horizon/models.py	/^    code_name = models.CharField(max_length=50, blank=False, null=False)  # 服务项目代号$/;"	kind:variable	line:100
 company	../horizon/models.py	/^    company = models.ForeignKey(Company, default=6707)$/;"	kind:variable	line:86
-comparison	../horizon/models.py	/^    comparison = models.CharField(max_length=3, choices=(('min', 'Minimum'), ('max', 'Maximum')), blank=True,$/;"	kind:variable	line:245
-converting_factor	../horizon/models.py	/^    converting_factor = models.FloatField(blank=True, null=True)  # 转换率，如：333公斤\/立方米，仅对转换量适用$/;"	kind:variable	line:244
-currency	../horizon/models.py	/^    currency = models.ForeignKey(Currency)$/;"	kind:variable	line:283
-datasheet	../horizon/models.py	/^    datasheet = models.ForeignKey(DataSheet)$/;"	kind:variable	line:325
-datasheet	../horizon/models.py	/^    datasheet = models.ForeignKey(DataSheet)$/;"	kind:variable	line:358
-datasheet_element	../horizon/models.py	/^    datasheet_element = models.ForeignKey(DataSheetElement)  # 一个数据表元素可有多个成本$/;"	kind:variable	line:375
-datasheet_element	../horizon/models.py	/^    datasheet_element = models.ForeignKey(DataSheetElement)  # 每个元素有一个或多个数量$/;"	kind:variable	line:248
-datasheet_element	../horizon/models.py	/^    datasheet_element = models.ForeignKey(DataSheetElement)  # 每个元素有一个或多个日期$/;"	kind:variable	line:220
-datasheet_elements	../horizon/models.py	/^    datasheet_elements = models.ManyToManyField(DataSheetElement)$/;"	kind:variable	line:301
-datasheet_fields_set	../horizon/lists.py	/^datasheet_fields_set = [$/;"	kind:variable	line:7
+comparison	../horizon/models.py	/^    comparison = models.CharField(max_length=3, choices=(('min', 'Minimum'), ('max', 'Maximum')), blank=True,$/;"	kind:variable	line:232
+converting_factor	../horizon/models.py	/^    converting_factor = models.FloatField(blank=True, null=True)  # 转换率，如：333公斤\/立方米，仅对转换量适用$/;"	kind:variable	line:231
+currency	../horizon/models.py	/^    currency = models.ForeignKey(Currency)$/;"	kind:variable	line:270
+data_locked	../horizon/models.py	/^    data_locked = models.BooleanField(default=False)$/;"	kind:variable	line:287
+datasheet	../horizon/models.py	/^    datasheet = models.ForeignKey(DataSheet)$/;"	kind:variable	line:318
+datasheet	../horizon/models.py	/^    datasheet = models.ForeignKey(DataSheet)$/;"	kind:variable	line:353
+datasheet	../horizon/tests.py	/^datasheet=DataSheet.objects.get(pid=48006)$/;"	kind:variable	line:6
+datasheet_element	../horizon/models.py	/^    datasheet_element = models.ForeignKey(DataSheetElement)  # 一个数据表元素可有多个成本$/;"	kind:variable	line:370
+datasheet_element	../horizon/models.py	/^    datasheet_element = models.ForeignKey(DataSheetElement)  # 每个元素有一个或多个数量$/;"	kind:variable	line:235
+datasheet_element	../horizon/models.py	/^    datasheet_element = models.ForeignKey(DataSheetElement)  # 每个元素有一个或多个日期$/;"	kind:variable	line:207
+datasheet_element	../horizon/models.py	/^    datasheet_element = models.ForeignKey(DataSheetElement)$/;"	kind:variable	line:191
+datasheet_elements	../horizon/models.py	/^    datasheet_elements = models.ManyToManyField(DataSheetElement)$/;"	kind:variable	line:290
+datasheet_fields_set	../horizon/lists.py	/^datasheet_fields_set = [$/;"	kind:variable	line:8
 datasheet_urls	../horizon/urls.py	/^datasheet_urls = [$/;"	kind:variable	line:12
-date	../horizon/models.py	/^    date = models.DateField(auto_now_add=True)$/;"	kind:variable	line:218
-decorator	../django_ajax/decorators.py	/^    def decorator(func):$/;"	kind:function	line:59
-decorators.py	../django_ajax/decorators.py	1;"	kind:file	line:1
-default	../django_ajax/encoder.py	/^    def default(self, obj):$/;"	kind:member	line:22
+date	../horizon/models.py	/^    date = models.DateField(auto_now_add=True)$/;"	kind:variable	line:205
 default_language	../horizon/models.py	/^    default_language = models.CharField(max_length=4, blank=True, null=True)$/;"	kind:variable	line:84
+delete_datasheet	../horizon/render.py	/^def delete_datasheet(file_fullpath):$/;"	kind:function	line:606
 dependencies	../horizon/migrations/0001_initial.py	/^    dependencies = [$/;"	kind:variable	line:14
 dependencies	../horizon/migrations/0002_auto_20161218_0714.py	/^    dependencies = [$/;"	kind:variable	line:11
 dependencies	../horizon/migrations/0003_auto_20161218_0947.py	/^    dependencies = [$/;"	kind:variable	line:11
@@ -402,17 +438,37 @@ dependencies	../horizon/migrations/0083_remove_schemesetting_locked.py	/^    dep
 dependencies	../horizon/migrations/0084_auto_20170704_1431.py	/^    dependencies = [$/;"	kind:variable	line:10
 dependencies	../horizon/migrations/0085_auto_20170709_0640.py	/^    dependencies = [$/;"	kind:variable	line:10
 dependencies	../horizon/migrations/0086_auto_20170709_1242.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../horizon/migrations/0087_datasheet_datasheet_template_created.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../horizon/migrations/0088_auto_20170717_1351.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../horizon/migrations/0089_auto_20170718_1238.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../horizon/migrations/0090_datasheet_xltemplate_file_location.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../horizon/migrations/0091_auto_20170718_1338.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../horizon/migrations/0092_auto_20170719_1452.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../horizon/migrations/0093_datasheet_xltemplate_file_fullname.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../horizon/migrations/0094_auto_20170724_1203.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../horizon/migrations/0095_auto_20170724_1235.py	/^    dependencies = [$/;"	kind:variable	line:11
+dependencies	../horizon/migrations/0096_auto_20170806_0707.py	/^    dependencies = [$/;"	kind:variable	line:11
+dependencies	../horizon/migrations/0097_setting_list.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../horizon/migrations/0098_datasheet_xldatasheet_file_name.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../horizon/migrations/0099_location_geo.py	/^    dependencies = [$/;"	kind:variable	line:11
+dependencies	../horizon/migrations/0100_element_name.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../horizon/migrations/0101_auto_20170902_0949.py	/^    dependencies = [$/;"	kind:variable	line:11
+dependencies	../horizon/migrations/0102_auto_20170902_1002.py	/^    dependencies = [$/;"	kind:variable	line:11
+dependencies	../horizon/migrations/0103_auto_20170902_1252.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../horizon/migrations/0104_auto_20170902_1522.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../horizon/migrations/0105_datasheet_data_locked.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../horizon/migrations/0106_auto_20170908_0515.py	/^    dependencies = [$/;"	kind:variable	line:11
+dependencies	../horizon/migrations/0107_auto_20170925_2130.py	/^    dependencies = [$/;"	kind:variable	line:11
+dependencies	../horizon/migrations/0108_remove_datasheet_datasheet_elements.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../horizon/migrations/0109_datasheet_datasheet_elements.py	/^    dependencies = [$/;"	kind:variable	line:10
 dependencies	../qsite/migrations/0001_initial.py	/^    dependencies = [$/;"	kind:variable	line:13
 dependencies	../qsite/migrations/0002_auto_20160923_1149.py	/^    dependencies = [$/;"	kind:variable	line:10
 dependencies	../qsite/migrations/0003_auto_20160923_1150.py	/^    dependencies = [$/;"	kind:variable	line:10
-dispatch	../django_ajax/mixin.py	/^    def dispatch(self, request, *args, **kwargs):$/;"	kind:member	line:17
-display_name	../horizon/models.py	/^    display_name = models.CharField(max_length=255, blank=False, null=False)$/;"	kind:variable	line:326
-display_name	../horizon/models.py	/^    display_name = models.CharField(max_length=255, blank=False, null=False)$/;"	kind:variable	line:340
-display_name	../horizon/models.py	/^    display_name = models.CharField(max_length=255, blank=True, null=True)$/;"	kind:variable	line:264
-element	../horizon/models.py	/^    element = models.ForeignKey(Element)$/;"	kind:variable	line:180
-element	../horizon/models.py	/^    element = models.ForeignKey(Element)$/;"	kind:variable	line:194
-element	../horizon/models.py	/^    element = models.ForeignKey(Element)$/;"	kind:variable	line:209
-encoder.py	../django_ajax/encoder.py	1;"	kind:file	line:1
+display_name	../horizon/models.py	/^    display_name = models.CharField(max_length=255, blank=False, null=False)$/;"	kind:variable	line:319
+display_name	../horizon/models.py	/^    display_name = models.CharField(max_length=255, blank=False, null=False)$/;"	kind:variable	line:335
+display_name	../horizon/models.py	/^    display_name = models.CharField(max_length=255, blank=True, null=True)$/;"	kind:variable	line:251
+element	../horizon/models.py	/^    element = models.ForeignKey(Element)$/;"	kind:variable	line:170
+element	../horizon/models.py	/^    element = models.ForeignKey(Element)$/;"	kind:variable	line:181
 field	../horizon/migrations/0001_initial.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='horizon.Category'),$/;"	kind:variable	line:190
 field	../horizon/migrations/0001_initial.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='horizon.Element'),$/;"	kind:variable	line:170
 field	../horizon/migrations/0001_initial.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='horizon.PriceCondition'),$/;"	kind:variable	line:160
@@ -527,10 +583,31 @@ field	../horizon/migrations/0079_auto_20170702_0438.py	/^            field=model
 field	../horizon/migrations/0080_auto_20170702_1134.py	/^            field=models.ManyToManyField(to='horizon.Date'),$/;"	kind:variable	line:31
 field	../horizon/migrations/0081_auto_20170702_1146.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='horizon.DataSheetElement'),$/;"	kind:variable	line:36
 field	../horizon/migrations/0086_auto_20170709_1242.py	/^            field=models.IntegerField(blank=True, default=0, null=True),$/;"	kind:variable	line:18
+field	../horizon/migrations/0087_datasheet_datasheet_template_created.py	/^            field=models.BooleanField(default=False),$/;"	kind:variable	line:18
+field	../horizon/migrations/0089_auto_20170718_1238.py	/^            field=models.CharField(blank=True, max_length=255, null=True),$/;"	kind:variable	line:23
+field	../horizon/migrations/0090_datasheet_xltemplate_file_location.py	/^            field=models.CharField(blank=True, max_length=255, null=True),$/;"	kind:variable	line:18
+field	../horizon/migrations/0093_datasheet_xltemplate_file_fullname.py	/^            field=models.CharField(blank=True, max_length=255, null=True),$/;"	kind:variable	line:18
+field	../horizon/migrations/0094_auto_20170724_1203.py	/^            field=models.CharField(default='', max_length=255),$/;"	kind:variable	line:26
+field	../horizon/migrations/0095_auto_20170724_1235.py	/^            field=models.CharField(blank=True, max_length=4, null=True),$/;"	kind:variable	line:23
+field	../horizon/migrations/0095_auto_20170724_1235.py	/^            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='horizon.UoM'),$/;"	kind:variable	line:28
+field	../horizon/migrations/0096_auto_20170806_0707.py	/^            field=models.ForeignKey(default=67004, on_delete=django.db.models.deletion.CASCADE, to='horizon.Category'),$/;"	kind:variable	line:23
+field	../horizon/migrations/0097_setting_list.py	/^            field=models.CharField(blank=True, max_length=50, null=True),$/;"	kind:variable	line:18
+field	../horizon/migrations/0098_datasheet_xldatasheet_file_name.py	/^            field=models.CharField(blank=True, max_length=255, null=True),$/;"	kind:variable	line:18
+field	../horizon/migrations/0099_location_geo.py	/^            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='horizon.Geo'),$/;"	kind:variable	line:19
+field	../horizon/migrations/0100_element_name.py	/^            field=models.CharField(default='', max_length=255),$/;"	kind:variable	line:18
+field	../horizon/migrations/0101_auto_20170902_0949.py	/^            field=models.CharField(max_length=255),$/;"	kind:variable	line:24
+field	../horizon/migrations/0101_auto_20170902_0949.py	/^            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='horizon.Category'),$/;"	kind:variable	line:19
+field	../horizon/migrations/0102_auto_20170902_1002.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='horizon.Category'),$/;"	kind:variable	line:19
+field	../horizon/migrations/0103_auto_20170902_1252.py	/^            field=models.IntegerField(blank=True, null=True),$/;"	kind:variable	line:18
+field	../horizon/migrations/0104_auto_20170902_1522.py	/^            field=models.CharField(default='0', max_length=30),$/;"	kind:variable	line:18
+field	../horizon/migrations/0105_datasheet_data_locked.py	/^            field=models.BooleanField(default=False),$/;"	kind:variable	line:18
+field	../horizon/migrations/0106_auto_20170908_0515.py	/^            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='horizon.DataSheetElement'),$/;"	kind:variable	line:23
+field	../horizon/migrations/0107_auto_20170925_2130.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='horizon.DataSheetElement'),$/;"	kind:variable	line:28
+field	../horizon/migrations/0109_datasheet_datasheet_elements.py	/^            field=models.ManyToManyField(to='horizon.DataSheetElement'),$/;"	kind:variable	line:18
 field	../qsite/migrations/0002_auto_20160923_1149.py	/^            field=models.CharField(max_length=5),$/;"	kind:variable	line:18
 field	../qsite/migrations/0003_auto_20160923_1150.py	/^            field=models.CharField(max_length=30),$/;"	kind:variable	line:18
-field_type	../horizon/models.py	/^    field_type = models.CharField(max_length=30, blank=True, null=True)$/;"	kind:variable	line:327
-field_type	../horizon/models.py	/^    field_type = models.CharField(max_length=30, blank=True, null=True)$/;"	kind:variable	line:341
+field_type	../horizon/models.py	/^    field_type = models.CharField(max_length=30, blank=True, null=True)$/;"	kind:variable	line:320
+field_type	../horizon/models.py	/^    field_type = models.CharField(max_length=30, blank=True, null=True)$/;"	kind:variable	line:336
 fields	../horizon/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:107
 fields	../horizon/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:114
 fields	../horizon/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:123
@@ -565,69 +642,65 @@ fields	../horizon/migrations/0080_auto_20170702_1134.py	/^            fields=[$/
 fields	../horizon/migrations/0081_auto_20170702_1146.py	/^            fields=[$/;"	kind:variable	line:18
 fields	../qsite/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:19
 fields	../qsite/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:27
-geo	../horizon/models.py	/^    geo = models.ForeignKey(Geo)$/;"	kind:variable	line:179
-get_datasheet_settings	../horizon/views.py	/^def get_datasheet_settings(request):$/;"	kind:function	line:187
-get_datasheet_settings_to_json	../horizon/render.py	/^def get_datasheet_settings_to_json(rec_json):$/;"	kind:function	line:402
-get_git_changeset	../django_ajax/__init__.py	/^def get_git_changeset():$/;"	kind:function	line:44
-get_scheme_content	../horizon/views.py	/^def get_scheme_content(request, scheme_hash_pid):$/;"	kind:function	line:212
-get_scheme_settings	../horizon/views.py	/^def get_scheme_settings(request):$/;"	kind:function	line:148
-get_scheme_settings_to_json	../horizon/render.py	/^def get_scheme_settings_to_json(request, rec_json):$/;"	kind:function	line:246
-get_version	../django_ajax/__init__.py	/^def get_version(version=None):$/;"	kind:function	line:13
-group	../horizon/models.py	/^    group = models.IntegerField(blank=True, null=True)  # 用于同意义但不同表述方式的价格条件，如：3MT可表达为3000KG$/;"	kind:variable	line:265
+file_fullpath	../horizon/tests.py	/^file_fullpath='\/home\/jingwei\/Downloads\/48006_new_asldfkj_alsdnvla.xlsx'$/;"	kind:variable	line:5
+geo	../horizon/models.py	/^    geo = models.ForeignKey(Geo, blank=True, null=True)$/;"	kind:variable	line:189
+get_datasheet_settings	../horizon/views.py	/^def get_datasheet_settings(request):$/;"	kind:function	line:188
+get_datasheet_settings_to_json	../horizon/render.py	/^def get_datasheet_settings_to_json(rec_json):$/;"	kind:function	line:416
+get_datasheet_template	../horizon/views.py	/^def get_datasheet_template(request, datasheet_hash_pid):$/;"	kind:function	line:225
+get_datasheets	../horizon/views.py	/^def get_datasheets(request, scheme_hash_pid):$/;"	kind:function	line:270
+get_scheme_settings	../horizon/views.py	/^def get_scheme_settings(request):$/;"	kind:function	line:149
+get_scheme_settings_to_json	../horizon/render.py	/^def get_scheme_settings_to_json(request, rec_json):$/;"	kind:function	line:239
+group	../horizon/models.py	/^    group = models.IntegerField(blank=True, null=True)  # 用于同意义但不同表述方式的价格条件，如：3MT可表达为3000KG$/;"	kind:variable	line:252
 hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密$/;"	kind:variable	line:112
 hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密$/;"	kind:variable	line:128
-hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密$/;"	kind:variable	line:138
+hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密$/;"	kind:variable	line:145
+hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密$/;"	kind:variable	line:161
+hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密$/;"	kind:variable	line:169
 hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密$/;"	kind:variable	line:17
-hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密$/;"	kind:variable	line:217
+hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密$/;"	kind:variable	line:180
+hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密$/;"	kind:variable	line:188
+hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密$/;"	kind:variable	line:204
 hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密$/;"	kind:variable	line:25
 hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密$/;"	kind:variable	line:46
 hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密$/;"	kind:variable	line:59
 hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密$/;"	kind:variable	line:83
 hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密$/;"	kind:variable	line:9
-hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:156
-hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:172
-hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:178
-hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:193
-hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:208
-hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:226
-hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:240
-hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:262
-hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:280
-hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:297
-hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:313
-hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:356
-hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:372
-hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:98
-hashed	../horizon/calculation.py	/^def hashed(value):$/;"	kind:function	line:5
-high	../horizon/models.py	/^    high = models.FloatField(blank=True, null=True)$/;"	kind:variable	line:267
-index	../horizon/views.py	/^def index(request):$/;"	kind:function	line:13
+hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密$/;"	kind:variable	line:98
+hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:213
+hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:227
+hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:249
+hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:267
+hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:284
+hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:306
+hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:351
+hash_pid	../horizon/models.py	/^    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密$/;"	kind:variable	line:367
+hashed	../horizon/calculation.py	/^def hashed(value):$/;"	kind:function	line:9
+high	../horizon/models.py	/^    high = models.FloatField(blank=True, null=True)$/;"	kind:variable	line:254
+index	../demo7/views.py	/^def index(request):$/;"	kind:function	line:6
+index	../horizon/views.py	/^def index(request):$/;"	kind:function	line:14
 index	../qsite/views.py	/^def index(request):$/;"	kind:function	line:5
 initial	../horizon/migrations/0001_initial.py	/^    initial = True$/;"	kind:variable	line:12
 initial	../qsite/migrations/0001_initial.py	/^    initial = True$/;"	kind:variable	line:11
-inner	../django_ajax/decorators.py	/^        def inner(request, *args, **kwargs):$/;"	kind:function	line:61
-json_encoder	../django_ajax/mixin.py	/^    json_encoder = None$/;"	kind:variable	line:15
 lang_dc	../qsite/models.py	/^    lang_dc = models.CharField(max_length=30)$/;"	kind:variable	line:6
 lang_id	../qsite/models.py	/^    lang_id = models.CharField(max_length=5)$/;"	kind:variable	line:5
 language	../qsite/models.py	/^    language = models.ForeignKey(Language)$/;"	kind:variable	line:15
-level	../horizon/models.py	/^    level = models.IntegerField()  # 标注设置所适用层：0代表scheme层，1代表datasheet层$/;"	kind:variable	line:143
+level	../horizon/models.py	/^    level = models.IntegerField()  # 标注设置所适用层：0代表scheme层，1代表datasheet层$/;"	kind:variable	line:133
 level	../horizon/models.py	/^    level = models.IntegerField(blank=False, null=False)$/;"	kind:variable	line:28
-level	../horizon/models.py	/^    level = models.IntegerField(blank=False, null=False)$/;"	kind:variable	line:62
+level	../horizon/models.py	/^    level = models.IntegerField(blank=True, null=True)$/;"	kind:variable	line:62
+list	../horizon/models.py	/^    list = models.CharField(max_length=50, blank=True, null=True)  # 若设定类型为list，则需要注明列表名称$/;"	kind:variable	line:131
 lists.py	../horizon/lists.py	1;"	kind:file	line:1
-lock_datasheet_settings	../horizon/views.py	/^def lock_datasheet_settings(request):$/;"	kind:function	line:198
-lock_datasheet_settings_to_json	../horizon/render.py	/^def lock_datasheet_settings_to_json(rec_json):$/;"	kind:function	line:432
-lock_scheme_settings	../horizon/views.py	/^def lock_scheme_settings(request):$/;"	kind:function	line:161
+load_xl_datasheet	../horizon/calculation.py	/^def load_xl_datasheet(file_fullpath, datasheet):$/;"	kind:function	line:90
+lock_datasheet_settings	../horizon/views.py	/^def lock_datasheet_settings(request):$/;"	kind:function	line:199
+lock_datasheet_settings_to_json	../horizon/render.py	/^def lock_datasheet_settings_to_json(rec_json):$/;"	kind:function	line:448
+lock_scheme_settings	../horizon/views.py	/^def lock_scheme_settings(request):$/;"	kind:function	line:162
 lock_scheme_settings_to_json	../horizon/render.py	/^def lock_scheme_settings_to_json(rec_json):$/;"	kind:function	line:302
-logger	../django_ajax/shortcuts.py	/^logger = logging.getLogger(__name__)$/;"	kind:variable	line:14
 long_name	../horizon/models.py	/^    long_name = models.CharField(max_length=20)$/;"	kind:variable	line:19
-long_name	../horizon/models.py	/^    long_name = models.CharField(max_length=30, blank=True, null=True)$/;"	kind:variable	line:228
-low	../horizon/models.py	/^    low = models.FloatField(blank=True, null=True)$/;"	kind:variable	line:266
+long_name	../horizon/models.py	/^    long_name = models.CharField(max_length=30, blank=True, null=True)$/;"	kind:variable	line:215
+low	../horizon/models.py	/^    low = models.FloatField(blank=True, null=True)$/;"	kind:variable	line:253
 ls	../horizon/models.py	/^    def ls(self):  # 生成地理信息各层级的列表$/;"	kind:member	line:64
 ls	../horizon/models.py	/^    def ls(self):$/;"	kind:member	line:30
 manage.py	../manage.py	1;"	kind:file	line:1
 managers	../horizon/migrations/0004_auto_20161218_1207.py	/^            managers=[$/;"	kind:variable	line:30
-middleware.py	../django_ajax/middleware.py	1;"	kind:file	line:1
-mixin.py	../django_ajax/mixin.py	1;"	kind:file	line:1
-model	../horizon/models.py	/^    model = models.CharField(max_length=255, blank=True, null=True)  # 指向须展开的model，如：数据表列标题$/;"	kind:variable	line:142
 model_name	../horizon/migrations/0001_initial.py	/^            model_name='category',$/;"	kind:variable	line:183
 model_name	../horizon/migrations/0001_initial.py	/^            model_name='category',$/;"	kind:variable	line:188
 model_name	../horizon/migrations/0001_initial.py	/^            model_name='chargeablequantity',$/;"	kind:variable	line:178
@@ -809,11 +882,47 @@ model_name	../horizon/migrations/0085_auto_20170709_0640.py	/^            model_
 model_name	../horizon/migrations/0085_auto_20170709_0640.py	/^            model_name='datasheetfield',$/;"	kind:variable	line:26
 model_name	../horizon/migrations/0085_auto_20170709_0640.py	/^            model_name='quantity',$/;"	kind:variable	line:31
 model_name	../horizon/migrations/0086_auto_20170709_1242.py	/^            model_name='datasheet',$/;"	kind:variable	line:16
+model_name	../horizon/migrations/0087_datasheet_datasheet_template_created.py	/^            model_name='datasheet',$/;"	kind:variable	line:16
+model_name	../horizon/migrations/0088_auto_20170717_1351.py	/^            model_name='datasheet',$/;"	kind:variable	line:16
+model_name	../horizon/migrations/0089_auto_20170718_1238.py	/^            model_name='datasheet',$/;"	kind:variable	line:16
+model_name	../horizon/migrations/0089_auto_20170718_1238.py	/^            model_name='datasheet',$/;"	kind:variable	line:21
+model_name	../horizon/migrations/0090_datasheet_xltemplate_file_location.py	/^            model_name='datasheet',$/;"	kind:variable	line:16
+model_name	../horizon/migrations/0091_auto_20170718_1338.py	/^            model_name='datasheet',$/;"	kind:variable	line:16
+model_name	../horizon/migrations/0092_auto_20170719_1452.py	/^            model_name='datasheet',$/;"	kind:variable	line:16
+model_name	../horizon/migrations/0092_auto_20170719_1452.py	/^            model_name='datasheet',$/;"	kind:variable	line:21
+model_name	../horizon/migrations/0092_auto_20170719_1452.py	/^            model_name='datasheet',$/;"	kind:variable	line:26
+model_name	../horizon/migrations/0093_datasheet_xltemplate_file_fullname.py	/^            model_name='datasheet',$/;"	kind:variable	line:16
+model_name	../horizon/migrations/0094_auto_20170724_1203.py	/^            model_name='location',$/;"	kind:variable	line:16
+model_name	../horizon/migrations/0094_auto_20170724_1203.py	/^            model_name='location',$/;"	kind:variable	line:24
+model_name	../horizon/migrations/0094_auto_20170724_1203.py	/^            model_name='setting',$/;"	kind:variable	line:20
+model_name	../horizon/migrations/0095_auto_20170724_1235.py	/^            model_name='datasheetfield',$/;"	kind:variable	line:21
+model_name	../horizon/migrations/0095_auto_20170724_1235.py	/^            model_name='datasheetfield',$/;"	kind:variable	line:26
+model_name	../horizon/migrations/0095_auto_20170724_1235.py	/^            model_name='setting',$/;"	kind:variable	line:17
+model_name	../horizon/migrations/0096_auto_20170806_0707.py	/^            model_name='datasheet',$/;"	kind:variable	line:21
+model_name	../horizon/migrations/0096_auto_20170806_0707.py	/^            model_name='datasheetelement',$/;"	kind:variable	line:17
+model_name	../horizon/migrations/0097_setting_list.py	/^            model_name='setting',$/;"	kind:variable	line:16
+model_name	../horizon/migrations/0098_datasheet_xldatasheet_file_name.py	/^            model_name='datasheet',$/;"	kind:variable	line:16
+model_name	../horizon/migrations/0099_location_geo.py	/^            model_name='location',$/;"	kind:variable	line:17
+model_name	../horizon/migrations/0100_element_name.py	/^            model_name='element',$/;"	kind:variable	line:16
+model_name	../horizon/migrations/0101_auto_20170902_0949.py	/^            model_name='element',$/;"	kind:variable	line:17
+model_name	../horizon/migrations/0101_auto_20170902_0949.py	/^            model_name='element',$/;"	kind:variable	line:22
+model_name	../horizon/migrations/0102_auto_20170902_1002.py	/^            model_name='element',$/;"	kind:variable	line:17
+model_name	../horizon/migrations/0103_auto_20170902_1252.py	/^            model_name='geo',$/;"	kind:variable	line:16
+model_name	../horizon/migrations/0104_auto_20170902_1522.py	/^            model_name='company',$/;"	kind:variable	line:16
+model_name	../horizon/migrations/0105_datasheet_data_locked.py	/^            model_name='datasheet',$/;"	kind:variable	line:16
+model_name	../horizon/migrations/0106_auto_20170908_0515.py	/^            model_name='location',$/;"	kind:variable	line:17
+model_name	../horizon/migrations/0106_auto_20170908_0515.py	/^            model_name='location',$/;"	kind:variable	line:21
+model_name	../horizon/migrations/0107_auto_20170925_2130.py	/^            model_name='datasheetfield',$/;"	kind:variable	line:21
+model_name	../horizon/migrations/0107_auto_20170925_2130.py	/^            model_name='location',$/;"	kind:variable	line:26
+model_name	../horizon/migrations/0108_remove_datasheet_datasheet_elements.py	/^            model_name='datasheet',$/;"	kind:variable	line:16
+model_name	../horizon/migrations/0109_datasheet_datasheet_elements.py	/^            model_name='datasheet',$/;"	kind:variable	line:16
 model_name	../qsite/migrations/0002_auto_20160923_1149.py	/^            model_name='language',$/;"	kind:variable	line:16
 model_name	../qsite/migrations/0003_auto_20160923_1150.py	/^            model_name='language',$/;"	kind:variable	line:16
-models.py	../django_ajax/models.py	1;"	kind:file	line:1
+models.py	../demo7/models.py	1;"	kind:file	line:1
 models.py	../horizon/models.py	1;"	kind:file	line:1
 models.py	../qsite/models.py	1;"	kind:file	line:1
+multiupload	../demo7/views.py	/^def multiupload(request):$/;"	kind:function	line:13
+name	../demo7/apps.py	/^    name = 'demo7'$/;"	kind:variable	line:5
 name	../horizon/apps.py	/^    name = 'horizon'$/;"	kind:variable	line:5
 name	../horizon/migrations/0001_initial.py	/^            name='Board',$/;"	kind:variable	line:20
 name	../horizon/migrations/0001_initial.py	/^            name='Category',$/;"	kind:variable	line:28
@@ -1022,19 +1131,50 @@ name	../horizon/migrations/0082_auto_20170702_1159.py	/^            name='name',
 name	../horizon/migrations/0082_auto_20170702_1159.py	/^            name='start_date',$/;"	kind:variable	line:21
 name	../horizon/migrations/0083_remove_schemesetting_locked.py	/^            name='locked',$/;"	kind:variable	line:17
 name	../horizon/migrations/0086_auto_20170709_1242.py	/^            name='number_of_price_fields',$/;"	kind:variable	line:17
-name	../horizon/models.py	/^    name = models.CharField(max_length=10, blank=False, null=False)$/;"	kind:variable	line:227
+name	../horizon/migrations/0087_datasheet_datasheet_template_created.py	/^            name='datasheet_template_created',$/;"	kind:variable	line:17
+name	../horizon/migrations/0089_auto_20170718_1238.py	/^            name='xltemplate_filename',$/;"	kind:variable	line:22
+name	../horizon/migrations/0090_datasheet_xltemplate_file_location.py	/^            name='xltemplate_file_location',$/;"	kind:variable	line:17
+name	../horizon/migrations/0092_auto_20170719_1452.py	/^            name='xltemplate_created',$/;"	kind:variable	line:27
+name	../horizon/migrations/0093_datasheet_xltemplate_file_fullname.py	/^            name='xltemplate_file_fullname',$/;"	kind:variable	line:17
+name	../horizon/migrations/0094_auto_20170724_1203.py	/^            name='SettingOption',$/;"	kind:variable	line:29
+name	../horizon/migrations/0094_auto_20170724_1203.py	/^            name='geo',$/;"	kind:variable	line:17
+name	../horizon/migrations/0094_auto_20170724_1203.py	/^            name='name',$/;"	kind:variable	line:25
+name	../horizon/migrations/0094_auto_20170724_1203.py	/^            name='setting_options',$/;"	kind:variable	line:21
+name	../horizon/migrations/0095_auto_20170724_1235.py	/^            name='model',$/;"	kind:variable	line:18
+name	../horizon/migrations/0095_auto_20170724_1235.py	/^            name='quantity_type',$/;"	kind:variable	line:22
+name	../horizon/migrations/0095_auto_20170724_1235.py	/^            name='quantity_uom',$/;"	kind:variable	line:27
+name	../horizon/migrations/0096_auto_20170806_0707.py	/^            name='category',$/;"	kind:variable	line:18
+name	../horizon/migrations/0096_auto_20170806_0707.py	/^            name='category',$/;"	kind:variable	line:22
+name	../horizon/migrations/0097_setting_list.py	/^            name='list',$/;"	kind:variable	line:17
+name	../horizon/migrations/0098_datasheet_xldatasheet_file_name.py	/^            name='xldatasheet_file_name',$/;"	kind:variable	line:17
+name	../horizon/migrations/0099_location_geo.py	/^            name='geo',$/;"	kind:variable	line:18
+name	../horizon/migrations/0100_element_name.py	/^            name='name',$/;"	kind:variable	line:17
+name	../horizon/migrations/0101_auto_20170902_0949.py	/^            name='category',$/;"	kind:variable	line:18
+name	../horizon/migrations/0101_auto_20170902_0949.py	/^            name='name',$/;"	kind:variable	line:23
+name	../horizon/migrations/0102_auto_20170902_1002.py	/^            name='category',$/;"	kind:variable	line:18
+name	../horizon/migrations/0103_auto_20170902_1252.py	/^            name='level',$/;"	kind:variable	line:17
+name	../horizon/migrations/0104_auto_20170902_1522.py	/^            name='register_number',$/;"	kind:variable	line:17
+name	../horizon/migrations/0105_datasheet_data_locked.py	/^            name='data_locked',$/;"	kind:variable	line:17
+name	../horizon/migrations/0106_auto_20170908_0515.py	/^            name='datasheet_element',$/;"	kind:variable	line:22
+name	../horizon/migrations/0106_auto_20170908_0515.py	/^            name='element',$/;"	kind:variable	line:18
+name	../horizon/migrations/0107_auto_20170925_2130.py	/^            name='datasheet_element',$/;"	kind:variable	line:27
+name	../horizon/migrations/0107_auto_20170925_2130.py	/^            name='location',$/;"	kind:variable	line:17
+name	../horizon/migrations/0108_remove_datasheet_datasheet_elements.py	/^            name='datasheet_elements',$/;"	kind:variable	line:17
+name	../horizon/migrations/0109_datasheet_datasheet_elements.py	/^            name='datasheet_elements',$/;"	kind:variable	line:17
+name	../horizon/models.py	/^    name = models.CharField(max_length=10, blank=False, null=False)$/;"	kind:variable	line:214
 name	../horizon/models.py	/^    name = models.CharField(max_length=200, blank=False, null=False)$/;"	kind:variable	line:60
-name	../horizon/models.py	/^    name = models.CharField(max_length=255, blank=False, null=False)  # 价格表描述$/;"	kind:variable	line:314
-name	../horizon/models.py	/^    name = models.CharField(max_length=255, blank=False, null=False)  # 数据表描述$/;"	kind:variable	line:296
+name	../horizon/models.py	/^    name = models.CharField(max_length=255, blank=False, null=False)  # 价格表描述$/;"	kind:variable	line:307
+name	../horizon/models.py	/^    name = models.CharField(max_length=255, blank=False, null=False)  # 数据表描述$/;"	kind:variable	line:283
 name	../horizon/models.py	/^    name = models.CharField(max_length=255, blank=False, null=False) #公司名称$/;"	kind:variable	line:47
 name	../horizon/models.py	/^    name = models.CharField(max_length=255, blank=False, null=False)$/;"	kind:variable	line:113
-name	../horizon/models.py	/^    name = models.CharField(max_length=255, blank=False, null=False)$/;"	kind:variable	line:263
+name	../horizon/models.py	/^    name = models.CharField(max_length=255, blank=False, null=False)$/;"	kind:variable	line:162
+name	../horizon/models.py	/^    name = models.CharField(max_length=255, blank=False, null=False)$/;"	kind:variable	line:250
+name	../horizon/models.py	/^    name = models.CharField(max_length=255, blank=False, null=False, default='')$/;"	kind:variable	line:190
 name	../horizon/models.py	/^    name = models.CharField(max_length=3)$/;"	kind:variable	line:18
 name	../horizon/models.py	/^    name = models.CharField(max_length=30, blank=False, null=False)$/;"	kind:variable	line:26
 name	../horizon/models.py	/^    name = models.CharField(max_length=50, blank=False, null=False)  # 服务项目名称$/;"	kind:variable	line:99
-name	../horizon/models.py	/^    name = models.CharField(max_length=50, blank=False, null=False)  # 设置描述$/;"	kind:variable	line:139
+name	../horizon/models.py	/^    name = models.CharField(max_length=50, blank=False, null=False)  # 设置描述$/;"	kind:variable	line:129
 name	../horizon/models.py	/^    name = models.CharField(max_length=50, blank=False, null=False)$/;"	kind:variable	line:10
-name	../horizon/models.py	/^    name = models.CharField(max_length=50, blank=False, null=False)$/;"	kind:variable	line:129
 name	../qsite/apps.py	/^    name = 'qsite'$/;"	kind:variable	line:5
 name	../qsite/migrations/0001_initial.py	/^            name='Language',$/;"	kind:variable	line:18
 name	../qsite/migrations/0001_initial.py	/^            name='NavigationBar',$/;"	kind:variable	line:26
@@ -1079,11 +1219,17 @@ new_name	../horizon/migrations/0085_auto_20170709_0640.py	/^            new_name
 new_name	../horizon/migrations/0085_auto_20170709_0640.py	/^            new_name='datasheet_element',$/;"	kind:variable	line:18
 new_name	../horizon/migrations/0085_auto_20170709_0640.py	/^            new_name='datasheet_element',$/;"	kind:variable	line:33
 new_name	../horizon/migrations/0085_auto_20170709_0640.py	/^            new_name='datasheet_elements',$/;"	kind:variable	line:23
-note	../horizon/models.py	/^    note = models.CharField(max_length=255, blank=True, null=True)  # 备注$/;"	kind:variable	line:141
+new_name	../horizon/migrations/0088_auto_20170717_1351.py	/^            new_name='xl_template_created',$/;"	kind:variable	line:18
+new_name	../horizon/migrations/0089_auto_20170718_1238.py	/^            new_name='xltemplate_created',$/;"	kind:variable	line:18
+new_name	../horizon/migrations/0091_auto_20170718_1338.py	/^            new_name='xltemplate_filelink',$/;"	kind:variable	line:18
+new_name	../horizon/migrations/0092_auto_20170719_1452.py	/^            new_name='xltemplate_file_fullpath',$/;"	kind:variable	line:18
+new_name	../horizon/migrations/0092_auto_20170719_1452.py	/^            new_name='xltemplate_file_name',$/;"	kind:variable	line:23
+new_name	../horizon/migrations/0107_auto_20170925_2130.py	/^            new_name='quantity_role',$/;"	kind:variable	line:23
+note	../horizon/models.py	/^    note = models.CharField(max_length=255, blank=True, null=True)  # 备注$/;"	kind:variable	line:132
 note	../horizon/models.py	/^    note = models.CharField(max_length=255, blank=True, null=True)  # 服务内容描述$/;"	kind:variable	line:101
 note	../horizon/models.py	/^    note = models.TextField(blank=True, null=True)  # 备注$/;"	kind:variable	line:49
-null	../horizon/models.py	/^                                  null=True)  # 计算计费单位量的比较方式，仅对转换量适用$/;"	kind:variable	line:246
-number_of_price_fields	../horizon/models.py	/^    number_of_price_fields = models.IntegerField(blank=True, null=True, default=0)$/;"	kind:variable	line:298
+null	../horizon/models.py	/^                                  null=True)  # 计算计费单位量的比较方式，仅对转换量适用$/;"	kind:variable	line:233
+number_of_price_fields	../horizon/models.py	/^    number_of_price_fields = models.IntegerField(blank=True, null=True, default=0)$/;"	kind:variable	line:285
 old_name	../horizon/migrations/0004_auto_20161218_1207.py	/^            old_name='Board',$/;"	kind:variable	line:35
 old_name	../horizon/migrations/0004_auto_20161218_1207.py	/^            old_name='board',$/;"	kind:variable	line:40
 old_name	../horizon/migrations/0007_auto_20161218_1251.py	/^            old_name='BoardSetting',$/;"	kind:variable	line:16
@@ -1121,6 +1267,12 @@ old_name	../horizon/migrations/0085_auto_20170709_0640.py	/^            old_name
 old_name	../horizon/migrations/0085_auto_20170709_0640.py	/^            old_name='data_sheet_element',$/;"	kind:variable	line:17
 old_name	../horizon/migrations/0085_auto_20170709_0640.py	/^            old_name='data_sheet_element',$/;"	kind:variable	line:32
 old_name	../horizon/migrations/0085_auto_20170709_0640.py	/^            old_name='data_sheet_elements',$/;"	kind:variable	line:22
+old_name	../horizon/migrations/0088_auto_20170717_1351.py	/^            old_name='datasheet_template_created',$/;"	kind:variable	line:17
+old_name	../horizon/migrations/0089_auto_20170718_1238.py	/^            old_name='xl_template_created',$/;"	kind:variable	line:17
+old_name	../horizon/migrations/0091_auto_20170718_1338.py	/^            old_name='xltemplate_file_location',$/;"	kind:variable	line:17
+old_name	../horizon/migrations/0092_auto_20170719_1452.py	/^            old_name='xltemplate_filelink',$/;"	kind:variable	line:17
+old_name	../horizon/migrations/0092_auto_20170719_1452.py	/^            old_name='xltemplate_filename',$/;"	kind:variable	line:22
+old_name	../horizon/migrations/0107_auto_20170925_2130.py	/^            old_name='quantity_type',$/;"	kind:variable	line:22
 operations	../horizon/migrations/0001_initial.py	/^    operations = [$/;"	kind:variable	line:18
 operations	../horizon/migrations/0002_auto_20161218_0714.py	/^    operations = [$/;"	kind:variable	line:15
 operations	../horizon/migrations/0003_auto_20161218_0947.py	/^    operations = [$/;"	kind:variable	line:15
@@ -1207,9 +1359,33 @@ operations	../horizon/migrations/0083_remove_schemesetting_locked.py	/^    opera
 operations	../horizon/migrations/0084_auto_20170704_1431.py	/^    operations = [$/;"	kind:variable	line:14
 operations	../horizon/migrations/0085_auto_20170709_0640.py	/^    operations = [$/;"	kind:variable	line:14
 operations	../horizon/migrations/0086_auto_20170709_1242.py	/^    operations = [$/;"	kind:variable	line:14
+operations	../horizon/migrations/0087_datasheet_datasheet_template_created.py	/^    operations = [$/;"	kind:variable	line:14
+operations	../horizon/migrations/0088_auto_20170717_1351.py	/^    operations = [$/;"	kind:variable	line:14
+operations	../horizon/migrations/0089_auto_20170718_1238.py	/^    operations = [$/;"	kind:variable	line:14
+operations	../horizon/migrations/0090_datasheet_xltemplate_file_location.py	/^    operations = [$/;"	kind:variable	line:14
+operations	../horizon/migrations/0091_auto_20170718_1338.py	/^    operations = [$/;"	kind:variable	line:14
+operations	../horizon/migrations/0092_auto_20170719_1452.py	/^    operations = [$/;"	kind:variable	line:14
+operations	../horizon/migrations/0093_datasheet_xltemplate_file_fullname.py	/^    operations = [$/;"	kind:variable	line:14
+operations	../horizon/migrations/0094_auto_20170724_1203.py	/^    operations = [$/;"	kind:variable	line:14
+operations	../horizon/migrations/0095_auto_20170724_1235.py	/^    operations = [$/;"	kind:variable	line:15
+operations	../horizon/migrations/0096_auto_20170806_0707.py	/^    operations = [$/;"	kind:variable	line:15
+operations	../horizon/migrations/0097_setting_list.py	/^    operations = [$/;"	kind:variable	line:14
+operations	../horizon/migrations/0098_datasheet_xldatasheet_file_name.py	/^    operations = [$/;"	kind:variable	line:14
+operations	../horizon/migrations/0099_location_geo.py	/^    operations = [$/;"	kind:variable	line:15
+operations	../horizon/migrations/0100_element_name.py	/^    operations = [$/;"	kind:variable	line:14
+operations	../horizon/migrations/0101_auto_20170902_0949.py	/^    operations = [$/;"	kind:variable	line:15
+operations	../horizon/migrations/0102_auto_20170902_1002.py	/^    operations = [$/;"	kind:variable	line:15
+operations	../horizon/migrations/0103_auto_20170902_1252.py	/^    operations = [$/;"	kind:variable	line:14
+operations	../horizon/migrations/0104_auto_20170902_1522.py	/^    operations = [$/;"	kind:variable	line:14
+operations	../horizon/migrations/0105_datasheet_data_locked.py	/^    operations = [$/;"	kind:variable	line:14
+operations	../horizon/migrations/0106_auto_20170908_0515.py	/^    operations = [$/;"	kind:variable	line:15
+operations	../horizon/migrations/0107_auto_20170925_2130.py	/^    operations = [$/;"	kind:variable	line:15
+operations	../horizon/migrations/0108_remove_datasheet_datasheet_elements.py	/^    operations = [$/;"	kind:variable	line:14
+operations	../horizon/migrations/0109_datasheet_datasheet_elements.py	/^    operations = [$/;"	kind:variable	line:14
 operations	../qsite/migrations/0001_initial.py	/^    operations = [$/;"	kind:variable	line:16
 operations	../qsite/migrations/0002_auto_20160923_1149.py	/^    operations = [$/;"	kind:variable	line:14
 operations	../qsite/migrations/0003_auto_20160923_1150.py	/^    operations = [$/;"	kind:variable	line:14
+option_list	../horizon/lists.py	/^option_list = {$/;"	kind:variable	line:17
 options	../horizon/migrations/0004_auto_20161218_1207.py	/^            options={$/;"	kind:variable	line:24
 options	../horizon/migrations/0025_auto_20170128_1323.py	/^            options={'ordering': ['pid']},$/;"	kind:variable	line:17
 options	../horizon/migrations/0029_auto_20170206_1351.py	/^            options={'ordering': ['pid']},$/;"	kind:variable	line:30
@@ -1227,48 +1403,48 @@ options	../horizon/migrations/0065_auto_20170601_1342.py	/^            options={
 options	../horizon/migrations/0068_auto_20170602_1428.py	/^            options={'ordering': ['pid']},$/;"	kind:variable	line:18
 options	../horizon/migrations/0072_auto_20170617_0155.py	/^            options={'ordering': ['pid']},$/;"	kind:variable	line:17
 options	../horizon/migrations/0077_auto_20170702_0352.py	/^            options={'ordering': ['pid']},$/;"	kind:variable	line:23
+options	../horizon/migrations/0107_auto_20170925_2130.py	/^            options={'ordering': ['pid']},$/;"	kind:variable	line:18
 ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:121
-ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:150
-ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:165
-ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:202
-ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:234
-ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:274
-ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:289
-ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:307
-ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:365
+ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:139
+ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:154
+ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:174
+ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:198
+ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:221
+ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:261
+ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:276
+ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:300
+ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:360
 ordering	../horizon/models.py	/^        ordering = ['pid']$/;"	kind:variable	line:92
-ordering	../horizon/models.py	/^        ordering = ['sequence']$/;"	kind:variable	line:187
-ordering	../horizon/models.py	/^        ordering = ['sequence']$/;"	kind:variable	line:334
-ordering	../horizon/models.py	/^        ordering = ['sequence']$/;"	kind:variable	line:349
+ordering	../horizon/models.py	/^        ordering = ['sequence']$/;"	kind:variable	line:329
+ordering	../horizon/models.py	/^        ordering = ['sequence']$/;"	kind:variable	line:344
 owners	../horizon/models.py	/^    owners = models.ManyToManyField(HorizonUser)  # 可用服务的用户$/;"	kind:variable	line:102
 owners	../horizon/models.py	/^    owners = models.ManyToManyField(HorizonUser)  # 项目总表的拥有者$/;"	kind:variable	line:114
 permissions	../horizon/models.py	/^    permissions = models.CharField(max_length=100, blank=True, null=True)$/;"	kind:variable	line:85
 pid	../horizon/models.py	/^    pid = models.IntegerField(blank=True, null=True)$/;"	kind:variable	line:82
-pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)  # 前部与DataSheetElement的pid相同，后部为price condition的pid$/;"	kind:variable	line:371
-pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)  # 用于价格排序$/;"	kind:variable	line:279
+pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)  # 前部与DataSheetElement的pid相同，后部为price condition的pid$/;"	kind:variable	line:366
+pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)  # 用于价格排序$/;"	kind:variable	line:266
 pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:111
 pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:127
-pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:137
-pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:155
+pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:144
 pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:16
-pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:171
-pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:177
-pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:192
-pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:207
-pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:216
-pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:225
-pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:239
+pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:160
+pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:168
+pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:179
+pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:187
+pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:203
+pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:212
+pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:226
 pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:24
-pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:261
-pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:295
-pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:312
-pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:355
+pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:248
+pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:282
+pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:305
+pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:350
 pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:45
 pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:58
 pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:8
 pid	../horizon/models.py	/^    pid = models.IntegerField(primary_key=True)$/;"	kind:variable	line:97
-platform	../horizon/views.py	/^platform = HorizonSetting.objects.get(name='platform').value$/;"	kind:variable	line:8
-platform_lower	../horizon/views.py	/^platform_lower = platform.lower()$/;"	kind:variable	line:9
+platform	../horizon/views.py	/^platform = HorizonSetting.objects.get(name='platform').value$/;"	kind:variable	line:9
+platform_lower	../horizon/views.py	/^platform_lower = platform.lower()$/;"	kind:variable	line:10
 preserve_default	../horizon/migrations/0015_auto_20161229_1423.py	/^            preserve_default=False,$/;"	kind:variable	line:31
 preserve_default	../horizon/migrations/0019_auto_20170121_0425.py	/^            preserve_default=False,$/;"	kind:variable	line:24
 preserve_default	../horizon/migrations/0023_auto_20170122_1248.py	/^            preserve_default=False,$/;"	kind:variable	line:34
@@ -1293,70 +1469,77 @@ preserve_default	../horizon/migrations/0057_datasheetelement_date.py	/^         
 preserve_default	../horizon/migrations/0059_price_uom.py	/^            preserve_default=False,$/;"	kind:variable	line:20
 preserve_default	../horizon/migrations/0068_auto_20170602_1428.py	/^            preserve_default=False,$/;"	kind:variable	line:28
 preserve_default	../horizon/migrations/0069_price_category.py	/^            preserve_default=False,$/;"	kind:variable	line:20
-price_conditions	../horizon/models.py	/^    price_conditions = models.ManyToManyField(PriceCondition)  # 计价条件，例，一个价格可以对应重量和体积双重条件$/;"	kind:variable	line:285
-price_conditions	../horizon/models.py	/^    price_conditions = models.ManyToManyField(PriceCondition)  # 计价条件，例，一个价格可以对应重量和体积双重条件$/;"	kind:variable	line:343
-price_sheet	../horizon/models.py	/^    price_sheet = models.ForeignKey(PriceSheet)$/;"	kind:variable	line:339
-price_sheet_element	../horizon/models.py	/^    price_sheet_element = models.ForeignKey(PriceSheetElement)$/;"	kind:variable	line:286
-price_sheet_elements	../horizon/models.py	/^    price_sheet_elements = models.ManyToManyField(PriceSheetElement)$/;"	kind:variable	line:315
-process_exception	../django_ajax/middleware.py	/^    def process_exception(self, request, exception):$/;"	kind:member	line:23
-process_response	../django_ajax/middleware.py	/^    def process_response(self, request, response):$/;"	kind:member	line:14
-register_number	../horizon/models.py	/^    register_number = models.CharField(max_length=30, blank=False, null=False)  # 公司注册号$/;"	kind:variable	line:48
+price_conditions	../horizon/models.py	/^    price_conditions = models.ManyToManyField(PriceCondition)  # 计价条件，例，一个价格可以对应重量和体积双重条件$/;"	kind:variable	line:272
+price_conditions	../horizon/models.py	/^    price_conditions = models.ManyToManyField(PriceCondition)  # 计价条件，例，一个价格可以对应重量和体积双重条件$/;"	kind:variable	line:338
+price_sheet	../horizon/models.py	/^    price_sheet = models.ForeignKey(PriceSheet)$/;"	kind:variable	line:334
+price_sheet_element	../horizon/models.py	/^    price_sheet_element = models.ForeignKey(PriceSheetElement)$/;"	kind:variable	line:273
+price_sheet_elements	../horizon/models.py	/^    price_sheet_elements = models.ManyToManyField(PriceSheetElement)$/;"	kind:variable	line:308
+quantity_role	../horizon/models.py	/^    quantity_role = models.CharField(max_length=4, blank=True, null=True)$/;"	kind:variable	line:322
+quantity_roles	../horizon/lists.py	/^quantity_roles = [$/;"	kind:variable	line:33
+quantity_uom	../horizon/models.py	/^    quantity_uom = models.ForeignKey(UoM, blank=True, null=True)$/;"	kind:variable	line:323
+register_number	../horizon/models.py	/^    register_number = models.CharField(max_length=30, blank=False, null=False, default='0')  # 公司注册号$/;"	kind:variable	line:48
 related_category	../horizon/models.py	/^    related_category = models.ForeignKey('self', null=True)$/;"	kind:variable	line:27
 related_geo	../horizon/models.py	/^    related_geo = models.ForeignKey('self', null=True)  # 可回代自身，如：一个省有多个市$/;"	kind:variable	line:61
 render.py	../horizon/render.py	1;"	kind:file	line:1
-render_data	../horizon/render.py	/^def render_data(datasheets):$/;"	kind:function	line:7
-render_to_json	../django_ajax/shortcuts.py	/^def render_to_json(response, *args, **kwargs):$/;"	kind:function	line:79
-response.py	../django_ajax/response.py	1;"	kind:file	line:1
-role	../horizon/models.py	/^    role = models.CharField(max_length=10, blank=True, null=True)  # 设定数量的角色，可以是计算计费数量的基数或者是转换量$/;"	kind:variable	line:242
-save_datasheet_settings	../horizon/views.py	/^def save_datasheet_settings(request):$/;"	kind:function	line:174
-save_datasheet_settings_to_json	../horizon/render.py	/^def save_datasheet_settings_to_json(rec_json):$/;"	kind:function	line:326
-save_scheme_settings	../horizon/views.py	/^def save_scheme_settings(request):$/;"	kind:function	line:135
-save_scheme_settings_to_json	../horizon/render.py	/^def save_scheme_settings_to_json(rec_json):$/;"	kind:function	line:139
-scheme	../horizon/models.py	/^    scheme = models.ForeignKey(Scheme)  # Scheme一一对应其自有的设置$/;"	kind:variable	line:158
-scheme	../horizon/models.py	/^    scheme = models.ForeignKey(Scheme)$/;"	kind:variable	line:300
+render_data	../horizon/render.py	/^def render_data(datasheet):$/;"	kind:function	line:8
+role	../horizon/models.py	/^    role = models.CharField(max_length=10, blank=True, null=True)  # 设定数量的角色，可以是计算计费数量的基数或者是转换量$/;"	kind:variable	line:229
+save_datasheet_fields	../horizon/views.py	/^def save_datasheet_fields(request):$/;"	kind:function	line:212
+save_datasheet_fields_to_json	../horizon/render.py	/^def save_datasheet_fields_to_json(rec_json):$/;"	kind:function	line:497
+save_datasheet_settings	../horizon/views.py	/^def save_datasheet_settings(request):$/;"	kind:function	line:175
+save_datasheet_settings_to_json	../horizon/render.py	/^def save_datasheet_settings_to_json(rec_json):$/;"	kind:function	line:332
+save_datasheet_upload	../horizon/render.py	/^def save_datasheet_upload(rec_file, file_path, datasheet):$/;"	kind:function	line:590
+save_folders	../horizon/lists.py	/^save_folders = {$/;"	kind:variable	line:27
+save_scheme_settings	../horizon/views.py	/^def save_scheme_settings(request):$/;"	kind:function	line:136
+save_scheme_settings_to_json	../horizon/render.py	/^def save_scheme_settings_to_json(rec_json):$/;"	kind:function	line:129
+scheme	../horizon/models.py	/^    scheme = models.ForeignKey(Scheme)  # Scheme一一对应其自有的设置$/;"	kind:variable	line:147
+scheme	../horizon/models.py	/^    scheme = models.ForeignKey(Scheme)$/;"	kind:variable	line:288
 scheme_urls	../horizon/urls.py	/^scheme_urls = [$/;"	kind:variable	line:5
-sequence	../horizon/models.py	/^    sequence = models.IntegerField()$/;"	kind:variable	line:181
-sequence	../horizon/models.py	/^    sequence = models.IntegerField()$/;"	kind:variable	line:342
-sequence	../horizon/models.py	/^    sequence = models.IntegerField(blank=False, null=False)$/;"	kind:variable	line:219
-sequence	../horizon/models.py	/^    sequence = models.IntegerField(blank=True, null=True)$/;"	kind:variable	line:247
-sequence	../horizon/models.py	/^    sequence = models.IntegerField(blank=True, null=True)$/;"	kind:variable	line:328
-serialize_to_json	../django_ajax/encoder.py	/^def serialize_to_json(data, *args, **kwargs):$/;"	kind:function	line:55
-service_fission	../horizon/views.py	/^def service_fission(request):$/;"	kind:function	line:126
-service_fusion	../horizon/views.py	/^def service_fusion(request):$/;"	kind:function	line:100
-setting	../horizon/models.py	/^    setting = models.ForeignKey(Setting)  # 对应的某个设置项$/;"	kind:variable	line:157
-setting	../horizon/models.py	/^    setting = models.ForeignKey(Setting)$/;"	kind:variable	line:357
+sequence	../horizon/models.py	/^    sequence = models.IntegerField()$/;"	kind:variable	line:192
+sequence	../horizon/models.py	/^    sequence = models.IntegerField()$/;"	kind:variable	line:337
+sequence	../horizon/models.py	/^    sequence = models.IntegerField(blank=False, null=False)$/;"	kind:variable	line:206
+sequence	../horizon/models.py	/^    sequence = models.IntegerField(blank=True, null=True)$/;"	kind:variable	line:234
+sequence	../horizon/models.py	/^    sequence = models.IntegerField(blank=True, null=True)$/;"	kind:variable	line:321
+service_fission	../horizon/views.py	/^def service_fission(request):$/;"	kind:function	line:127
+service_fusion	../horizon/views.py	/^def service_fusion(request):$/;"	kind:function	line:101
+setting	../horizon/models.py	/^    setting = models.ForeignKey(Setting)  # 对应的某个设置项$/;"	kind:variable	line:146
+setting	../horizon/models.py	/^    setting = models.ForeignKey(Setting)$/;"	kind:variable	line:352
 setting_locked	../horizon/models.py	/^    setting_locked = models.BooleanField()$/;"	kind:variable	line:115
-setting_locked	../horizon/models.py	/^    setting_locked = models.BooleanField(default=False)$/;"	kind:variable	line:299
-setting_options	../horizon/models.py	/^    setting_options = models.ManyToManyField(SettingOption)  # 任一设置项目可以有多个设置选项值，同样的选项值可以被不同设置项目使用$/;"	kind:variable	line:144
+setting_locked	../horizon/models.py	/^    setting_locked = models.BooleanField(default=False)$/;"	kind:variable	line:286
 settings.py	../qscm/settings.py	1;"	kind:file	line:1
-shortcuts.py	../django_ajax/shortcuts.py	1;"	kind:file	line:1
-test_json_response	../django_ajax/tests.py	/^    def test_json_response(self):$/;"	kind:member	line:19
-tests.py	../django_ajax/tests.py	1;"	kind:file	line:1
+tests.py	../demo7/tests.py	1;"	kind:file	line:1
 tests.py	../horizon/tests.py	1;"	kind:file	line:1
 tests.py	../qsite/tests.py	1;"	kind:file	line:1
-total	../horizon/models.py	/^    total = models.BooleanField()$/;"	kind:variable	line:374
-type	../horizon/models.py	/^    type = models.CharField(max_length=20, blank=False, null=True)  # 数据类型$/;"	kind:variable	line:140
-uom	../horizon/models.py	/^    uom = models.ForeignKey(UoM)  # 区间判定单位$/;"	kind:variable	line:268
-uom	../horizon/models.py	/^    uom = models.ForeignKey(UoM)  # 计价单位$/;"	kind:variable	line:282
-uom	../horizon/models.py	/^    uom = models.ForeignKey(UoM, blank=True, null=True)  # 每个数量都有一个计量单位，空单位即表示次数$/;"	kind:variable	line:243
-urlpatterns	../horizon/urls.py	/^urlpatterns = [$/;"	kind:variable	line:19
+total	../horizon/models.py	/^    total = models.BooleanField()$/;"	kind:variable	line:369
+type	../horizon/models.py	/^    type = models.CharField(max_length=20, blank=False, null=True)  # 设定类型$/;"	kind:variable	line:130
+uom	../horizon/models.py	/^    uom = models.ForeignKey(UoM)  # 区间判定单位$/;"	kind:variable	line:255
+uom	../horizon/models.py	/^    uom = models.ForeignKey(UoM)  # 计价单位$/;"	kind:variable	line:269
+uom	../horizon/models.py	/^    uom = models.ForeignKey(UoM, blank=True, null=True)  # 每个数量都有一个计量单位，空单位即表示次数$/;"	kind:variable	line:230
+upload_datasheet_file	../horizon/views.py	/^def upload_datasheet_file(request):$/;"	kind:function	line:242
+urlpatterns	../demo7/urls.py	/^urlpatterns = [$/;"	kind:variable	line:4
+urlpatterns	../horizon/urls.py	/^urlpatterns = [$/;"	kind:variable	line:21
 urlpatterns	../qscm/urls.py	/^urlpatterns = [$/;"	kind:variable	line:20
+urls.py	../demo7/urls.py	1;"	kind:file	line:1
 urls.py	../horizon/urls.py	1;"	kind:file	line:1
 urls.py	../qscm/urls.py	1;"	kind:file	line:1
-user_login	../horizon/views.py	/^def user_login(request):$/;"	kind:function	line:43
-user_logout	../horizon/views.py	/^def user_logout(request):$/;"	kind:function	line:76
-user_register	../horizon/views.py	/^def user_register(request):$/;"	kind:function	line:23
-value	../horizon/models.py	/^    value = models.CharField(max_length=255, blank=False, null=False)$/;"	kind:variable	line:159
-value	../horizon/models.py	/^    value = models.CharField(max_length=255, blank=False, null=False)$/;"	kind:variable	line:359
+user_login	../horizon/views.py	/^def user_login(request):$/;"	kind:function	line:44
+user_logout	../horizon/views.py	/^def user_logout(request):$/;"	kind:function	line:77
+user_register	../horizon/views.py	/^def user_register(request):$/;"	kind:function	line:24
+value	../horizon/models.py	/^    value = models.CharField(max_length=255, blank=False, null=False)$/;"	kind:variable	line:148
+value	../horizon/models.py	/^    value = models.CharField(max_length=255, blank=False, null=False)$/;"	kind:variable	line:354
 value	../horizon/models.py	/^    value = models.CharField(max_length=50, blank=True, null=True)$/;"	kind:variable	line:11
-value	../horizon/models.py	/^    value = models.FloatField()$/;"	kind:variable	line:373
-value	../horizon/models.py	/^    value = models.FloatField(blank=True, null=True)  # 价格值$/;"	kind:variable	line:281
-value	../horizon/models.py	/^    value = models.FloatField(blank=True, null=True)$/;"	kind:variable	line:241
-vendor	../horizon/models.py	/^    vendor = models.ForeignKey(Company)$/;"	kind:variable	line:195
-vendor	../horizon/models.py	/^    vendor = models.ForeignKey(Company)$/;"	kind:variable	line:210
-vendor	../horizon/models.py	/^    vendor = models.ForeignKey(Company)$/;"	kind:variable	line:316
+value	../horizon/models.py	/^    value = models.FloatField()$/;"	kind:variable	line:368
+value	../horizon/models.py	/^    value = models.FloatField(blank=True, null=True)  # 价格值$/;"	kind:variable	line:268
+value	../horizon/models.py	/^    value = models.FloatField(blank=True, null=True)$/;"	kind:variable	line:228
+vendor	../horizon/models.py	/^    vendor = models.ForeignKey(Company)$/;"	kind:variable	line:171
+vendor	../horizon/models.py	/^    vendor = models.ForeignKey(Company)$/;"	kind:variable	line:182
+vendor	../horizon/models.py	/^    vendor = models.ForeignKey(Company)$/;"	kind:variable	line:309
 verbose_name	../horizon/models.py	/^        verbose_name = 'Geography'$/;"	kind:variable	line:77
-view_services	../horizon/views.py	/^def view_services(request):$/;"	kind:function	line:82
+view_services	../horizon/views.py	/^def view_services(request):$/;"	kind:function	line:83
+views.py	../demo7/views.py	1;"	kind:file	line:1
 views.py	../horizon/views.py	1;"	kind:file	line:1
 views.py	../qsite/views.py	1;"	kind:file	line:1
 wsgi.py	../qscm/wsgi.py	1;"	kind:file	line:1
+xldatasheet_file_name	../horizon/models.py	/^    xldatasheet_file_name = models.CharField(max_length=255, blank=True, null=True)$/;"	kind:variable	line:294
+xltemplate_file_fullname	../horizon/models.py	/^    xltemplate_file_fullname = models.CharField(max_length=255, blank=True, null=True)$/;"	kind:variable	line:292
+xltemplate_file_fullpath	../horizon/models.py	/^    xltemplate_file_fullpath = models.CharField(max_length=255, blank=True, null=True)$/;"	kind:variable	line:293
+xltemplate_file_name	../horizon/models.py	/^    xltemplate_file_name = models.CharField(max_length=255, blank=True, null=True)$/;"	kind:variable	line:291

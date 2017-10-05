@@ -1,6 +1,8 @@
 from django.conf.urls import url, include
-from demo7 import views
+from . import views
 
 urlpatterns = [
-    url(r'^$', views.frontpage, name='index2'),
+    url(r'^$', views.index, name='index'),
+    url(r'multiupload/$', views.multiupload, name='multiupload'),
+
 ]

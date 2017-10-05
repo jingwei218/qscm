@@ -12,7 +12,7 @@ platform_lower = platform.lower()
 
 # 进入首页，包含登录链接
 def index(request):
-    return render(request, 'frontpage.html',
+    return render(request, 'index.html',
                   {
                       'title': platform,
                       'platform': platform,
