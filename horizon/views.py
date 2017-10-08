@@ -5,7 +5,6 @@ from .render import *
 import json
 
 
-
 platform = HorizonSetting.objects.get(name='platform').value
 platform_lower = platform.lower()
 

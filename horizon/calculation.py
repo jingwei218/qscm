@@ -1,9 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from .models import *
-from openpyxl import *
 import hashlib
 import pandas as pd
-
 
 
 def hashed(value):

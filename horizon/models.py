@@ -44,7 +44,7 @@ class Category(models.Model):
 class Company(models.Model):
     pid = models.IntegerField(primary_key=True)
     hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
-    name = models.CharField(max_length=255, blank=False, null=False) #公司名称
+    name = models.CharField(max_length=255, blank=False, null=False)  # 公司名称
     register_number = models.CharField(max_length=30, blank=False, null=False, default='0')  # 公司注册号
     note = models.TextField(blank=True, null=True)  # 备注
     categories = models.ManyToManyField(Category)
@@ -90,7 +90,7 @@ class HorizonUser(User):
 
     class Meta:
         ordering = ['pid']
-        
+
 
 # 可供选择的服务：招标、对账
 class Service(models.Model):
@@ -197,6 +197,7 @@ class Location(models.Model):
     class Meta:
         ordering = ['pid']
 
+
 # ========================= DataSheetElement Addons ========================= #
 # 日期
 class DataDate(models.Model):
@@ -210,7 +211,7 @@ class DataDate(models.Model):
 # 计量单位，用于标注数量的单位
 class UoM(models.Model):
     pid = models.IntegerField(primary_key=True)
-    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
+    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
     name = models.CharField(max_length=10, blank=False, null=False)
     long_name = models.CharField(max_length=30, blank=True, null=True)
 
@@ -224,7 +225,7 @@ class UoM(models.Model):
 # 数量
 class Quantity(models.Model):
     pid = models.IntegerField(primary_key=True)
-    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
+    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
     value = models.FloatField(blank=True, null=True)
     role = models.CharField(max_length=10, blank=True, null=True)  # 设定数量的角色，可以是计算计费数量的基数或者是转换量
     uom = models.ForeignKey(UoM, blank=True, null=True)  # 每个数量都有一个计量单位，空单位即表示次数
@@ -246,7 +247,7 @@ class AllocatedQuantity(models.Model):
 # 计价条件
 class PriceCondition(models.Model):
     pid = models.IntegerField(primary_key=True)
-    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
+    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
     name = models.CharField(max_length=255, blank=False, null=False)
     display_name = models.CharField(max_length=255, blank=True, null=True)
     group = models.IntegerField(blank=True, null=True)  # 用于同意义但不同表述方式的价格条件，如：3MT可表达为3000KG
@@ -264,7 +265,7 @@ class PriceCondition(models.Model):
 # 价格
 class Price(models.Model):
     pid = models.IntegerField(primary_key=True)  # 用于价格排序
-    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
+    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
     value = models.FloatField(blank=True, null=True)  # 价格值
     uom = models.ForeignKey(UoM)  # 计价单位
     currency = models.ForeignKey(Currency)
@@ -281,7 +282,7 @@ class Price(models.Model):
 class DataSheet(models.Model):
     pid = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, blank=False, null=False)  # 数据表描述
-    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
+    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
     number_of_price_fields = models.IntegerField(blank=True, null=True, default=0)
     setting_locked = models.BooleanField(default=False)
     data_locked = models.BooleanField(default=False)
@@ -303,7 +304,7 @@ class DataSheet(models.Model):
 # 价格表，每个供应商可以有多份价格表
 class PriceSheet(models.Model):
     pid = models.IntegerField(primary_key=True)
-    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
+    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
     name = models.CharField(max_length=255, blank=False, null=False)  # 价格表描述
     price_sheet_elements = models.ManyToManyField(PriceSheetElement)
     vendor = models.ForeignKey(Company)
@@ -348,7 +349,7 @@ class PriceSheetField(models.Model):
 # 数据表设置
 class DataSheetSetting(models.Model):
     pid = models.IntegerField(primary_key=True)
-    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
+    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
     setting = models.ForeignKey(Setting)
     datasheet = models.ForeignKey(DataSheet)
     value = models.CharField(max_length=255, blank=False, null=False)
@@ -364,9 +365,7 @@ class DataSheetSetting(models.Model):
 # 成本
 class Cost(models.Model):
     pid = models.IntegerField(primary_key=True)  # 前部与DataSheetElement的pid相同，后部为price condition的pid
-    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  #对pid加密
+    hash_pid = models.CharField(max_length=255, blank=False, null=False, default='0')  # 对pid加密
     value = models.FloatField()
     total = models.BooleanField()
     datasheet_element = models.ForeignKey(DataSheetElement)  # 一个数据表元素可有多个成本
-
-
