@@ -2,6 +2,7 @@
 
 <div class="container-fluid">
     <div class="row" style="text-align: center">7 Demos</div>
+    {{ request.session.session_key }}
 </div>
 
 <div class="container-fluid">
@@ -17,9 +18,22 @@
     </div>
     <br>
     <div class="row">
-        <div class="col-xs-12">2. Table sort and print</div>
+        <div class="col-xs-12">2. Server push and qr code</div>
         <div class="col-xs-12">
-            <table id="t-1" class="sortable printable">
+            <div class="col-xs-12">
+                <span>Message: </span>
+                <span id="ws_message"></span>
+            </div>
+            <a id="wsqr" href="">Generate QR Code</a>
+        </div>
+        <div class="col-xs-12" id="qrcode_img"></div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-xs-12">3. Table sort and print</div>
+        <div class="col-xs-12 printarea">
+            <h5 class="draggable printable resizable" data-name="h5#0">Books</h5>
+            <table id="t-1" class="sortable draggable printable resizable" data-name="table#1">
                 <thead>
                     <tr>
                         <th class="sort-alpha">Title</th>
@@ -29,32 +43,26 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for book in books %}
                     <tr>
-                        <td class="editable">Drupal 7</td>
-                        <td class="editable">David <span class="sort-key">Mercer</span></td>
-                        <td class="editable">September 2010</td>
-                        <td class="editable">$44.99</td>
+                        <td class="editable">{{ book.name }}</td>
+                        <td class="editable">{{ book.author }}</td>
+                        <td class="editable">{{ book.publish_date }}</td>
+                        <td class="editable">{{ book.price }}</td>
                     </tr>
-                    <tr>
-                        <td class="editable">Amazon SimpleDB: LITE</td>
-                        <td class="editable">Prabhakar <span class="sort-key">Chaganti</span>, Rich Helms</td>
-                        <td class="editable">May 2011</td>
-                        <td class="editable">$9.99</td>
-                    </tr>
-                    <tr>
-                        <td class="editable">Object-Oriented JavaScript</td>
-                        <td class="editable">Stoyan <span class="sort-key">Stefanov</span></td>
-                        <td class="editable">July 2008</td>
-                        <td class="editable">$39.99</td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
         <div class="col-xs-12">
-            <input id="print_table" type="button" value="Print" />
+            <input id="print" type="button" value="Print" />
+            <input id="reset" type="button" value="Reset" />
+            <input id="save" type="button" value="Save" />
         </div>
         <input id="edit_box" style="font-size: x-small;" hidden="hidden">
     </div>
     <br>
+
 </div>
+
 {% endblock %}

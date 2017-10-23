@@ -1,51 +1,39 @@
-@media screen {
-    table {
-        margin: 1em 0;
-        border-width: 2px;
-    }
-    th {
-        text-align: left;
-        white-space: nowrap;
-        background-color: #eee;
-    }
-    th.sort a {
-        text-decoration: none;
-        display: block;
-        background: url('/static/demo7/sort-icons.png') no-repeat 0 3px;
-        padding-left: 20px;
-    }
-    th.sorted-desc a {
-        background-position: 0 -47px;
-    }
-    th.sorted-asc a {
-        background-position: 0 -97px;
-    }
-    th.sort a:hover {
-        background-color: #ddd;
-    }
-    th.sort a:focus {
-        color: #222;
-    }
-    th,
-    td {
-        padding: 3px 6px;
-    }
+.printarea {
+    margin: 1em 0;
+    padding: 0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(73, 144, 202);
 }
-
-@media print {
-    table {
-        margin: 1em 0;
-        border-width: 2px;
-    }
-    th {
-        text-align: left;
-        white-space: nowrap;
-        background-color: #555;
-        border-style: dotted;
-    }
-    th,
-    td {
-        padding: 3px 6px;
-        font-size: 1em;
-    }
+table {
+    margin: 1em 0;
+    border-width: 1px;
+    border-color: blue;
+    border-style: solid;
+}
+th {
+    text-align: left;
+    white-space: nowrap;
+    background-color: #eee;
+}
+th.sort a {
+    text-decoration: none;
+    display: block;
+    background: url('/static/demo7/sort-icons.png') no-repeat 0 3px;
+    padding-left: 20px;
+}
+th.sorted-desc a {
+    background-position: 0 -47px;
+}
+th.sorted-asc a {
+    background-position: 0 -97px;
+}
+th.sort a:hover {
+    background-color: #ddd;
+}
+th.sort a:focus {
+    color: #222;
+}
+th,td {
+    padding: 3px 6px;
 }
