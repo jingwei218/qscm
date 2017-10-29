@@ -1,9 +1,14 @@
 .printarea {
     margin: 1em 0;
-    padding: 0;
     border-width: 1px;
-    border-style: solid;
-    border-color: rgb(73, 144, 202);
+    border-color: #333333;
+    border-style: dotted;
+}
+.template {
+    border-width: 1px;
+    border-color: #333333;
+    border-style: dotted;
+    min-height: 100px;
 }
 table {
     margin: 1em 0;
@@ -36,4 +41,7 @@ th.sort a:focus {
 }
 th,td {
     padding: 3px 6px;
+}
+#add_list {
+    width: 100px;
 }

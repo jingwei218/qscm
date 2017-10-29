@@ -2,7 +2,6 @@
 
 <div class="container-fluid">
     <div class="row" style="text-align: center">7 Demos</div>
-    {{ request.session.session_key }}
 </div>
 
 <div class="container-fluid">
@@ -30,10 +29,10 @@
     </div>
     <br>
     <div class="row">
-        <div class="col-xs-12">3. Table sort and print</div>
-        <div class="col-xs-12 printarea">
+        <div class="col-xs-12">3. Table sort</div>
+        <div class="col-xs-12">
             <h5 class="draggable printable resizable" data-name="h5#0">Books</h5>
-            <table id="t-1" class="sortable draggable printable resizable" data-name="table#1">
+            <table id="t-1" class="sortable draggable printable resizable">
                 <thead>
                     <tr>
                         <th class="sort-alpha">Title</th>
@@ -54,14 +53,49 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-xs-12">
-            <input id="print" type="button" value="Print" />
-            <input id="reset" type="button" value="Reset" />
-            <input id="save" type="button" value="Save" />
-        </div>
-        <input id="edit_box" style="font-size: x-small;" hidden="hidden">
     </div>
     <br>
+    <div class="row">
+        <div class="col-xs-12">4. Report template and print</div>
+        <div class="col-xs-12">
+            <h6>Add Element</h6>
+            <span>Template Name</span>
+            <input type="text" id="tplNam" placeholder="template name" />
+            <span id="template_msg"></span>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="col-xs-1">Add a table</div>
+                    <input type="text" class="para_tbl" id="tblMod" placeholder="model name" />
+                    <input type="text" class="para_tbl" id="tblFltCon" placeholder="filter conditons" />
+                    <input type="text" class="para_tbl" id="tblCol" placeholder="field names" />
+                    <a href="#" class="add_element" id="add_table">OK</a>
+                </li>
+                <li class="list-group-item">
+                    <div class="col-xs-1">Add a field</div>
+                    <input type="text" class="para_fld" id="fldMod" placeholder="model name" />
+                    <input type="text" class="para_fld" id="fldFltCon" placeholder="filter conditons" />
+                    <input type="text" class="para_fld" id="fldCol" placeholder="field name" />
+                    <a href="#" class="add_element" id="add_field">OK</a>
+                </li>
+                <li class="list-group-item">
+                    <div class="col-xs-1">Add a label</div>
+                    <input type="text" id="lblTxt" placeholder="label text" />
+                    <a href="#" class="add_element" id="add_label">OK</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-12 template resizable printarea" id="template"></div>
+        <div class="col-xs-12">
+            <input id="save" type="button" value="Save" />
+            <input id="load" type="button" value="Load" />
+            <input id="reset" type="button" value="Reset" />
+            <input id="print" type="button" value="Print" />
+        </div>
+    </div>
+
+    <input id="edit_box" style="font-size: x-small;" hidden="hidden">
+</div>
+<br>
 
 </div>
 

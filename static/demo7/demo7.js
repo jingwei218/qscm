@@ -12,7 +12,7 @@ $.ajaxSetup({
 });
 
 function connectSocket() {
-    socket = new WebSocket('ws://127.0.0.1:8000/socket/');
+    socket = new WebSocket('ws://' + window.location.host + ':8000/socket/');
     if (socket.readyState == WebSocket.OPEN) {
         socket.onopen();
     }
@@ -25,15 +25,73 @@ function connectSocket() {
     };
 }
 
+function appendTable(json, cols, tpl, tplmsg) {
+    var error_message = json['error_message'];
+    if (error_message) {
+        $(tplmsg).text(error_message);
+        return;
+    }
+    var table = json['context'],
+        eid = json['node_eid'],
+        col_array = cols.split(','),
+        msg = json['message'];
+    $(tplmsg).text(msg);
+    $(tpl).append('<table id="' + eid + '" class="te"><thead><tr></tr></thead><tbody></tbody></table>');
+    var html = '';
+    for (ci in col_array) {
+        html += '<th>' + col_array[ci] + '</th>';
+    }
+    $(tpl).find('table:last').find('thead>tr').append(html);
+    html = '';
+    for (ri in table) {
+        html += '<tr>';
+        for (fi in col_array) {
+            col = col_array[fi]
+            html += '<td>' + table[ri][col] + '</td>';
+        }
+        html += '</tr>';
+    }
+    $(tpl).find('table:last').find('tbody').append(html);
+    $(tpl).find('table:last').draggable().resizable();
+}
+
+function appendField(json, tpl, tplmsg) {
+    var error_message = json['error_message'];
+    if (error_message) {
+        $(tplmsg).text(error_message);
+        return;
+    }
+    var field = json['context'],
+        eid = json['node_eid'],
+        msg = json['message'];
+    $(tplmsg).text(msg);
+    $(tpl).append('<span id="' + eid + '" class="te">' + field + '</span>');
+    $(tpl).find('span:last').draggable().resizable();
+}
+
+function appendLabel(json, tpl, tplmsg, labeltxt) {
+    var error_message = json['error_message'];
+    if (error_message) {
+        $(tplmsg).text(error_message);
+        return;
+    }
+    var eid = json['node_eid'],
+        msg = json['message'],
+        label = labeltxt;
+    $(tplmsg).text(msg);
+    html = '<span id="' + eid + '" class="te">' + label + '</span>';
+    $(tpl).append(html);
+    $(tpl).find('span:last').draggable().resizable();
+}
+
 $(document).ready(function () {
 
     var $table1 = $('#t-1'),
         $headers = $table1.find('thead th');
-    $headers
-        .each(function () {
-            var keyType = this.className.replace(/^sort-/, '');
-            $(this).data('keyType', keyType);
-        })
+    $headers.each(function () {
+        var keyType = this.className.replace(/^sort-/, '');
+        $(this).data('keyType', keyType);
+    })
         .wrapInner('<a href="#"></a>')
         .addClass('sort');
 
@@ -128,8 +186,8 @@ $(document).ready(function () {
         e.preventDefault();
         connectSocket();
         $('#qrcode_img').html('');
-        var json_data = { 'url': window.location.protocol + '//10.0.0.2/demo7/wspush/' }, //test use only
-            //json_data = { 'url': window.location.protocol + '//' + window.location.host + '/demo7/ws/' },
+        var //json_data = { 'url': window.location.protocol + '//10.0.0.2/demo7/wspush/' }, //test use only
+            json_data = { 'url': window.location.protocol + '//' + window.location.host + '/demo7/wspush/' },
             data = JSON.stringify(json_data);
         $.ajax({
             url: '/demo7/qrcode/',
@@ -142,42 +200,159 @@ $(document).ready(function () {
         });
     });
 
-    $('.draggable').draggable({
-        drag: function (e, ui) {
-
-        }
-    });
+    $('.draggable').draggable();
 
     $('.resizable').resizable();
 
-    $('#print').click(function(e) {
+    $('#print').click(function (e) {
         $.print(".printarea");
-    })
-    
-    $('#save').click(function(e) {
-        var json_data = {'printableElements': new Array()}
-        $('.printable').each(function(i, e) {
-            var ele_data = {
-                'name': $(this).data('name'),
-                'positionX': $(this).position().left,
-                'positionY': $(this).position().top,
-                'width': $(this).outerWidth(),
-                'height': $(this).outerHeight()
-            }
-            json_data['printableElements'].push(ele_data);
+    });
+
+    $('.add_element').click(function (e) {
+        e.preventDefault();
+        var html,
+            eid = $(e.target).attr('id');
+        switch (eid) {
+            case "add_table":
+                var tblMod = $('#tblMod').val(),
+                    tblCol = $('#tblCol').val(),
+                    json_data = {
+                        'node': 'table',
+                        'model_name': tblMod,
+                        'filter_condition_string': $('#tblFltCon').val(),
+                        'col_string': tblCol,
+                        'template_name': $('#tplNam').val()
+                    },
+                    data = JSON.stringify(json_data);
+                $.ajax({
+                    url: '/demo7/addelement/',
+                    dataType: "json",
+                    method: "POST",
+                    data: data
+                }).done(function (rec_json) {
+                    appendTable(rec_json, tblCol, '#template', '#template_msg');
+                });
+                break;
+            case "add_field":
+                var fldMod = $('#fldMod').val(),
+                    fldCol = $('#fldCol').val(),
+                    json_data = {
+                        'node': 'field',
+                        'model_name': fldMod,
+                        'filter_condition_string': $('#fldFltCon').val(),
+                        'col_string': fldCol,
+                        'template_name': $('#tplNam').val()
+                    },
+                    data = JSON.stringify(json_data);
+                $.ajax({
+                    url: '/demo7/addelement/',
+                    dataType: "json",
+                    method: "POST",
+                    data: data
+                }).done(function (rec_json) {
+                    appendField(rec_json, '#template', '#template_msg');
+                });
+                break;
+            case "add_label":
+                var lblTxt = $('#lblTxt').val(),
+                    json_data = {
+                        'node': 'label',
+                        'label_text': $('#lblTxt').val(),
+                        'template_name': $('#tplNam').val()
+                    },
+                    data = JSON.stringify(json_data);
+                $.ajax({
+                    url: '/demo7/addelement/',
+                    dataType: "json",
+                    method: "POST",
+                    data: data
+                }).done(function (rec_json) {
+                    appendLabel(rec_json, '#template', '#template_msg', lblTxt);
+                });
+        }
+    });
+
+    $('#save').click(function (e) {
+        var json_data = { 'templateElements': new Array() }
+        $('.te').each(function (i, e) {
+            var eid_arr = $(e).attr('id').split('-'),
+                ele_data = {
+                    'node': eid_arr[0],
+                    'node_id': eid_arr[1],
+                    'positionX': $(e).offset().left - $('#template').offset().left,
+                    'positionY': $(e).offset().top - $('#template').offset().top,
+                    'width': $(e).outerWidth(),
+                    'height': $(e).outerHeight()
+                }
+            json_data['templateElements'].push(ele_data);
         });
         data = JSON.stringify(json_data);
-        console.log(data);
         $.ajax({
             url: '/demo7/savetemplate/',
             dataType: "json",
             method: "POST",
             data: data
-        }).done(function(rec_json) {
-            
+        }).done(function (rec_json) {
+            var error_message = rec_json['error_message'];
+            if (error_message) {
+                $('#template_msg').text(error_message);
+                return;
+            }
+            var msg = rec_json['message'];
+            $('#template_msg').text(msg);
         });
     });
 
+    $('#load').click(function (e) {
+        e.preventDefault();
+        $('#template .te').remove();
+        var tplNam = $('#tplNam').val(),
+            json_data = {
+                'template_name': tplNam
+            },
+            data = JSON.stringify(json_data);
+        $.ajax({
+            url: '/demo7/loadtemplate/',
+            dataType: "json",
+            method: "POST",
+            data: data
+        }).done(function (rec_json) {
+            var error_message = rec_json['error_message'];
+            if (error_message) {
+                $('#template_msg').text(error_message);
+                return;
+            }
+            var templateElements = rec_json['templateElements'];
+            for (key in templateElements) {
+                var json = templateElements[key],
+                    node = json['node'],
+                    cols = json['columns'],
+                    positionX = json['positionX'],
+                    positionY = json['positionY'],
+                    width = json['width'],
+                    height = json['height'];
+                switch (node) {
+                    case "table":
+                        appendTable(json, cols, '#template', '#template_msg');
+                        break;
+                    case "field":
+                        appendField(json, '#template', '#template_msg');
+                        break;
+                    case "label":
+                        appendLabel(json, '#template', '#template_msg', json['context']);
+                }
+                $('#template .te:last').offset({
+                    left: positionX + $('#template').offset().left,
+                    top: positionY + $('#template').offset().top
+                }).outerWidth(width).outerHeight(height);
+            }
+        });
+    });
+
+    $('#reset').click(function(e) {
+        e.preventDefault();
+        $('#template .te').remove();
+    });
 });
 
 
