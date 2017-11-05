@@ -353,6 +353,11 @@ $(document).ready(function () {
         e.preventDefault();
         $('#template .te').remove();
     });
+
+    $('#tplNam').change(function() {
+        $('#load').click();
+    });
+
 });
 
 

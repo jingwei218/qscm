@@ -3,8 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.apps import apps
 from django.core.exceptions import ObjectDoesNotExist
 from qscm.settings import BASE_DIR
-from .consumers import *
-from .models import *
+from demo7.consumers import *
+from demo7.models import *
 import json
 import qrcode
 

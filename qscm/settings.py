@@ -77,14 +77,27 @@ WSGI_APPLICATION = 'qscm.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
+    #'default': {
+    #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #    'NAME': 'quantum',
+    #    'USER': 'quantum',
+    #    'PASSWORD': 'quantum',
+    #    'HOST': '127.0.0.1',
+    #    'PORT': '5432',
+    #},
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'quantum',
-        'USER': 'quantum',
-        'PASSWORD': 'quantum',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'quantum',  # 数据库名
+        'USER': 'uat01',
+        'PASSWORD': 'uat01',
+        'HOST': 'liangxun.ktddn.com',
+        'PORT': '6785',
+        'OPTIONS': {
+            'driver': 'FreeTDS',
+            'host_is_server': True,
+        }
     }
+
 }
 
 
