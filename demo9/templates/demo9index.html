@@ -1,14 +1,14 @@
-{% extends 'demo7base.html' %} {% block body %}
+{% extends 'demo9base.html' %} {% block body %}
 
 <div class="container-fluid">
-    <div class="row" style="text-align: center">7 Demos</div>
+    <div class="row" style="text-align: center">Demo9</div>
 </div>
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">1. Multiple files upload</div>
         <div class="col-xs-12">
-            <form action="/demo7/multiupload/" method="post" class="uploader" id="uploader" enctype="multipart/form-data">
+            <form action="/demo9/multiupload/" method="post" class="uploader" id="uploader" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="file" name="fileuploads" multiple="multiple" accept="image/*">
                 <input type="submit" value="Submit">
@@ -46,7 +46,7 @@
                     <tr>
                         <td class="editable">{{ book.name }}</td>
                         <td class="editable">{{ book.author }}</td>
-                        <td class="editable">{{ book.publish_date }}</td>
+                        <td class="editable">{{ book.publish_date.isoformat }}</td>
                         <td class="editable">{{ book.price }}</td>
                     </tr>
                     {% endfor %}

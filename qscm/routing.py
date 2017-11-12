@@ -1,5 +1,5 @@
 from channels.routing import route
-from demo7 import consumers
+from demo9 import consumers
 
 
 channel_routing = [

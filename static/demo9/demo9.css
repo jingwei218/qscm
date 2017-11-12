@@ -24,7 +24,7 @@ th {
 th.sort a {
     text-decoration: none;
     display: block;
-    background: url('/static/demo7/sort-icons.png') no-repeat 0 3px;
+    background: url('/static/demo9/sort-icons.png') no-repeat 0 3px;
     padding-left: 20px;
 }
 th.sorted-desc a {

@@ -3,8 +3,8 @@ import json
 
 
 def ws_connect(message):
-    global rc
     rc = message.reply_channel.name
+    global rc
     print(rc)
     message.reply_channel.send({
         'text': json.dumps({

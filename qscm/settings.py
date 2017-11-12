@@ -25,13 +25,13 @@ SECRET_KEY = 'h75cx9(+#tidda1hhbu(ydre3*dz3z3pvu$j1h1c56#ksr$3b^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.1.1', '127.0.0.1', '10.0.0.2', '192.168.0.109']
+ALLOWED_HOSTS = ['127.0.1.1', '127.0.0.1', '10.0.0.2', '192.168.0.109', '192.168.0.175']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'demo7.apps.Demo7Config',
+    'demo9.apps.Demo9Config',
     'horizon.apps.HorizonConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -77,26 +77,14 @@ WSGI_APPLICATION = 'qscm.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    #'default': {
-    #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #    'NAME': 'quantum',
-    #    'USER': 'quantum',
-    #    'PASSWORD': 'quantum',
-    #    'HOST': '127.0.0.1',
-    #    'PORT': '5432',
-    #},
     'default': {
-        'ENGINE': 'sql_server.pyodbc',
-        'NAME': 'quantum',  # 数据库名
-        'USER': 'uat01',
-        'PASSWORD': 'uat01',
-        'HOST': 'liangxun.ktddn.com',
-        'PORT': '6785',
-        'OPTIONS': {
-            'driver': 'FreeTDS',
-            'host_is_server': True,
-        }
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'quantum',
+        'USER': 'quantum',
+        'PASSWORD': 'quantum',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    },
 
 }
 

@@ -12,7 +12,7 @@ $.ajaxSetup({
 });
 
 function connectSocket() {
-    socket = new WebSocket('ws://' + window.location.host + ':8000/socket/');
+    socket = new WebSocket('ws://' + window.location.host.split(':')[0] + ':8080/socket/');
     if (socket.readyState == WebSocket.OPEN) {
         socket.onopen();
     }
@@ -186,16 +186,15 @@ $(document).ready(function () {
         e.preventDefault();
         connectSocket();
         $('#qrcode_img').html('');
-        var //json_data = { 'url': window.location.protocol + '//10.0.0.2/demo7/wspush/' }, //test use only
-            json_data = { 'url': window.location.protocol + '//' + window.location.host + '/demo7/wspush/' },
+        var json_data = { 'url': window.location.protocol + '//' + window.location.host + '/demo9/wspush/' },
             data = JSON.stringify(json_data);
         $.ajax({
-            url: '/demo7/qrcode/',
+            url: '/demo9/qrcode/',
             dataType: "json",
             method: "POST",
             data: data
         }).done(function (rec_json) {
-            img_path = rec_json['img_path'];
+            var img_path = rec_json['img_path'];
             $('#qrcode_img').append('<img src="' + img_path + '" alt="QR CODE"/>');
         });
     });
@@ -225,7 +224,7 @@ $(document).ready(function () {
                     },
                     data = JSON.stringify(json_data);
                 $.ajax({
-                    url: '/demo7/addelement/',
+                    url: '/demo9/addelement/',
                     dataType: "json",
                     method: "POST",
                     data: data
@@ -245,7 +244,7 @@ $(document).ready(function () {
                     },
                     data = JSON.stringify(json_data);
                 $.ajax({
-                    url: '/demo7/addelement/',
+                    url: '/demo9/addelement/',
                     dataType: "json",
                     method: "POST",
                     data: data
@@ -262,7 +261,7 @@ $(document).ready(function () {
                     },
                     data = JSON.stringify(json_data);
                 $.ajax({
-                    url: '/demo7/addelement/',
+                    url: '/demo9/addelement/',
                     dataType: "json",
                     method: "POST",
                     data: data
@@ -288,7 +287,7 @@ $(document).ready(function () {
         });
         data = JSON.stringify(json_data);
         $.ajax({
-            url: '/demo7/savetemplate/',
+            url: '/demo9/savetemplate/',
             dataType: "json",
             method: "POST",
             data: data
@@ -312,7 +311,7 @@ $(document).ready(function () {
             },
             data = JSON.stringify(json_data);
         $.ajax({
-            url: '/demo7/loadtemplate/',
+            url: '/demo9/loadtemplate/',
             dataType: "json",
             method: "POST",
             data: data

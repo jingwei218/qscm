@@ -4,12 +4,15 @@ from django.http import HttpResponseRedirect, HttpResponse
 from .render import *
 import json
 
+# platform = HorizonSetting.objects.get(name='platform').value
+# platform_lower = platform.lower()
+platform = 'Horizon'
+platform_lower = 'horizon'
+
 
 # 进入首页，包含登录链接
 def index(request):
-    global platform, platform_lower
-    platform = HorizonSetting.objects.get(name='platform').value
-    platform_lower = platform.lower()
+
     return render(request, 'index.html',
                   {
                       'title': platform,

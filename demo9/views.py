@@ -3,30 +3,25 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.apps import apps
 from django.core.exceptions import ObjectDoesNotExist
 from qscm.settings import BASE_DIR
-from demo7.consumers import *
-from demo7.models import *
+from .consumers import *
+from .models import *
 import json
 import qrcode
+import string
+import random
+import os
 
-demo7 = apps.get_app_config('demo7')
+demo9 = apps.get_app_config('demo9')
 
 
 # Create your views here.
 def index(request):
 
-    all_books = Book.objects.all()
-    books = []
-    for book in all_books:
-        books.append({
-            'name': book.name,
-            'author': book.author,
-            'publish_date': book.publish_date.isoformat(),
-            'price': book.price
-        })
-    return render(request, 'demo7index.html',
+    books = Book.objects.all()
+    return render(request, 'demo9index.html',
                   {
                       'books': books,
-                      'title': '7 Demos',
+                      'title': 'Demo9',
                   })
 
 
@@ -34,20 +29,33 @@ def multiupload(request):
 
     rec_files = request.FILES.getlist('fileuploads')
     for file in rec_files:
-        file_path = BASE_DIR + '/demo7/uploads/' + file.name
+        file_path = BASE_DIR + '/demo9/uploads/' + file.name
         with open(file_path, 'wb+') as destination:
             for chunk in file.chunks():
                 destination.write(chunk)
-    return HttpResponseRedirect('/demo7')
+    return HttpResponseRedirect('/demo9')
 
 
 def qrcgen(request):
     rec_json = json.loads(request.body.decode('utf-8'))
-    url = rec_json['url']
-    img = qrcode.make(url)
-    img_path = BASE_DIR + '/demo7/uploads/qrcode.png'
-    img.save(img_path)
-    response_data = {'img_path': '/repo/qrcode.png'}
+    qrc_content = dict()
+    qrc_content['url'] = rec_json['url']
+
+    s = string.ascii_letters + '_'
+    while True:
+        random_code = ''.join(random.choice(s) for i in range(16))
+        file_path = BASE_DIR + '/demo9/uploads/' + random_code + '/'
+        if not os.path.exists(file_path):  # 不存在在目录时创建新目录
+            os.makedirs(file_path)
+            break
+    qrc_content['path_token'] = random_code
+    qrcode_img = qrcode.make(qrc_content['url'])
+    qrcode_img_storage_path = file_path + 'qrcode.png'
+    qrcode_img.save(qrcode_img_storage_path)
+
+    response_data = {
+        'img_path': '/demo9repo/' + random_code + '/qrcode.png',
+    }
     return HttpResponse(
         json.dumps(response_data),
         content_type="application/json"
@@ -71,7 +79,7 @@ def addelement(request):
         col_string = rec_json['col_string']
         html = None
         try:
-            model = demo7.get_model(model_name)
+            model = demo9.get_model(model_name)
         except LookupError:
             response_data['error_message'] = 'No model'
             return HttpResponse(json.dumps(response_data), content_type="application/json")
@@ -162,7 +170,7 @@ def loadtemplate(request):
         response_data_temp = dict()
 
         if node != 'label':
-            model = demo7.get_model(modelName)
+            model = demo9.get_model(modelName)
             queryset, response_data_temp = getqueryset(model, filterConditions, response_data_temp)
             if 'error_message' in response_data:
                 return HttpResponse(json.dumps(response_data_temp), content_type="application/json")

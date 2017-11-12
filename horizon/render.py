@@ -57,7 +57,7 @@ def render_data(datasheet):
                 # 日期
                 elif field_type == 'Date':
                     d = DataDate.objects.filter(datasheet_element=datasheet_element).get(sequence=datasheet_field_sequence)
-                    cell_value = d.date
+                    cell_value = d.date.isoformat()
                     cell_id = d.hash_pid
                 # 供应商
                 elif field_type == 'Vendor':
